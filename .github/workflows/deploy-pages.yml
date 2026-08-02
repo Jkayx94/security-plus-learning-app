@@ -25,14 +25,22 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          ZIP_FILE=$(find . -maxdepth 1 -type f -iname '*.zip' | head -n 1)
-          if [ -z "${ZIP_FILE:-}" ]; then
-            echo "No ZIP file found in the repository root."
+
+          ZIP_FILE=""
+          while IFS= read -r candidate; do
+            if unzip -tq "$candidate" >/dev/null 2>&1; then
+              ZIP_FILE="$candidate"
+              break
+            fi
+          done < <(find . -maxdepth 1 -type f -iname '*.zip' | sort)
+
+          if [ -z "$ZIP_FILE" ]; then
+            echo "No valid ZIP archive found in the repository root."
             ls -la
             exit 1
           fi
 
-          echo "Using application archive: $ZIP_FILE"
+          echo "Using valid application archive: $ZIP_FILE"
           rm -rf app extracted
           mkdir -p app extracted
           unzip -q "$ZIP_FILE" -d extracted
@@ -50,11 +58,15 @@ jobs:
           from pathlib import Path
           path = Path('app/src/App.tsx')
           text = path.read_text(encoding='utf-8')
-          text = text.replace(
+          variants = [
               'setIndex={i=>{setQIndex(i);',
-              'setIndex={(i: number)=>{setQIndex(i);',
-              1,
-          )
+              'setIndex={(i)=>{setQIndex(i);',
+          ]
+          replacement = 'setIndex={(i: number)=>{setQIndex(i);'
+          for old in variants:
+              if old in text:
+                  text = text.replace(old, replacement, 1)
+                  break
           path.write_text(text, encoding='utf-8')
           PY
 
