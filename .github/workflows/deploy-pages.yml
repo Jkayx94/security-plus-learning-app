@@ -50,7 +50,11 @@ jobs:
 
           test -f app/package-lock.json
           test -f app/src/app.ts
+          test -f app/src/styles.css
           test -f app/public/manifest.webmanifest
+
+      - name: Apply mobile UI fixes
+        run: python3 scripts/patch-mobile-ui.py app/src/app.ts app/src/styles.css
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -79,6 +83,8 @@ jobs:
           test -f dist/sw.js
           test -f dist/icons/icon-192.png
           test -f dist/icons/icon-512.png
+          grep -q "Need help or a different explanation" dist/assets/app.js
+          grep -q "submitAnswer" dist/assets/styles.css
           node --check dist/assets/app.js
 
       - name: Configure Pages
