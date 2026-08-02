@@ -53,7 +53,7 @@ jobs:
           test -f app/src/styles.css
           test -f app/public/manifest.webmanifest
 
-      - name: Apply mobile UI fixes
+      - name: Apply public app and mobile UI update
         run: python3 scripts/patch-mobile-ui.py app/src/app.ts app/src/styles.css
 
       - name: Set up Node
@@ -84,9 +84,13 @@ jobs:
           test -f dist/icons/icon-192.png
           test -f dist/icons/icon-512.png
           grep -q "Flag how this felt" dist/assets/app.js
-          grep -q "2.0.1" dist/assets/app.js
+          grep -q "What should we call you" dist/assets/app.js
+          grep -q "Security+ Adaptive Learning" dist/assets/app.js
+          grep -q "PROFILE_KEY" dist/assets/app.js
+          grep -q "2.1.0" dist/assets/app.js
           grep -q "body:has(.question) nav" dist/assets/styles.css
-          grep -q "security-plus-v2.0.1" dist/sw.js
+          grep -q "onboardingCard" dist/assets/styles.css
+          grep -q "security-plus-v2.1.0" dist/sw.js
           node --check dist/assets/app.js
 
       - name: Configure Pages
