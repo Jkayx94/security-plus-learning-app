@@ -56,6 +56,9 @@ jobs:
       - name: Apply public app and mobile UI update
         run: python3 scripts/patch-mobile-ui.py app/src/app.ts app/src/styles.css
 
+      - name: Apply generated question safeguards
+        run: python3 scripts/patch-question-quality.py app/src/app.ts
+
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
@@ -87,10 +90,15 @@ jobs:
           grep -q "What should we call you" dist/assets/app.js
           grep -q "Security+ Adaptive Learning" dist/assets/app.js
           grep -q "PROFILE_KEY" dist/assets/app.js
-          grep -q "2.1.0" dist/assets/app.js
-          grep -q "body:has(.question) nav" dist/assets/styles.css
-          grep -q "onboardingCard" dist/assets/styles.css
-          grep -q "security-plus-v2.1.0" dist/sw.js
+          grep -q "objective-path-recognition" dist/assets/app.js
+          grep -q "completes this objective path" dist/assets/app.js
+          if grep -q "A scenario points to" dist/assets/app.js; then
+            echo "Invalid fabricated scenario generator remains"
+            exit 1
+          fi
+          grep -q "document.querySelector('nav')?.remove" dist/assets/app.js
+          grep -q "2.1.1" dist/assets/app.js
+          grep -q "security-plus-v2.1.1" dist/sw.js
           node --check dist/assets/app.js
 
       - name: Configure Pages
