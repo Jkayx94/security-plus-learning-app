@@ -41,28 +41,16 @@ jobs:
           APP_DIR=$(dirname "$PACKAGE_FILE")
           cp -a "$APP_DIR"/. app/
 
+          python3 scripts/patch-ui.py app/src/App.tsx
+
           python3 - <<'PY'
           from pathlib import Path
-
-          app = Path('app')
-          app_tsx = app / 'src' / 'App.tsx'
-          text = app_tsx.read_text(encoding='utf-8')
-          replacements = [
-              ('setIndex={i=>{setQIndex(i);', 'setIndex={(i: number)=>{setQIndex(i);'),
-              ('setIndex={(i)=>{setQIndex(i);', 'setIndex={(i: number)=>{setQIndex(i);'),
-          ]
-          for old, new in replacements:
-              if old in text:
-                  text = text.replace(old, new, 1)
-                  break
-          app_tsx.write_text(text, encoding='utf-8')
-
-          vite = app / 'vite.config.ts'
+          vite = Path('app/vite.config.ts')
           if vite.exists():
-              v = vite.read_text(encoding='utf-8')
-              if 'base:' not in v:
-                  v = v.replace('defineConfig({', "defineConfig({\n  base: '/security-plus-learning-app/',", 1)
-              vite.write_text(v, encoding='utf-8')
+              text = vite.read_text(encoding='utf-8')
+              if 'base:' not in text:
+                  text = text.replace('defineConfig({', "defineConfig({\n  base: '/security-plus-learning-app/',", 1)
+              vite.write_text(text, encoding='utf-8')
           PY
 
       - name: Set up Node
@@ -86,8 +74,6 @@ jobs:
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
