@@ -26,7 +26,14 @@ jobs:
         run: |
           set -euo pipefail
 
-          ZIP_FILE="security-plus-learning-pwa-prototype.zip"
+          ZIP_FILE=$(find . -maxdepth 1 -type f -iname '*.zip' | head -n 1)
+          if [ -z "${ZIP_FILE:-}" ]; then
+            echo "No ZIP archive found in the repository root"
+            ls -la
+            exit 1
+          fi
+
+          echo "Using archive: $ZIP_FILE"
           unzip -t "$ZIP_FILE"
           rm -rf extracted app
           mkdir -p extracted app
