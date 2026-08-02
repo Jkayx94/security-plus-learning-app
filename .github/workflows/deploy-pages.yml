@@ -21,30 +21,41 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Find and extract app source
+      - name: Extract application source
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p app extracted
-
-          if [ -f security-plus-learning-pwa-prototype-fixed.zip ]; then
-            base64 --decode security-plus-learning-pwa-prototype-fixed.zip > /tmp/security-plus-app.zip
-            ZIP_FILE=/tmp/security-plus-app.zip
-          elif [ -f security-plus-learning-pwa-prototype.zip ]; then
-            ZIP_FILE=security-plus-learning-pwa-prototype.zip
-          else
-            echo "No application ZIP was found in the repository root."
+          ZIP_FILE="security-plus-learning-pwa-prototype.zip"
+          if [ ! -f "$ZIP_FILE" ]; then
+            echo "Missing $ZIP_FILE in the repository root."
             exit 1
           fi
 
+          rm -rf app extracted
+          mkdir -p app extracted
           unzip -q "$ZIP_FILE" -d extracted
+
           PACKAGE=$(find extracted -type f -name package.json | head -n 1)
           if [ -z "${PACKAGE:-}" ]; then
             echo "No package.json found inside $ZIP_FILE"
             exit 1
           fi
+
           APP_DIR=$(dirname "$PACKAGE")
           cp -a "$APP_DIR"/. app/
+
+          # Fix the generated TypeScript callback parameter before compilation.
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('app/src/App.tsx')
+          text = path.read_text(encoding='utf-8')
+          old = 'setIndex={(i)=>{setQIndex(i);'
+          new = 'setIndex={(i: number)=>{setQIndex(i);'
+          if old in text:
+              path.write_text(text.replace(old, new, 1), encoding='utf-8')
+          elif new not in text:
+              raise SystemExit('Expected setIndex callback was not found in src/App.tsx')
+          PY
 
       - name: Set up Node
         uses: actions/setup-node@v4
