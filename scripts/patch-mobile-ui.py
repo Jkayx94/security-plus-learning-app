@@ -1,4 +1,5 @@
 from pathlib import Path
+import re
 import sys
 
 if len(sys.argv) != 3:
@@ -15,7 +16,9 @@ new = """${exam?'':`<div class=\"confidence\"><b>How confident are you?</b>${(['
 if old not in app:
     raise SystemExit("Expected question layout fragment was not found; refusing an unsafe patch")
 
-app_path.write_text(app.replace(old, new), encoding="utf-8")
+app = app.replace(old, new)
+app = app.replace("2.0.0", "2.0.1")
+app_path.write_text(app, encoding="utf-8")
 
 css = css_path.read_text(encoding="utf-8")
 old_shell = ".shell{width:min(760px,100%);margin:auto;padding:18px 14px}"
@@ -38,4 +41,19 @@ body:has(.question) .shell,body:has(.feedback) .shell{padding-bottom:calc(36px +
 @media(max-width:420px){.flagActions{grid-template-columns:1fr}.confidence button{min-height:42px;font-size:.88rem}}
 """
 css_path.write_text(css, encoding="utf-8")
-print("Mobile UI patch applied")
+
+sw_path = app_path.parent.parent / "public" / "sw.js"
+if sw_path.exists():
+    sw = sw_path.read_text(encoding="utf-8")
+    sw = sw.replace("2.0.0", "2.0.1")
+    sw = re.sub(r"(CACHE(?:_NAME)?\s*=\s*['\"]).*?(['\"])", r"\1security-plus-v2.0.1\2", sw, count=1)
+    if "skipWaiting" not in sw:
+        sw += "\nself.addEventListener('install',()=>self.skipWaiting());\nself.addEventListener('activate',event=>event.waitUntil(self.clients.claim()));\n"
+    sw_path.write_text(sw, encoding="utf-8")
+
+manifest_path = app_path.parent.parent / "public" / "manifest.webmanifest"
+if manifest_path.exists():
+    manifest = manifest_path.read_text(encoding="utf-8").replace("2.0.0", "2.0.1")
+    manifest_path.write_text(manifest, encoding="utf-8")
+
+print("Mobile UI patch applied; version set to 2.0.1 and service-worker cache invalidated")
