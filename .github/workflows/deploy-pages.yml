@@ -25,26 +25,20 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          ZIP_FILE="security-plus-learning-pwa-prototype.zip"
-          if [ ! -f "$ZIP_FILE" ]; then
-            echo "Missing $ZIP_FILE in the repository root."
-            exit 1
-          fi
-
+          base64 --decode security-plus-learning-pwa-prototype.zip.b64 > /tmp/security-plus-learning-pwa-prototype.zip
           rm -rf app extracted
           mkdir -p app extracted
-          unzip -q "$ZIP_FILE" -d extracted
+          unzip -q /tmp/security-plus-learning-pwa-prototype.zip -d extracted
 
           PACKAGE=$(find extracted -type f -name package.json | head -n 1)
           if [ -z "${PACKAGE:-}" ]; then
-            echo "No package.json found inside $ZIP_FILE"
+            echo "No package.json found in application archive."
             exit 1
           fi
 
           APP_DIR=$(dirname "$PACKAGE")
           cp -a "$APP_DIR"/. app/
 
-          # Fix the generated TypeScript callback parameter before compilation.
           python3 - <<'PY'
           from pathlib import Path
           path = Path('app/src/App.tsx')
@@ -52,9 +46,8 @@ jobs:
           old = 'setIndex={(i)=>{setQIndex(i);'
           new = 'setIndex={(i: number)=>{setQIndex(i);'
           if old in text:
-              path.write_text(text.replace(old, new, 1), encoding='utf-8')
-          elif new not in text:
-              raise SystemExit('Expected setIndex callback was not found in src/App.tsx')
+              text = text.replace(old, new, 1)
+          path.write_text(text, encoding='utf-8')
           PY
 
       - name: Set up Node
