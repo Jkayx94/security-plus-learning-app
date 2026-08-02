@@ -83,8 +83,8 @@ jobs:
           test -f dist/sw.js
           test -f dist/icons/icon-192.png
           test -f dist/icons/icon-512.png
-          grep -q "Need help or a different explanation" dist/assets/app.js
-          grep -q "submitAnswer" dist/assets/styles.css
+          grep -q "Flag how this felt" dist/assets/app.js
+          grep -q "body:has(.question) nav" dist/assets/styles.css
           node --check dist/assets/app.js
 
       - name: Configure Pages
