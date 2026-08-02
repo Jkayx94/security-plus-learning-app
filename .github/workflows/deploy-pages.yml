@@ -84,7 +84,9 @@ jobs:
           test -f dist/icons/icon-192.png
           test -f dist/icons/icon-512.png
           grep -q "Flag how this felt" dist/assets/app.js
+          grep -q "2.0.1" dist/assets/app.js
           grep -q "body:has(.question) nav" dist/assets/styles.css
+          grep -q "security-plus-v2.0.1" dist/sw.js
           node --check dist/assets/app.js
 
       - name: Configure Pages
