@@ -41,4 +41,16 @@ text = render_pattern.sub(new_render, text, count=1)
 
 text = text.replace("'2.1.0'", "'2.1.1'").replace('"2.1.0"', '"2.1.1"')
 path.write_text(text, encoding="utf-8")
-print("Generated question safeguards applied; version set to 2.1.1")
+
+public_dir = path.parent.parent / "public"
+sw_path = public_dir / "sw.js"
+if sw_path.exists():
+    sw = sw_path.read_text(encoding="utf-8")
+    sw = sw.replace("2.1.0", "2.1.1")
+    sw = re.sub(r"(CACHE(?:_NAME)?\s*=\s*['\"]).*?(['\"])", r"\1security-plus-v2.1.1\2", sw, count=1)
+    sw_path.write_text(sw, encoding="utf-8")
+manifest_path = public_dir / "manifest.webmanifest"
+if manifest_path.exists():
+    manifest_path.write_text(manifest_path.read_text(encoding="utf-8").replace("2.1.0", "2.1.1"), encoding="utf-8")
+
+print("Generated question safeguards applied; version and cache set to 2.1.1")
