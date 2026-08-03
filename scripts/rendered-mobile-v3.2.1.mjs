@@ -32,6 +32,22 @@ try{
  assert.equal(await page.locator('.appNotification').count(),1);
  await page.waitForTimeout(3700);
  assert.ok((await page.locator('.appNotification').count())<=1);
+
+ // Verify a real question action remains usable while a notification is displayed.
+ await page.getByRole('button',{name:'Start reviewed question'}).click();
+ await page.getByRole('button',{name:'Report question'}).click();
+ await page.getByRole('button',{name:'Save report'}).click();
+ await page.locator('.appNotification').waitFor();
+ await page.locator('.answers button').first().click();
+ const submit=page.getByRole('button',{name:'Submit answer'});
+ assert.equal(await submit.isEnabled(),true);
+ await submit.click();
+ await page.getByRole('button',{name:'Fairly sure'}).click();
+ await page.locator('.appNotification').waitFor();
+ const continueButton=page.getByRole('button',{name:'Continue'});
+ assert.equal(await continueButton.isEnabled(),true);
+ await continueButton.click();
+
  await page.getByText('More',{exact:true}).click();
  await page.getByRole('button',{name:/Developer Lab/}).waitFor();
  await page.getByRole('button',{name:/Cosmetics/}).click();
@@ -50,5 +66,5 @@ try{
  await page.getByRole('heading',{name:'About'}).waitFor();
  assert.equal(await page.getByText('TEST MODE',{exact:true}).count(),0);
  await browser.close();
- console.log('RENDERED MOBILE AUDIT PASSED: 360x800 touch viewport.');
+ console.log('RENDERED MOBILE AUDIT PASSED: 360x800 touch viewport; notifications, Submit and Continue verified.');
 } finally {server.kill('SIGTERM')}
