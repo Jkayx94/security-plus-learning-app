@@ -2,6 +2,6 @@
   "schemaVersion": "1.0.0",
   "curriculumVersion": "1.2",
   "eventModel": "append_only",
-  "learnerId": "JAKE-001",
+  "learnerId": "LOCAL-LEARNER-TEMPLATE",
   "events": []
 }
