@@ -1,0 +1,127 @@
+from pathlib import Path
+import re, sys
+
+if len(sys.argv)!=3: raise SystemExit('usage: apply-v3.1-learning-engine.py src/app.ts src/styles.css')
+app_path,css_path=map(Path,sys.argv[1:])
+s=app_path.read_text(encoding='utf-8')
+css=css_path.read_text(encoding='utf-8')
+
+s=s.replace("APP_VERSION='3.0.2'","APP_VERSION='3.1.0'").replace("schemaVersion:'3.0.2'","schemaVersion:'3.1.0'").replace("merged.schemaVersion='3.0.2'","merged.schemaVersion='3.1.0'").replace("state.schemaVersion='3.0.2'","state.schemaVersion='3.1.0'").replace("schemaVersion:'3.0.2'","schemaVersion:'3.1.0'").replace("contentVersion:'3.0.0'","contentVersion:'3.1.0'")
+s=s.replace("updateAvailable=false;","updateAvailable=false, versionTapCount=0, developerCodeVisible=false;")
+
+achievements="""const achievementDefs=[
+{id:'first-lesson',name:'First Lesson',coins:2,progress:()=>state.events.some(e=>e.type==='concept_introduced')?1:0,target:1},
+{id:'first-correct',name:'First Correct Answer',coins:2,progress:()=>state.events.filter(e=>e.type==='activity_answered'&&e.payload.correct===true).length,target:1},
+{id:'first-understood',name:'First Concept Understood',coins:3,progress:()=>Object.values(state.progress).filter(p=>['understood','applied','retained','exam-ready'].includes(p.stage)).length,target:1},
+{id:'first-applied',name:'First Concept Applied',coins:3,progress:()=>Object.values(state.progress).filter(p=>['applied','retained','exam-ready'].includes(p.stage)).length,target:1},
+{id:'first-retained',name:'First Concept Retained',coins:5,progress:()=>Object.values(state.progress).filter(p=>['retained','exam-ready'].includes(p.stage)).length,target:1},
+{id:'first-exam-ready',name:'First Exam-Ready Concept',coins:5,progress:()=>Object.values(state.progress).filter(p=>p.stage==='exam-ready').length,target:1},
+{id:'ten-understood',name:'10 Concepts Understood',coins:5,progress:()=>Object.values(state.progress).filter(p=>['understood','applied','retained','exam-ready'].includes(p.stage)).length,target:10},
+{id:'fifty-understood',name:'50 Concepts Understood',coins:10,progress:()=>Object.values(state.progress).filter(p=>['understood','applied','retained','exam-ready'].includes(p.stage)).length,target:50},
+{id:'hundred-questions',name:'100 Questions Answered',coins:10,progress:()=>state.events.filter(e=>e.type==='activity_answered').length,target:100},
+{id:'five-hundred-questions',name:'500 Questions Answered',coins:30,progress:()=>state.events.filter(e=>e.type==='activity_answered').length,target:500},
+{id:'seven-day-streak',name:'Seven Day Streak',coins:10,progress:()=>state.streak,target:7},
+{id:'thirty-day-streak',name:'Thirty Day Streak',coins:30,progress:()=>state.streak,target:30},
+{id:'first-pbq',name:'First PBQ Completed',coins:5,progress:()=>state.events.filter(e=>e.type==='activity_answered'&&String(e.payload.activityType).includes('pbq')).length,target:1},
+{id:'first-boss-battle',name:'First Boss Battle',coins:2,progress:()=>state.bossHistory.length,target:1},
+{id:'first-boss',name:'First Boss Defeated',coins:10,progress:()=>state.bossHistory.filter(b=>b.passed).length,target:1},
+{id:'perfect-boss',name:'Perfect Boss Battle',coins:15,progress:()=>state.bossHistory.filter(b=>b.passed&&b.score===100).length,target:1},
+{id:'first-objective-boss',name:'First Objective Boss',coins:15,progress:()=>state.bossHistory.filter(b=>b.passed&&b.bossType==='objective').length,target:1},
+{id:'first-domain-boss',name:'First Domain Boss',coins:25,progress:()=>state.bossHistory.filter(b=>b.passed&&b.bossType==='domain').length,target:1},
+{id:'acronym-apprentice',name:'Acronym Apprentice',coins:8,progress:()=>acronyms.filter(r=>state.progress[r.conceptId]?.stage!=='unseen').length,target:50},
+{id:'acronym-expert',name:'Acronym Expert',coins:25,progress:()=>acronyms.filter(r=>['retained','exam-ready'].includes(state.progress[r.conceptId]?.stage)).length,target:200},
+{id:'security-plus-ready',name:'Security+ Exam Ready',coins:50,progress:()=>Object.values(state.progress).filter(p=>p.stage==='exam-ready').length,target:300}
+];
+function checkAchievements(){for(const a of achievementDefs){const unlocked=a.progress()>=a.target;if(!state.achievements.includes(a.id)&&unlocked){state.achievements.push(a.id);awardOnce(`achievement:${a.id}`,a.coins,'achievement_unlocked',{achievementId:a.id,unlockedAt:iso()});toastMessage=`Achievement unlocked: ${a.name} (+${a.coins} coins)`;toastKind='achievement'}}}
+"""
+s=re.sub(r"const achievementDefs=\[.*?function checkAchievements\(\)\{.*?\}\nconst shieldTiers=",achievements+"const shieldTiers=",s,flags=re.S)
+
+shields="""const shieldTiers=[
+{id:'shield-bronze',name:'Bronze',requires:'10 understood and first Unit Boss',test:()=>countStages('understood')>=10&&bossCount('unit')>=1},
+{id:'shield-silver',name:'Silver',requires:'50 understood, 20 applied and 3 Unit Bosses',test:()=>countStages('understood')>=50&&countStages('applied')>=20&&bossCount('unit')>=3},
+{id:'shield-gold',name:'Gold',requires:'150 understood, 75 applied, 25 retained and an Objective Boss',test:()=>countStages('understood')>=150&&countStages('applied')>=75&&countStages('retained')>=25&&bossCount('objective')>=1},
+{id:'shield-platinum',name:'Platinum',requires:'300 understood, 150 applied, 75 retained and 2 Domain Bosses',test:()=>countStages('understood')>=300&&countStages('applied')>=150&&countStages('retained')>=75&&bossCount('domain')>=2},
+{id:'shield-diamond',name:'Diamond',requires:'450 understood, 300 applied, 200 retained and all 5 Domain Bosses',test:()=>countStages('understood')>=450&&countStages('applied')>=300&&countStages('retained')>=200&&bossCount('domain')>=5},
+{id:'shield-master',name:'Security+ Master',requires:'80% estimated readiness, 300 exam-ready, 400 retained and Final Boss',test:()=>estimatedReadiness()>=80&&countStages('retained')>=400&&countStages('exam-ready')>=300&&bossCount('final')>=1}
+];
+function countStages(stage:Stage){const order:Stage[]=['unseen','introduced','recognised','understood','applied','retained','exam-ready'],i=order.indexOf(stage);return Object.values(state.progress).filter(p=>order.indexOf(p.stage)>=i).length}
+function bossCount(type:string){return state.bossHistory.filter(b=>b.passed&&b.bossType===type).length}
+function estimatedReadiness(){const ps=Object.values(state.progress);return ps.length?Math.round(ps.reduce((a,p)=>a+p.mastery,0)/ps.length):0}
+function currentShield(){return [...shieldTiers].reverse().find(t=>t.test())||{id:'shield-basic',name:'Basic',requires:'Defeat your first Unit Boss'} }
+"""
+s=re.sub(r"const shieldTiers=\[.*?\];\nfunction firstAttemptAccuracy",shields+"function firstAttemptAccuracy",s,flags=re.S)
+
+s=s.replace("const bossCounts={unit:7,objective:10,domain:12,final:15},thresholds={unit:70,objective:75,domain:80,final:85},rewards={unit:15,objective:30,domain:85,final:100};","const bossCounts={unit:5,objective:8,domain:12,final:15},thresholds={unit:70,objective:75,domain:80,final:85},rewards={unit:10,objective:25,domain:75,final:150};")
+
+# Hide question quality status outside test mode.
+s=s.replace("<span class=\"quality ${a.qualityStatus||'generated'}\">${esc(a.qualityStatus||'generated')}</span>","${state.testMode.enabled?`<span class=\"quality ${a.qualityStatus||'generated'}\">${esc(a.qualityStatus==='generated'?'generated fallback':a.qualityStatus||'generated fallback')}</span>`:''}")
+
+# Replace feedback with explicit branches.
+feedback="""function feedbackView(){
+ const {a,correct,selected:sel,committed,exam}=feedback;
+ if(!committed)return shell(`<main class="shell feedbackScreen"><section class="card feedback ${correct?'correct':'wrong'}"><p class="eyebrow">${exam?'ANSWER RECORDED':correct?'CORRECT':'NOT CORRECT'}</p><h1>${exam?'How confident were you?':correct?'Correct':'Not correct'}</h1><p><b>Selected answer:</b> ${esc(sel.join(', ')||'No response')}</p>${correct?'':`<p><b>Correct answer:</b> ${esc(a.correct.join(', '))}</p>`}<h2>How confident were you?</h2><div class="postAnswerConfidence">${(['I knew it','Fairly sure','Guessed','No idea'] as Confidence[]).map(c=>`<button data-rating="${c}">${c}</button>`).join('')}</div></section></main>`);
+ const low=correct&&(feedback.confidence==='Guessed'||feedback.confidence==='No idea');
+ const other=Object.entries(a.distractorReasons).filter(([k])=>!sel.includes(k)).map(([k,v])=>`<p><b>${esc(k)}:</b> ${esc(v)}</p>`).join('');
+ if(correct)return shell(`<main class="shell feedbackScreen"><section class="card feedback correct"><p class="eyebrow">${low?'CORRECT, BUT LOW CONFIDENCE':'CORRECT'}</p><h1>${low?'Correct, but low confidence':'Correct'}</h1><p><b>Selected answer:</b> ${esc(sel.join(', '))}</p><p class="shortExplanation">${esc(a.reason)}</p><div class="cue"><b>Memory cue</b><p>${esc(a.memoryCue)}</p></div>${low?'<p class="notice">Brief reinforcement scheduled sooner because confidence was low.</p>':''}<details open class="explanationPanel"><summary>Why this is correct</summary><p>${esc(a.reason)}</p></details><details class="explanationPanel"><summary>Why each other option is wrong</summary>${other}</details><details class="explanationPanel"><summary>Exam tip</summary><p>${esc(a.examTrap)}</p></details><details class="explanationPanel"><summary>Microsoft/MSP example</summary><p>${esc(a.microsoftExample)}</p><p>${esc(a.mspExample)}</p></details><p class="reward">+${feedback.xp||0} XP${feedback.coins?` · +${feedback.coins} coins`:''}</p><button class="primary wide" data-action="continue">Continue</button></section></main>`);
+ const misconception=a.confusionWith||feedback.preAnswerFlag||'A related term was selected instead of the most precise answer.';
+ return shell(`<main class="shell feedbackScreen"><section class="card feedback wrong"><p class="eyebrow">NOT CORRECT</p><h1>Not correct</h1><p><b>Your selected answer:</b> ${esc(sel.join(', ')||'No response')}</p><p><b>Correct answer:</b> ${esc(a.correct.join(', '))}</p><details open class="explanationPanel"><summary>Why your selected answer was tempting</summary><p>${esc(a.commonWrongTemptation||'It is related to the topic, but it does not satisfy the requirement as precisely.')}</p></details><details open class="explanationPanel"><summary>Why the correct answer is better</summary><p>${esc(a.reason)}</p></details><details class="explanationPanel"><summary>Why the remaining options are wrong</summary>${other}</details><div class="trap"><b>Misconception detected</b><p>${esc(misconception)}</p></div><div class="cue"><b>Memory cue</b><p>${esc(a.memoryCue)}</p></div><details class="explanationPanel"><summary>Exam tip</summary><p>${esc(a.examTrap)}</p></details><details class="explanationPanel"><summary>Targeted remediation</summary><p>Review the purpose, timing and scope of both the selected and correct options, then answer a differently worded version.</p></details><div class="feedbackActions"><button data-action="retest">Retest now</button><button class="primary" data-action="continue">Continue</button></div></section></main>`)
+}
+"""
+s=re.sub(r"function feedbackView\(\)\{.*?\nfunction dashboard",feedback+"function dashboard",s,flags=re.S)
+
+# Boss completion result and visuals.
+s=s.replace("if(!a){if(s.bossId)completeBoss(s);delete state.activeSession;checkAchievements();save();view='dashboard';return dashboard()}","if(!a){if(s.bossId){completeBoss(s);delete state.activeSession;checkAchievements();save();view='boss-result';return bossResultView()}delete state.activeSession;checkAchievements();save();view='dashboard';return dashboard()}")
+s=s.replace("<section class=\"bossHud\" aria-label=\"Boss health\">","<section class=\"bossArena\"><div class=\"bossVisual ${s.bossType}\" aria-hidden=\"true\"><span class=\"bossCore\">◆</span><b>${s.bossType==='final'?'RISK TITAN':s.bossType==='domain'?'IDENTITY GATEKEEPER':s.bossType==='objective'?'CERTIFICATE GUARDIAN':'ROGUE PROCESS'}</b></div>${bossConsole(s)}<section class=\"bossHud\" aria-label=\"Boss health\">")
+s=s.replace("</section>${exam?'':`<section class=\"selectionReason\">","</section><div class=\"learnerShieldBar\"><b>Learner shield</b><i style=\"width:${Math.max(10,100-(s.index-(s.bossCorrect||0))*12)}%\"></i></div></section>${exam?'':`<section class=\"selectionReason\">")
+
+boss_result="""function bossResultView(){const b=state.bossHistory.at(-1);if(!b)return dashboard();const weak=Object.values(state.progress).filter(p=>p.misconceptions.length||p.mastery<50).slice(0,5);return shell(`<main class="shell"><section class="card bossResult ${b.passed?'defeated':'survived'}"><p class="eyebrow">${b.passed?'BOSS DEFEATED':'BOSS SURVIVED'}</p><h1>${b.score}%</h1><p>${b.passed?'Pass threshold met. Reward issued once.':'No penalty. Review the weak concepts and retry when ready.'}</p><h2>Weak concepts</h2>${weak.map(p=>`<p>${esc(records.find(r=>r.conceptId===p.conceptId)?.name||p.conceptId)}</p>`).join('')||'<p>No specific weak concept detected.</p>'}${b.passed?'<button class="primary wide" data-nav="home">Continue</button>':'<div class="feedbackActions"><button data-mode="mistakes" data-minutes="5">Start targeted review</button><button data-nav="review">Retry later</button></div>'}</section></main>`)}
+"""
+s=s.replace("function dashboard(){",boss_result+"function dashboard(){")
+
+# Home feature exposure.
+home="""function home(){const ps=Object.values(state.progress),due=ps.filter(p=>p.nextReview&&new Date(p.nextReview)<=new Date()).length,mistakes=ps.filter(p=>p.attempts>p.correct||p.misconceptions.length).length,low=ps.filter(p=>p.guesses>0||p.confidenceAccuracy<55&&p.attempts>0).length,shield=currentShield();return shell(`<main class="shell"><section class="hero"><p class="eyebrow">SECURITY+ LEARNING EXPERIENCE · v${APP_VERSION}</p><div class="homeIdentity">${shieldMarkup('large')}<div><h1>Welcome back, ${esc(learnerName())}.</h1><p>${esc(shield.name)} shield · progress through real study evidence.</p></div></div><div class="heroStats"><span>Level ${level()}</span><span>${state.xp} XP</span><span>${state.coins} coins</span><span>${state.streak} day streak</span></div><button class="primary wide" data-start="5">Continue learning · 5 minutes</button></section><section class="actionGrid"><button data-mode="due" data-minutes="5">Reviews due <small>${due}</small></button><button data-mode="mistakes" data-minutes="5">Fix my mistakes <small>${mistakes}</small></button><button data-mode="low-confidence" data-minutes="5">Low confidence <small>${low}</small></button><button data-mode="acronym" data-minutes="5">Weak acronyms</button><button data-mode="comparison" data-minutes="5">Comparison practice</button><button data-nav="review">Boss battles</button><button data-nav="achievements">Achievements</button><button data-nav="cosmetics">Cosmetics</button><button data-nav="exam">Exam mode</button>${state.testMode.enabled?'<button data-nav="testlab">Developer Lab</button>':''}</section><section><h2>Quick sessions</h2><div class="durationGrid">${[[.5,'30 seconds'],[1,'1 minute'],[2,'2 minutes'],[5,'5 minutes'],[10,'10 minutes'],[15,'15 minutes']].map(([m,l])=>`<button data-start="${m}"><b>${l}</b></button>`).join('')}</div></section></main>`)}
+"""
+s=re.sub(r"function home\(\)\{.*?\nfunction learn",home+"function learn",s,flags=re.S)
+
+# Expanded achievements and separate cosmetics.
+ach="""function achievementsView(){return shell(`<main class="shell"><h1>Achievements</h1><section class="profileSummary">${shieldMarkup('large')}<div><h2>${esc(learnerName())} · Level ${level()}</h2><p>${state.achievements.length}/${achievementDefs.length} unlocked</p></div></section>${achievementDefs.map(a=>{const value=Math.min(a.target,a.progress()),unlocked=state.achievements.includes(a.id),pct=Math.round(value/a.target*100);return `<section class="card achievement ${unlocked?'unlocked':'locked'}"><div class="row"><h2>${unlocked?'★':'○'} ${a.name}</h2><span>${a.coins} coins</span></div><div class="progress"><i style="width:${pct}%"></i></div><p>${unlocked?'Unlocked from real study evidence.':`${value}/${a.target}`}</p></section>`}).join('')}</main>`)}
+const cosmeticCatalogue=[['theme-blue','Blue theme',0],['theme-purple','Purple theme',40],['theme-green','Green theme',40],['theme-oled','OLED black',60],['card-glass','Glass cards',35],['card-flat','Flat cards',25],['border-bronze','Bronze border',30],['border-neon','Neon border',60],['shield-gold-style','Angular shield style',75],['avatar-sentinel','Shield Sentinel avatar',50],['background-grid','Security grid background',45],['motion-subtle','Subtle motion style',30]];
+function cosmeticsView(){return shell(`<main class="shell"><h1>Cosmetics</h1><p>Cosmetics never alter learning content, mastery or readiness.</p><section class="card">${shieldMarkup('large')}<p>${state.coins} coins available</p></section>${cosmeticCatalogue.map(([idn,name,cost])=>{const owned=state.cosmetics.owned.includes(String(idn)),equipped=state.cosmetics.equippedTheme===idn||state.cosmetics.equippedShield===idn;return `<section class="card cosmetic"><div><h2>${esc(name)}</h2><p>${equipped?'Equipped':owned?'Owned':`${cost} coins`}</p></div><button data-cosmetic="${idn}" data-cost="${cost}">${equipped?'Equipped':owned?'Equip':'Unlock'}</button></section>`}).join('')}</main>`)}
+"""
+s=re.sub(r"function achievementsView\(\)\{.*?\nfunction reportsView",ach+"function reportsView",s,flags=re.S)
+
+# Settings version five taps, hidden code, lab.
+settings="""function settingsView(){return shell(`<main class="shell"><h1>Profile, data and backups</h1><section class="card"><h2>Learner profile</h2><label>Display name <input id="profile-name" maxlength="40" value="${esc(learnerName())}"></label><label>Exam date <input id="profile-exam" type="date" value="${esc(profile?.examDate||'')}"></label><button data-action="save-profile-settings">Save profile</button></section><section class="card"><h2>Progress data</h2><button data-action="export">Download JSON backup</button><input id="import" type="file" accept="application/json"></section><section class="card"><h2>Shield progression</h2><p><b>Current:</b> ${esc(currentShield().name)}</p>${shieldTiers.map(t=>`<p><b>${t.name}</b> · ${t.test()?'Unlocked':`Locked — ${t.requires}`}</p>`).join('')}</section><section class="card"><h2>Application</h2><button class="versionTap" data-action="version-tap">Version ${APP_VERSION}</button><p class="muted">Tap version five times for local QA tools.</p>${developerCodeVisible&&!state.testMode.enabled?'<label>Developer code <input id="test-code" autocomplete="off"></label><button data-action="test-enable">Enable test mode</button>':''}${state.testMode.enabled?'<button data-nav="testlab">Open Developer Lab</button>':''}</section><section class="card danger"><h2>Reset</h2><button data-action="reset">Reset all local progress</button></section></main>`)}
+"""
+s=re.sub(r"function settingsView\(\)\{.*?\n\nfunction reviewView",settings+"\nfunction reviewView",s,flags=re.S)
+
+# Developer Lab requested functions.
+lab="""function visualTestLab(){if(!state.testMode.enabled)return settingsView();const shields=['shield-basic','shield-bronze','shield-silver','shield-gold','shield-platinum','shield-diamond','shield-master'];return shell(`<main class="shell testLab"><h1>Developer Lab</h1><p class="notice">TEST MODE data is separate and excluded from genuine progress and exports.</p><section class="card"><h2>Test currency</h2><p>${state.testMode.coins} test coins</p><button data-test-grant="10">+10</button><button data-test-grant="100">+100</button><button data-test-grant="10000">+10,000</button><button data-action="test-unlock">Unlock all test cosmetics</button></section><section class="card"><h2>Shield previews</h2>${shieldMarkup('large')}<div class="previewGrid">${shields.map(x=>`<button data-test-shield="${x}">${x.replace('shield-','')}</button>`).join('')}</div></section><section class="card"><h2>Achievement and feedback previews</h2><button data-test-overlay="achievement">Achievement animation</button><button data-test-overlay="feedback-correct">Correct answer</button><button data-test-overlay="feedback-wrong">Incorrect answer</button><button data-test-overlay="feedback-low">Low-confidence correct</button><button data-test-overlay="update">Update notification</button><button data-test-overlay="success">Success toast</button></section><section class="card"><h2>Boss battles and animations</h2><button data-test-boss="boss">Unit Boss</button><button data-test-boss="boss-objective">Objective Boss</button><button data-test-boss="boss-domain">Domain Boss</button><button data-test-boss="boss-final">Final Readiness Boss</button><button data-test-animation="impact">Boss hit</button><button data-test-animation="defeated">Boss defeat</button></section><section class="card"><button data-action="test-reset">Reset test-only state</button><button data-action="test-exit">Exit test mode</button></section></main>`)}
+"""
+s=re.sub(r"function visualTestLab\(\)\{.*?\n\}\nfunction testOverlay",lab+"\nfunction testOverlay",s,flags=re.S)
+
+# Routes and actions.
+s=s.replace("view==='testlab'?visualTestLab():settingsView()","view==='testlab'?visualTestLab():view==='cosmetics'?cosmeticsView():view==='boss-result'?bossResultView():settingsView()")
+s=s.replace("if(a==='continue'){","if(a==='retest'){const repeat=makeActivity(records.find(r=>r.conceptId===feedback.a.conceptId),'Targeted retest after incorrect answer');state.activeSession=state.activeSession||createSession(1,'mistakes');state.activeSession.activities.splice(state.activeSession.index,0,repeat);resetActivity();view='session';render();return}if(a==='continue'){")
+s=s.replace("if(a==='test-enable')","if(a==='version-tap'){versionTapCount++;if(versionTapCount>=5){developerCodeVisible=true;toast('Developer code entry enabled')}else toast(`${5-versionTapCount} more taps`);return}if(a==='test-enable')")
+s=s.replace("if(t.dataset.testShield&&state.testMode.enabled)","if(t.dataset.testGrant&&state.testMode.enabled){state.testMode.coins+=Number(t.dataset.testGrant);save();toast(`${t.dataset.testGrant} test coins granted`);return}if(t.dataset.testShield&&state.testMode.enabled)")
+s=s.replace("state.testMode.enabled=false;save();toast('TEST MODE disabled')","state.testMode.enabled=false;developerCodeVisible=false;versionTapCount=0;save();view='settings';toast('TEST MODE disabled')")
+
+# Correct export schema and remove test state.
+s=s.replace("schemaVersion:'3.0.2'","schemaVersion:'3.1.0'")
+
+# Avoid test sessions writing real session-start events.
+s=s.replace("state.events.push(emit('session_started',state.activeSession.activities.map(a=>a.conceptId),{minutes,mode}));","if(!testOnly)state.events.push(emit('session_started',state.activeSession.activities.map(a=>a.conceptId),{minutes,mode,testOnly:false}));")
+
+# CSS additions.
+css += r'''
+/* v3.1 learning engine */
+.actionGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}.actionGrid button{min-height:76px;text-align:left}.actionGrid small{display:block;opacity:.75}.homeIdentity{display:flex;gap:16px;align-items:center}.profileShield{display:inline-grid;place-items:center;min-width:54px;min-height:64px;clip-path:polygon(50% 0,92% 18%,84% 72%,50% 100%,16% 72%,8% 18%);background:linear-gradient(145deg,#52637c,#202b3d);border:2px solid #8ca3c3;text-transform:capitalize}.profileShield.large{width:92px;height:108px}.profileShield b{font-size:.65rem}.shield-bronze{background:linear-gradient(145deg,#b97843,#5b321b)}.shield-silver{background:linear-gradient(145deg,#dfe6ed,#657080);color:#111}.shield-gold{background:linear-gradient(145deg,#ffd95a,#8c6500);color:#181100}.shield-platinum{background:linear-gradient(145deg,#d9f7ff,#547b8d);color:#10191c}.shield-diamond{background:linear-gradient(145deg,#b7f7ff,#7757c7)}.shield-master{background:linear-gradient(145deg,#fff,#56d5ff,#9d71ff)}.bossArena{border:1px solid #415573;border-radius:22px;padding:14px;background:linear-gradient(180deg,#101827,#080d15)}.bossVisual{display:grid;place-items:center;gap:4px;min-height:90px}.bossCore{font-size:3rem;filter:drop-shadow(0 0 12px #ff5f68);animation:bossIdle 1.8s ease-in-out infinite}.bossHealth,.learnerShieldBar{height:14px;background:#202b3d;border-radius:999px;overflow:hidden}.bossHealth i{display:block;height:100%;background:#d94d58;transition:width .3s}.learnerShieldBar i{display:block;height:100%;background:#5ed6b3}.bossResult{text-align:center}.bossResult.defeated{animation:rewardReveal .45s ease-out}.feedback.correct{border-color:#46c897}.feedback.wrong{border-color:#e36b72}.versionTap{width:100%}.cosmetic{display:flex;justify-content:space-between;gap:12px;align-items:center}.testModeBadge{position:fixed;right:12px;top:12px;z-index:20}.quality{font-size:.7rem}.bossVisual.hit .bossCore{animation:bossHit .25s}.toast.achievement{animation:rewardReveal .4s}.answers button.selected{transform:translateY(-1px)}
+@keyframes bossIdle{50%{transform:translateY(-4px)}}@keyframes bossHit{50%{transform:translateX(8px);filter:brightness(2)}}@keyframes rewardReveal{from{transform:scale(.94);opacity:0}to{transform:scale(1);opacity:1}}
+@media(max-width:520px){.actionGrid{grid-template-columns:1fr 1fr}.homeIdentity{align-items:flex-start}.question h1{font-size:clamp(1.45rem,7vw,2.2rem)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+'''
+
+app_path.write_text(s,encoding='utf-8')
+css_path.write_text(css,encoding='utf-8')
+print('Applied Security+ v3.1 learning engine changes')
