@@ -15,7 +15,7 @@ test('CI builds canonical source without repair scripts or generated commits', (
 });
 
 test('course storage and content loaders remain stable', () => {
-  assert.match(app, /KEY='security-plus-mastery-state'/);
+  assert.match(app, /KEY\s*=\s*['"]security-plus-mastery-state['"]/);
   assert.match(app, /loadContentPack/);
   assert.match(app, /sy0-701-curriculum-v1\.2\.json/);
   assert.match(app, /sy0-701-learning-units-v1\.2\.json/);
