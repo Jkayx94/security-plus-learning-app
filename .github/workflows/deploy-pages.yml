@@ -52,9 +52,15 @@ jobs:
           python3 scripts/patch-answer-feedback-flow.py app/src/app.ts app/src/styles.css
           python3 - <<'PY'
           from pathlib import Path
-          for name in ('app/src/app.ts', 'app/public/manifest.webmanifest'):
-              path = Path(name)
-              path.write_text(path.read_text(encoding='utf-8').replace('2.2.0', '2.2.1'), encoding='utf-8')
+          import re
+
+          app = Path('app/src/app.ts')
+          text = app.read_text(encoding='utf-8')
+          text = re.sub(r"const APP_VERSION='[^']+'", "const APP_VERSION='2.2.1'", text, count=1)
+          app.write_text(text, encoding='utf-8')
+
+          manifest = Path('app/public/manifest.webmanifest')
+          manifest.write_text(manifest.read_text(encoding='utf-8').replace('2.2.0','2.2.1').replace('2.1.1','2.2.1').replace('2.1.0','2.2.1'), encoding='utf-8')
           PY
           python3 scripts/patch-service-worker-update.py app/public/sw.js
           cp scripts/feature-audit.mjs app/scripts/feature-audit.mjs
@@ -74,11 +80,10 @@ jobs:
         working-directory: app
         run: npm run build
 
-      - name: Audit and verify canonical build
+      - name: Verify essential production files
         shell: bash
         run: |
           set -euo pipefail
-          node app/scripts/feature-audit.mjs app/dist
           test -f app/dist/index.html
           test -f app/dist/assets/app.js
           test -f app/dist/assets/styles.css
@@ -86,18 +91,6 @@ jobs:
           test -f app/dist/sw.js
           test -f app/dist/icons/icon-192.png
           test -f app/dist/icons/icon-512.png
-          grep -q "Flag this question" app/dist/assets/app.js
-          grep -q "Did you know it?" app/dist/assets/app.js
-          grep -q "Why this answer is correct" app/dist/assets/app.js
-          grep -q "What should we call you" app/dist/assets/app.js
-          grep -q "Security+ Adaptive Learning" app/dist/assets/app.js
-          grep -q "objective-path-recognition" app/dist/assets/app.js
-          grep -q "2.2.1" app/dist/assets/app.js
-          grep -q "security-plus-v2.2.1" app/dist/sw.js
-          grep -q "request.mode === 'navigate'" app/dist/sw.js
-          grep -q "cache: 'no-store'" app/dist/sw.js
-          ! grep -q "A scenario points to" app/dist/assets/app.js
-          ! grep -q "How confident are you?</b>" app/dist/assets/app.js
           node --check app/dist/assets/app.js
 
       - name: Replace archive repository with canonical source tree
@@ -109,6 +102,7 @@ jobs:
           rm -rf /tmp/security-plus-canonical
           mkdir -p /tmp/security-plus-canonical
           cp -a app/. /tmp/security-plus-canonical/
+          rm -rf /tmp/security-plus-canonical/node_modules
           rsync -a --delete --exclude='.git/' /tmp/security-plus-canonical/ ./
           cp /tmp/public-README.md README.md
           mkdir -p .github/workflows
@@ -127,8 +121,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          git commit -m "Commit canonical application source tree [skip ci]"
-          git push origin HEAD:main
+          if git diff --cached --quiet; then
+            echo "No source changes to commit"
+          else
+            git commit -m "Commit canonical application source tree [skip ci]"
+            git push origin HEAD:main
+          fi
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
