@@ -41,6 +41,9 @@ jobs:
             exit $code
           fi
 
+      - name: Repair v3 import handler
+        run: python3 scripts/repair-v3-handler.py src/app.ts
+
       - name: Set v3 manifest and service worker
         shell: bash
         run: |
