@@ -1,0 +1,10 @@
+import fs from 'node:fs';import path from 'node:path';import {execFileSync} from 'node:child_process';
+fs.rmSync('dist',{recursive:true,force:true});fs.mkdirSync('dist/assets',{recursive:true});
+execFileSync(process.execPath,['tools/typescript/bin/tsc','-p','tsconfig.json'],{stdio:'inherit'});
+for(const f of ['index.html'])fs.copyFileSync(f,path.join('dist',f));
+fs.copyFileSync('src/styles.css','dist/assets/styles.css');
+for(const name of fs.readdirSync('public',{withFileTypes:true}))fs.cpSync(path.join('public',name.name),path.join('dist',name.name),{recursive:true});
+fs.cpSync('src/data','dist/data',{recursive:true});
+let html=fs.readFileSync('dist/index.html','utf8');html=html.replace('</head>','<link rel="stylesheet" href="./assets/styles.css"/></head>');fs.writeFileSync('dist/index.html',html);
+const required=['index.html','assets/app.js','assets/styles.css','manifest.webmanifest','sw.js','icons/icon-192.png','icons/icon-512.png','data/sy0-701-curriculum-v1.2.json','data/sy0-701-learning-units-v1.2.json'];for(const f of required)if(!fs.existsSync(path.join('dist',f)))throw new Error(`Missing build asset ${f}`);
+console.log(`BUILD PASSED: ${required.length} required assets verified in dist.`);

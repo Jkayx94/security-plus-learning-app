@@ -1,0 +1,284 @@
+{
+  "schemaVersion": "1.0.0",
+  "curriculumVersion": "1.2",
+  "scope": {
+    "unitIds": [
+      "UNIT-1.1-01",
+      "UNIT-1.1-02"
+    ]
+  },
+  "lessons": [
+    {
+      "lessonId": "LES-UNIT-1.1-01-V1",
+      "unitId": "UNIT-1.1-01",
+      "title": "Security Control Categories",
+      "estimatedMinutes": 14,
+      "introduction": "Security controls can be grouped by how they are implemented: technical, managerial, operational, and physical.",
+      "whyItMatters": "MSPs use tools, governance, technician procedures and building protections together. Category identifies the primary implementation mechanism.",
+      "steps": [
+        {
+          "stepId": "L101-S01",
+          "title": "Two independent questions",
+          "content": "Ask: what category is the control, and what type is it? Category describes implementation. Type describes intended effect.",
+          "memoryCue": "Category = how. Type = why.",
+          "conceptIds": [
+            "CON-1.1-TECHNICAL",
+            "CON-1.1-MANAGERIAL",
+            "CON-1.1-OPERATIONAL",
+            "CON-1.1-PHYSICAL"
+          ],
+          "checkpoint": {
+            "prompt": "Is preventive a category or a type?",
+            "expected": "type",
+            "feedback": "Preventive describes purpose, not implementation category."
+          }
+        },
+        {
+          "stepId": "L101-S02",
+          "title": "Technical",
+          "content": "Technical controls are enforced primarily by hardware, software, firmware or configuration.",
+          "example": {
+            "context": "Microsoft/MSP",
+            "scenario": "Microsoft Entra Conditional Access blocks unmanaged devices."
+          },
+          "memoryCue": "The system enforces it.",
+          "conceptIds": [
+            "CON-1.1-TECHNICAL"
+          ],
+          "checkpoint": {
+            "prompt": "An Intune compliance policy blocks an unmanaged device. Category?",
+            "expected": "technical",
+            "feedback": "Technology performs the enforcement."
+          }
+        },
+        {
+          "stepId": "L101-S03",
+          "title": "Managerial",
+          "content": "Managerial controls establish governance, risk decisions, policies, standards and oversight.",
+          "example": {
+            "context": "MSP",
+            "scenario": "Leadership approves a risk treatment plan and acceptable-use policy."
+          },
+          "memoryCue": "Management decides and directs.",
+          "conceptIds": [
+            "CON-1.1-MANAGERIAL"
+          ],
+          "checkpoint": {
+            "prompt": "A board-approved risk policy is which category?",
+            "expected": "managerial",
+            "feedback": "It establishes direction and governance."
+          }
+        },
+        {
+          "stepId": "L101-S04",
+          "title": "Operational",
+          "content": "Operational controls are performed mainly by people following repeatable procedures.",
+          "example": {
+            "context": "MSP",
+            "scenario": "A technician follows the leaver checklist and disables accounts."
+          },
+          "memoryCue": "People perform the process.",
+          "conceptIds": [
+            "CON-1.1-OPERATIONAL"
+          ],
+          "checkpoint": {
+            "prompt": "A technician follows an incident runbook. Category?",
+            "expected": "operational",
+            "feedback": "The control is executed through a human process."
+          }
+        },
+        {
+          "stepId": "L101-S05",
+          "title": "Physical",
+          "content": "Physical controls protect people, facilities, equipment and physical access.",
+          "example": {
+            "context": "MSP",
+            "scenario": "A badge-controlled comms-room door and CCTV protect network hardware."
+          },
+          "memoryCue": "It protects the physical world.",
+          "conceptIds": [
+            "CON-1.1-PHYSICAL"
+          ],
+          "checkpoint": {
+            "prompt": "A locked server-cabinet door is which category?",
+            "expected": "physical",
+            "feedback": "It limits physical access."
+          }
+        },
+        {
+          "stepId": "L101-S06",
+          "title": "Category recap",
+          "content": "Classify by the primary mechanism: technology, governance, human procedure or physical barrier.",
+          "memoryCue": "Tech, manage, operate, physical.",
+          "conceptIds": [
+            "CON-1.1-TECHNICAL",
+            "CON-1.1-MANAGERIAL",
+            "CON-1.1-OPERATIONAL",
+            "CON-1.1-PHYSICAL"
+          ],
+          "checkpoint": {
+            "prompt": "A policy plus an automated block are one category?",
+            "expected": "no",
+            "feedback": "The policy is managerial; automated enforcement is technical."
+          }
+        }
+      ]
+    },
+    {
+      "lessonId": "LES-UNIT-1.1-02-V1",
+      "unitId": "UNIT-1.1-02",
+      "title": "Security Control Types",
+      "estimatedMinutes": 18,
+      "introduction": "Control type describes the control's primary intended effect.",
+      "whyItMatters": "Exam scenarios often include controls with several effects. Select the type matching the scenario's stated primary purpose and timing.",
+      "steps": [
+        {
+          "stepId": "L102-S01",
+          "title": "Purpose and timing",
+          "content": "Ask whether the control stops, discourages, discovers, restores, substitutes or instructs.",
+          "memoryCue": "Stop, scare, spot, restore, substitute, instruct.",
+          "conceptIds": [
+            "CON-1.1-PREVENTIVE",
+            "CON-1.1-DETERRENT",
+            "CON-1.1-DETECTIVE",
+            "CON-1.1-CORRECTIVE",
+            "CON-1.1-COMPENSATING",
+            "CON-1.1-DIRECTIVE"
+          ],
+          "checkpoint": {
+            "prompt": "Does type describe implementation or purpose?",
+            "expected": "purpose",
+            "feedback": "Type describes intended effect."
+          }
+        },
+        {
+          "stepId": "L102-S02",
+          "title": "Preventive",
+          "content": "Preventive controls block or reduce the likelihood of an unwanted event.",
+          "example": {
+            "context": "Microsoft",
+            "scenario": "A Conditional Access rule blocks legacy authentication."
+          },
+          "memoryCue": "Preventive prevents.",
+          "conceptIds": [
+            "CON-1.1-PREVENTIVE"
+          ],
+          "checkpoint": {
+            "prompt": "A firewall deny rule is primarily what type?",
+            "expected": "preventive",
+            "feedback": "It blocks traffic before access occurs."
+          }
+        },
+        {
+          "stepId": "L102-S03",
+          "title": "Deterrent",
+          "content": "Deterrent controls discourage behaviour by increasing perceived risk or consequences.",
+          "example": {
+            "context": "MSP",
+            "scenario": "Visible CCTV signs discourage unauthorised entry."
+          },
+          "memoryCue": "Deterrent discourages.",
+          "conceptIds": [
+            "CON-1.1-DETERRENT"
+          ],
+          "checkpoint": {
+            "prompt": "A warning banner is primarily what type?",
+            "expected": "deterrent",
+            "feedback": "It warns and discourages."
+          }
+        },
+        {
+          "stepId": "L102-S04",
+          "title": "Detective",
+          "content": "Detective controls identify or alert on events that occurred or are occurring.",
+          "example": {
+            "context": "Microsoft",
+            "scenario": "Microsoft Sentinel raises an impossible-travel alert."
+          },
+          "memoryCue": "Detective discovers.",
+          "conceptIds": [
+            "CON-1.1-DETECTIVE"
+          ],
+          "checkpoint": {
+            "prompt": "A SIEM alert is primarily what type?",
+            "expected": "detective",
+            "feedback": "It identifies suspicious activity."
+          }
+        },
+        {
+          "stepId": "L102-S05",
+          "title": "Corrective",
+          "content": "Corrective controls repair damage, remove effects or restore normal operation after an event.",
+          "example": {
+            "context": "MSP",
+            "scenario": "A technician restores a server from a clean backup."
+          },
+          "memoryCue": "Corrective restores.",
+          "conceptIds": [
+            "CON-1.1-CORRECTIVE"
+          ],
+          "checkpoint": {
+            "prompt": "Restoring from backup is what type?",
+            "expected": "corrective",
+            "feedback": "It restores service after harm."
+          }
+        },
+        {
+          "stepId": "L102-S06",
+          "title": "Compensating",
+          "content": "Compensating controls provide an alternative when the preferred control is unavailable or impractical, while addressing the same intent.",
+          "example": {
+            "context": "MSP",
+            "scenario": "A restricted jump host is used because a legacy platform cannot support MFA."
+          },
+          "memoryCue": "Compensating substitutes.",
+          "conceptIds": [
+            "CON-1.1-COMPENSATING"
+          ],
+          "checkpoint": {
+            "prompt": "Is every extra control compensating?",
+            "expected": "no",
+            "feedback": "It must substitute for an unavailable or impractical preferred control."
+          }
+        },
+        {
+          "stepId": "L102-S07",
+          "title": "Directive",
+          "content": "Directive controls instruct or require people to act in a specified way.",
+          "example": {
+            "context": "MSP",
+            "scenario": "An acceptable-use policy requires staff to report suspected phishing."
+          },
+          "memoryCue": "Directive directs.",
+          "conceptIds": [
+            "CON-1.1-DIRECTIVE"
+          ],
+          "checkpoint": {
+            "prompt": "A mandatory security policy is primarily what type?",
+            "expected": "directive",
+            "feedback": "It instructs required behaviour."
+          }
+        },
+        {
+          "stepId": "L102-S08",
+          "title": "Type recap",
+          "content": "Choose the primary purpose named by the scenario, then classify category separately.",
+          "memoryCue": "Stop, discourage, discover, restore, substitute, instruct.",
+          "conceptIds": [
+            "CON-1.1-PREVENTIVE",
+            "CON-1.1-DETERRENT",
+            "CON-1.1-DETECTIVE",
+            "CON-1.1-CORRECTIVE",
+            "CON-1.1-COMPENSATING",
+            "CON-1.1-DIRECTIVE"
+          ],
+          "checkpoint": {
+            "prompt": "Can a technical control also be detective?",
+            "expected": "yes",
+            "feedback": "Category and type are separate axes."
+          }
+        }
+      ]
+    }
+  ]
+}

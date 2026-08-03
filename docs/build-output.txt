@@ -1,0 +1,46 @@
+
+> security-plus-learning-app@2.0.0 build
+> npm run validate && npm run test && npm run typecheck && node scripts/build.mjs
+
+
+> security-plus-learning-app@2.0.0 validate
+> node scripts/validate-data.mjs
+
+VALIDATION PASSED: 578 objective concepts, 336 acronyms, 101 units, 30 prototype questions.
+
+> security-plus-learning-app@2.0.0 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: authoritative record counts
+ok 1 - authoritative record counts
+  ---
+  duration_ms: 0.940758
+  type: 'test'
+  ...
+# Subtest: all unit concept references resolve
+ok 2 - all unit concept references resolve
+  ---
+  duration_ms: 1.220362
+  type: 'test'
+  ...
+# Subtest: all objective concepts have a learning unit
+ok 3 - all objective concepts have a learning unit
+  ---
+  duration_ms: 0.821508
+  type: 'test'
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 3
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 174.749244
+
+> security-plus-learning-app@2.0.0 typecheck
+> node tools/typescript/bin/tsc -p tsconfig.json --noEmit
+
+BUILD PASSED: 9 required assets verified in dist.

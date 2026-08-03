@@ -1,0 +1,1094 @@
+{
+  "schemaVersion": "1.0.0",
+  "curriculumVersion": "1.2",
+  "threeAttemptPolicy": {
+    "attempt1": "No hint",
+    "afterAttempt1": "Level 1",
+    "afterAttempt2": "Level 2",
+    "afterAttempt3": "Level 3 then final response",
+    "afterFinalFailure": "Reveal"
+  },
+  "scope": {
+    "unitIds": [
+      "UNIT-1.1-01",
+      "UNIT-1.1-02"
+    ],
+    "questionCount": 30
+  },
+  "questions": [
+    {
+      "questionId": "Q-1.1-001",
+      "unitIds": [
+        "UNIT-1.1-01"
+      ],
+      "conceptIds": [
+        "CON-1.1-TECHNICAL"
+      ],
+      "activityType": "recognition",
+      "difficulty": "easy",
+      "prompt": "Which category is primarily enforced by hardware, software, firmware, or configuration?",
+      "answerOptions": [
+        "Technical",
+        "Managerial",
+        "Operational",
+        "Physical"
+      ],
+      "correctAnswer": "Technical",
+      "fullRationale": "Technology performs the enforcement.",
+      "incorrectOptionRationales": {
+        "Managerial": "Managerial does not match the scenario's primary implementation mechanism or intended effect.",
+        "Operational": "Operational does not match the scenario's primary implementation mechanism or intended effect.",
+        "Physical": "Physical does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Technical."
+      },
+      "misconceptionTags": [
+        "MISCONCEPTION_TECHNICAL"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-002",
+      "unitIds": [
+        "UNIT-1.1-01"
+      ],
+      "conceptIds": [
+        "CON-1.1-MANAGERIAL"
+      ],
+      "activityType": "recognition",
+      "difficulty": "easy",
+      "prompt": "Which category includes governance, risk decisions, policies, and oversight?",
+      "answerOptions": [
+        "Technical",
+        "Managerial",
+        "Operational",
+        "Physical"
+      ],
+      "correctAnswer": "Managerial",
+      "fullRationale": "Managerial controls establish direction and oversight.",
+      "incorrectOptionRationales": {
+        "Technical": "Technical does not match the scenario's primary implementation mechanism or intended effect.",
+        "Operational": "Operational does not match the scenario's primary implementation mechanism or intended effect.",
+        "Physical": "Physical does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Managerial."
+      },
+      "misconceptionTags": [
+        "MISCONCEPTION_MANAGERIAL"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-003",
+      "unitIds": [
+        "UNIT-1.1-01"
+      ],
+      "conceptIds": [
+        "CON-1.1-OPERATIONAL"
+      ],
+      "activityType": "recognition",
+      "difficulty": "easy",
+      "prompt": "Which category is carried out mainly by people following procedures?",
+      "answerOptions": [
+        "Technical",
+        "Managerial",
+        "Operational",
+        "Physical"
+      ],
+      "correctAnswer": "Operational",
+      "fullRationale": "Operational controls are human-executed processes.",
+      "incorrectOptionRationales": {
+        "Technical": "Technical does not match the scenario's primary implementation mechanism or intended effect.",
+        "Managerial": "Managerial does not match the scenario's primary implementation mechanism or intended effect.",
+        "Physical": "Physical does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Operational."
+      },
+      "misconceptionTags": [
+        "MISCONCEPTION_OPERATIONAL"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-004",
+      "unitIds": [
+        "UNIT-1.1-01"
+      ],
+      "conceptIds": [
+        "CON-1.1-PHYSICAL"
+      ],
+      "activityType": "recognition",
+      "difficulty": "easy",
+      "prompt": "Which category protects facilities, equipment, and physical access?",
+      "answerOptions": [
+        "Technical",
+        "Managerial",
+        "Operational",
+        "Physical"
+      ],
+      "correctAnswer": "Physical",
+      "fullRationale": "Physical controls protect tangible assets and spaces.",
+      "incorrectOptionRationales": {
+        "Technical": "Technical does not match the scenario's primary implementation mechanism or intended effect.",
+        "Managerial": "Managerial does not match the scenario's primary implementation mechanism or intended effect.",
+        "Operational": "Operational does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Physical."
+      },
+      "misconceptionTags": [
+        "MISCONCEPTION_PHYSICAL"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-005",
+      "unitIds": [
+        "UNIT-1.1-01"
+      ],
+      "conceptIds": [
+        "CON-1.1-TECHNICAL"
+      ],
+      "activityType": "recognition",
+      "difficulty": "easy",
+      "prompt": "A Microsoft Entra Conditional Access rule blocks unmanaged devices. Category?",
+      "answerOptions": [
+        "Technical",
+        "Managerial",
+        "Operational",
+        "Physical"
+      ],
+      "correctAnswer": "Technical",
+      "fullRationale": "The configured technology enforces the decision.",
+      "incorrectOptionRationales": {
+        "Managerial": "Managerial does not match the scenario's primary implementation mechanism or intended effect.",
+        "Operational": "Operational does not match the scenario's primary implementation mechanism or intended effect.",
+        "Physical": "Physical does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Technical."
+      },
+      "misconceptionTags": [
+        "MISCONCEPTION_TECHNICAL"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-006",
+      "unitIds": [
+        "UNIT-1.1-01"
+      ],
+      "conceptIds": [
+        "CON-1.1-MANAGERIAL"
+      ],
+      "activityType": "recognition",
+      "difficulty": "easy",
+      "prompt": "An MSP director approves a risk treatment plan. Category?",
+      "answerOptions": [
+        "Technical",
+        "Managerial",
+        "Operational",
+        "Physical"
+      ],
+      "correctAnswer": "Managerial",
+      "fullRationale": "This is governance and risk decision-making.",
+      "incorrectOptionRationales": {
+        "Technical": "Technical does not match the scenario's primary implementation mechanism or intended effect.",
+        "Operational": "Operational does not match the scenario's primary implementation mechanism or intended effect.",
+        "Physical": "Physical does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Managerial."
+      },
+      "misconceptionTags": [
+        "MISCONCEPTION_MANAGERIAL"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-007",
+      "unitIds": [
+        "UNIT-1.1-01"
+      ],
+      "conceptIds": [
+        "CON-1.1-OPERATIONAL"
+      ],
+      "activityType": "recognition",
+      "difficulty": "easy",
+      "prompt": "A technician follows a leaver checklist to disable accounts. Category?",
+      "answerOptions": [
+        "Technical",
+        "Managerial",
+        "Operational",
+        "Physical"
+      ],
+      "correctAnswer": "Operational",
+      "fullRationale": "A person executes a repeatable procedure.",
+      "incorrectOptionRationales": {
+        "Technical": "Technical does not match the scenario's primary implementation mechanism or intended effect.",
+        "Managerial": "Managerial does not match the scenario's primary implementation mechanism or intended effect.",
+        "Physical": "Physical does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Operational."
+      },
+      "misconceptionTags": [
+        "MISCONCEPTION_OPERATIONAL"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-008",
+      "unitIds": [
+        "UNIT-1.1-01"
+      ],
+      "conceptIds": [
+        "CON-1.1-PHYSICAL"
+      ],
+      "activityType": "recognition",
+      "difficulty": "easy",
+      "prompt": "A badge-controlled comms-room door is which category?",
+      "answerOptions": [
+        "Technical",
+        "Managerial",
+        "Operational",
+        "Physical"
+      ],
+      "correctAnswer": "Physical",
+      "fullRationale": "It controls physical access to a protected space.",
+      "incorrectOptionRationales": {
+        "Technical": "Technical does not match the scenario's primary implementation mechanism or intended effect.",
+        "Managerial": "Managerial does not match the scenario's primary implementation mechanism or intended effect.",
+        "Operational": "Operational does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Physical."
+      },
+      "misconceptionTags": [
+        "MISCONCEPTION_PHYSICAL"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-009",
+      "unitIds": [
+        "UNIT-1.1-02"
+      ],
+      "conceptIds": [
+        "CON-1.1-PREVENTIVE"
+      ],
+      "activityType": "recognition",
+      "difficulty": "easy",
+      "prompt": "Which type primarily blocks or reduces the likelihood of an event?",
+      "answerOptions": [
+        "Preventive",
+        "Deterrent",
+        "Detective",
+        "Corrective",
+        "Compensating",
+        "Directive"
+      ],
+      "correctAnswer": "Preventive",
+      "fullRationale": "Preventive controls stop or reduce likelihood.",
+      "incorrectOptionRationales": {
+        "Deterrent": "Deterrent does not match the scenario's primary implementation mechanism or intended effect.",
+        "Detective": "Detective does not match the scenario's primary implementation mechanism or intended effect.",
+        "Corrective": "Corrective does not match the scenario's primary implementation mechanism or intended effect.",
+        "Compensating": "Compensating does not match the scenario's primary implementation mechanism or intended effect.",
+        "Directive": "Directive does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Preventive."
+      },
+      "misconceptionTags": [
+        "MISCONCEPTION_PREVENTIVE"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-010",
+      "unitIds": [
+        "UNIT-1.1-02"
+      ],
+      "conceptIds": [
+        "CON-1.1-DETERRENT"
+      ],
+      "activityType": "recognition",
+      "difficulty": "easy",
+      "prompt": "Which type primarily discourages unwanted behaviour?",
+      "answerOptions": [
+        "Preventive",
+        "Deterrent",
+        "Detective",
+        "Corrective",
+        "Compensating",
+        "Directive"
+      ],
+      "correctAnswer": "Deterrent",
+      "fullRationale": "Deterrent controls increase perceived risk or consequence.",
+      "incorrectOptionRationales": {
+        "Preventive": "Preventive does not match the scenario's primary implementation mechanism or intended effect.",
+        "Detective": "Detective does not match the scenario's primary implementation mechanism or intended effect.",
+        "Corrective": "Corrective does not match the scenario's primary implementation mechanism or intended effect.",
+        "Compensating": "Compensating does not match the scenario's primary implementation mechanism or intended effect.",
+        "Directive": "Directive does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Deterrent."
+      },
+      "misconceptionTags": [
+        "MISCONCEPTION_DETERRENT"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-011",
+      "unitIds": [
+        "UNIT-1.1-02"
+      ],
+      "conceptIds": [
+        "CON-1.1-DETECTIVE"
+      ],
+      "activityType": "recognition",
+      "difficulty": "easy",
+      "prompt": "Which type identifies or alerts on an event?",
+      "answerOptions": [
+        "Preventive",
+        "Deterrent",
+        "Detective",
+        "Corrective",
+        "Compensating",
+        "Directive"
+      ],
+      "correctAnswer": "Detective",
+      "fullRationale": "Detective controls discover activity.",
+      "incorrectOptionRationales": {
+        "Preventive": "Preventive does not match the scenario's primary implementation mechanism or intended effect.",
+        "Deterrent": "Deterrent does not match the scenario's primary implementation mechanism or intended effect.",
+        "Corrective": "Corrective does not match the scenario's primary implementation mechanism or intended effect.",
+        "Compensating": "Compensating does not match the scenario's primary implementation mechanism or intended effect.",
+        "Directive": "Directive does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Detective."
+      },
+      "misconceptionTags": [
+        "MISCONCEPTION_DETECTIVE"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-012",
+      "unitIds": [
+        "UNIT-1.1-02"
+      ],
+      "conceptIds": [
+        "CON-1.1-CORRECTIVE"
+      ],
+      "activityType": "recognition",
+      "difficulty": "easy",
+      "prompt": "Which type repairs damage or restores normal operation?",
+      "answerOptions": [
+        "Preventive",
+        "Deterrent",
+        "Detective",
+        "Corrective",
+        "Compensating",
+        "Directive"
+      ],
+      "correctAnswer": "Corrective",
+      "fullRationale": "Corrective controls restore after an event.",
+      "incorrectOptionRationales": {
+        "Preventive": "Preventive does not match the scenario's primary implementation mechanism or intended effect.",
+        "Deterrent": "Deterrent does not match the scenario's primary implementation mechanism or intended effect.",
+        "Detective": "Detective does not match the scenario's primary implementation mechanism or intended effect.",
+        "Compensating": "Compensating does not match the scenario's primary implementation mechanism or intended effect.",
+        "Directive": "Directive does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Corrective."
+      },
+      "misconceptionTags": [
+        "MISCONCEPTION_CORRECTIVE"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-013",
+      "unitIds": [
+        "UNIT-1.1-02"
+      ],
+      "conceptIds": [
+        "CON-1.1-COMPENSATING"
+      ],
+      "activityType": "recognition",
+      "difficulty": "easy",
+      "prompt": "Which type substitutes when a preferred control is unavailable?",
+      "answerOptions": [
+        "Preventive",
+        "Deterrent",
+        "Detective",
+        "Corrective",
+        "Compensating",
+        "Directive"
+      ],
+      "correctAnswer": "Compensating",
+      "fullRationale": "Compensating controls provide an alternative with similar intent.",
+      "incorrectOptionRationales": {
+        "Preventive": "Preventive does not match the scenario's primary implementation mechanism or intended effect.",
+        "Deterrent": "Deterrent does not match the scenario's primary implementation mechanism or intended effect.",
+        "Detective": "Detective does not match the scenario's primary implementation mechanism or intended effect.",
+        "Corrective": "Corrective does not match the scenario's primary implementation mechanism or intended effect.",
+        "Directive": "Directive does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Compensating."
+      },
+      "misconceptionTags": [
+        "MISCONCEPTION_COMPENSATING"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-014",
+      "unitIds": [
+        "UNIT-1.1-02"
+      ],
+      "conceptIds": [
+        "CON-1.1-DIRECTIVE"
+      ],
+      "activityType": "recognition",
+      "difficulty": "easy",
+      "prompt": "Which type instructs or requires behaviour?",
+      "answerOptions": [
+        "Preventive",
+        "Deterrent",
+        "Detective",
+        "Corrective",
+        "Compensating",
+        "Directive"
+      ],
+      "correctAnswer": "Directive",
+      "fullRationale": "Directive controls specify required behaviour.",
+      "incorrectOptionRationales": {
+        "Preventive": "Preventive does not match the scenario's primary implementation mechanism or intended effect.",
+        "Deterrent": "Deterrent does not match the scenario's primary implementation mechanism or intended effect.",
+        "Detective": "Detective does not match the scenario's primary implementation mechanism or intended effect.",
+        "Corrective": "Corrective does not match the scenario's primary implementation mechanism or intended effect.",
+        "Compensating": "Compensating does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Directive."
+      },
+      "misconceptionTags": [
+        "MISCONCEPTION_DIRECTIVE"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-015",
+      "unitIds": [
+        "UNIT-1.1-02"
+      ],
+      "conceptIds": [
+        "CON-1.1-PREVENTIVE"
+      ],
+      "activityType": "scenario",
+      "difficulty": "medium",
+      "prompt": "A firewall deny rule is primarily what type?",
+      "answerOptions": [
+        "Preventive",
+        "Deterrent",
+        "Detective",
+        "Corrective"
+      ],
+      "correctAnswer": "Preventive",
+      "fullRationale": "It blocks traffic before access occurs.",
+      "incorrectOptionRationales": {
+        "Deterrent": "Deterrent does not match the scenario's primary implementation mechanism or intended effect.",
+        "Detective": "Detective does not match the scenario's primary implementation mechanism or intended effect.",
+        "Corrective": "Corrective does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Preventive."
+      },
+      "misconceptionTags": [
+        "MISCONCEPTION_PREVENTIVE"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-016",
+      "unitIds": [
+        "UNIT-1.1-02"
+      ],
+      "conceptIds": [
+        "CON-1.1-DETERRENT"
+      ],
+      "activityType": "scenario",
+      "difficulty": "medium",
+      "prompt": "A visible CCTV warning sign is primarily what type?",
+      "answerOptions": [
+        "Preventive",
+        "Deterrent",
+        "Detective",
+        "Corrective"
+      ],
+      "correctAnswer": "Deterrent",
+      "fullRationale": "Its primary purpose is to discourage behaviour.",
+      "incorrectOptionRationales": {
+        "Preventive": "Preventive does not match the scenario's primary implementation mechanism or intended effect.",
+        "Detective": "Detective does not match the scenario's primary implementation mechanism or intended effect.",
+        "Corrective": "Corrective does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Deterrent."
+      },
+      "misconceptionTags": [
+        "MISCONCEPTION_DETERRENT"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-017",
+      "unitIds": [
+        "UNIT-1.1-02"
+      ],
+      "conceptIds": [
+        "CON-1.1-DETECTIVE"
+      ],
+      "activityType": "scenario",
+      "difficulty": "medium",
+      "prompt": "A Microsoft Sentinel alert is primarily what type?",
+      "answerOptions": [
+        "Preventive",
+        "Deterrent",
+        "Detective",
+        "Corrective"
+      ],
+      "correctAnswer": "Detective",
+      "fullRationale": "It identifies suspicious activity.",
+      "incorrectOptionRationales": {
+        "Preventive": "Preventive does not match the scenario's primary implementation mechanism or intended effect.",
+        "Deterrent": "Deterrent does not match the scenario's primary implementation mechanism or intended effect.",
+        "Corrective": "Corrective does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Detective."
+      },
+      "misconceptionTags": [
+        "MISCONCEPTION_DETECTIVE"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-018",
+      "unitIds": [
+        "UNIT-1.1-02"
+      ],
+      "conceptIds": [
+        "CON-1.1-CORRECTIVE"
+      ],
+      "activityType": "scenario",
+      "difficulty": "medium",
+      "prompt": "Restoring a server from a clean backup is primarily what type?",
+      "answerOptions": [
+        "Preventive",
+        "Detective",
+        "Corrective",
+        "Directive"
+      ],
+      "correctAnswer": "Corrective",
+      "fullRationale": "It restores operation after damage.",
+      "incorrectOptionRationales": {
+        "Preventive": "Preventive does not match the scenario's primary implementation mechanism or intended effect.",
+        "Detective": "Detective does not match the scenario's primary implementation mechanism or intended effect.",
+        "Directive": "Directive does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Corrective."
+      },
+      "misconceptionTags": [
+        "MISCONCEPTION_CORRECTIVE"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-019",
+      "unitIds": [
+        "UNIT-1.1-02"
+      ],
+      "conceptIds": [
+        "CON-1.1-COMPENSATING"
+      ],
+      "activityType": "scenario",
+      "difficulty": "medium",
+      "prompt": "A restricted jump host replaces unavailable MFA on a legacy system. Type?",
+      "answerOptions": [
+        "Preventive",
+        "Corrective",
+        "Compensating",
+        "Directive"
+      ],
+      "correctAnswer": "Compensating",
+      "fullRationale": "It substitutes for the preferred unavailable control.",
+      "incorrectOptionRationales": {
+        "Preventive": "Preventive does not match the scenario's primary implementation mechanism or intended effect.",
+        "Corrective": "Corrective does not match the scenario's primary implementation mechanism or intended effect.",
+        "Directive": "Directive does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Compensating."
+      },
+      "misconceptionTags": [
+        "MISCONCEPTION_COMPENSATING"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-020",
+      "unitIds": [
+        "UNIT-1.1-02"
+      ],
+      "conceptIds": [
+        "CON-1.1-DIRECTIVE"
+      ],
+      "activityType": "scenario",
+      "difficulty": "medium",
+      "prompt": "An acceptable-use policy requiring phishing reporting is primarily what type?",
+      "answerOptions": [
+        "Preventive",
+        "Detective",
+        "Compensating",
+        "Directive"
+      ],
+      "correctAnswer": "Directive",
+      "fullRationale": "It instructs required behaviour.",
+      "incorrectOptionRationales": {
+        "Preventive": "Preventive does not match the scenario's primary implementation mechanism or intended effect.",
+        "Detective": "Detective does not match the scenario's primary implementation mechanism or intended effect.",
+        "Compensating": "Compensating does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Directive."
+      },
+      "misconceptionTags": [
+        "MISCONCEPTION_DIRECTIVE"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-021",
+      "unitIds": [
+        "UNIT-1.1-01"
+      ],
+      "conceptIds": [
+        "CON-1.1-PHYSICAL"
+      ],
+      "activityType": "scenario",
+      "difficulty": "medium",
+      "prompt": "A locked access-controlled server-room door is best classified as which pair?",
+      "answerOptions": [
+        "Physical / Preventive",
+        "Technical / Preventive",
+        "Physical / Detective",
+        "Operational / Directive"
+      ],
+      "correctAnswer": "Physical / Preventive",
+      "fullRationale": "The barrier is physical and its primary purpose is to block entry.",
+      "incorrectOptionRationales": {
+        "Technical / Preventive": "Technical / Preventive does not match the scenario's primary implementation mechanism or intended effect.",
+        "Physical / Detective": "Physical / Detective does not match the scenario's primary implementation mechanism or intended effect.",
+        "Operational / Directive": "Operational / Directive does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Physical / Preventive."
+      },
+      "misconceptionTags": [
+        "CATEGORY_TYPE_AXIS_CONFUSION"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-022",
+      "unitIds": [
+        "UNIT-1.1-02"
+      ],
+      "conceptIds": [
+        "CON-1.1-DETECTIVE"
+      ],
+      "activityType": "scenario",
+      "difficulty": "medium",
+      "prompt": "A SIEM correlation rule that raises an alert is best classified as which pair?",
+      "answerOptions": [
+        "Technical / Detective",
+        "Managerial / Detective",
+        "Technical / Corrective",
+        "Operational / Preventive"
+      ],
+      "correctAnswer": "Technical / Detective",
+      "fullRationale": "Software performs detection and alerting.",
+      "incorrectOptionRationales": {
+        "Managerial / Detective": "Managerial / Detective does not match the scenario's primary implementation mechanism or intended effect.",
+        "Technical / Corrective": "Technical / Corrective does not match the scenario's primary implementation mechanism or intended effect.",
+        "Operational / Preventive": "Operational / Preventive does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Technical / Detective."
+      },
+      "misconceptionTags": [
+        "CATEGORY_TYPE_AXIS_CONFUSION"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-023",
+      "unitIds": [
+        "UNIT-1.1-01"
+      ],
+      "conceptIds": [
+        "CON-1.1-OPERATIONAL"
+      ],
+      "activityType": "scenario",
+      "difficulty": "medium",
+      "prompt": "A technician isolates an infected endpoint by following an incident runbook. Primary category?",
+      "answerOptions": [
+        "Technical",
+        "Managerial",
+        "Operational",
+        "Physical"
+      ],
+      "correctAnswer": "Operational",
+      "fullRationale": "The scenario asks about the technician-executed procedure.",
+      "incorrectOptionRationales": {
+        "Technical": "Technical does not match the scenario's primary implementation mechanism or intended effect.",
+        "Managerial": "Managerial does not match the scenario's primary implementation mechanism or intended effect.",
+        "Physical": "Physical does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Operational."
+      },
+      "misconceptionTags": [
+        "CATEGORY_TYPE_AXIS_CONFUSION"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-024",
+      "unitIds": [
+        "UNIT-1.1-01"
+      ],
+      "conceptIds": [
+        "CON-1.1-MANAGERIAL"
+      ],
+      "activityType": "scenario",
+      "difficulty": "medium",
+      "prompt": "Leadership mandates annual access reviews through policy. Primary category and type?",
+      "answerOptions": [
+        "Managerial / Directive",
+        "Operational / Detective",
+        "Technical / Preventive",
+        "Physical / Directive"
+      ],
+      "correctAnswer": "Managerial / Directive",
+      "fullRationale": "Governance establishes a required action.",
+      "incorrectOptionRationales": {
+        "Operational / Detective": "Operational / Detective does not match the scenario's primary implementation mechanism or intended effect.",
+        "Technical / Preventive": "Technical / Preventive does not match the scenario's primary implementation mechanism or intended effect.",
+        "Physical / Directive": "Physical / Directive does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Managerial / Directive."
+      },
+      "misconceptionTags": [
+        "CATEGORY_TYPE_AXIS_CONFUSION"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-025",
+      "unitIds": [
+        "UNIT-1.1-02"
+      ],
+      "conceptIds": [
+        "CON-1.1-DETECTIVE"
+      ],
+      "activityType": "scenario",
+      "difficulty": "medium",
+      "prompt": "An automated endpoint tool detects malware but does not block it. Best pair?",
+      "answerOptions": [
+        "Technical / Detective",
+        "Technical / Preventive",
+        "Operational / Detective",
+        "Managerial / Corrective"
+      ],
+      "correctAnswer": "Technical / Detective",
+      "fullRationale": "Technology identifies the event without blocking it.",
+      "incorrectOptionRationales": {
+        "Technical / Preventive": "Technical / Preventive does not match the scenario's primary implementation mechanism or intended effect.",
+        "Operational / Detective": "Operational / Detective does not match the scenario's primary implementation mechanism or intended effect.",
+        "Managerial / Corrective": "Managerial / Corrective does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Technical / Detective."
+      },
+      "misconceptionTags": [
+        "CATEGORY_TYPE_AXIS_CONFUSION"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-026",
+      "unitIds": [
+        "UNIT-1.1-02"
+      ],
+      "conceptIds": [
+        "CON-1.1-PREVENTIVE"
+      ],
+      "activityType": "scenario",
+      "difficulty": "medium",
+      "prompt": "A door lock directly stops unauthorised entry. Best pair?",
+      "answerOptions": [
+        "Physical / Preventive",
+        "Physical / Deterrent",
+        "Technical / Preventive",
+        "Operational / Corrective"
+      ],
+      "correctAnswer": "Physical / Preventive",
+      "fullRationale": "It is a physical barrier whose primary purpose is blocking.",
+      "incorrectOptionRationales": {
+        "Physical / Deterrent": "Physical / Deterrent does not match the scenario's primary implementation mechanism or intended effect.",
+        "Technical / Preventive": "Technical / Preventive does not match the scenario's primary implementation mechanism or intended effect.",
+        "Operational / Corrective": "Operational / Corrective does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Physical / Preventive."
+      },
+      "misconceptionTags": [
+        "CATEGORY_TYPE_AXIS_CONFUSION"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-027",
+      "unitIds": [
+        "UNIT-1.1-02"
+      ],
+      "conceptIds": [
+        "CON-1.1-COMPENSATING"
+      ],
+      "activityType": "scenario",
+      "difficulty": "medium",
+      "prompt": "Which statement about compensating controls is correct?",
+      "answerOptions": [
+        "Any additional control is compensating",
+        "It replaces an unavailable preferred control while addressing its intent",
+        "It always repairs damage",
+        "It only applies to physical security"
+      ],
+      "correctAnswer": "It replaces an unavailable preferred control while addressing its intent",
+      "fullRationale": "Compensating means an alternative, not merely an extra layer.",
+      "incorrectOptionRationales": {
+        "Any additional control is compensating": "Any additional control is compensating does not match the scenario's primary implementation mechanism or intended effect.",
+        "It always repairs damage": "It always repairs damage does not match the scenario's primary implementation mechanism or intended effect.",
+        "It only applies to physical security": "It only applies to physical security does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: It replaces an unavailable preferred control while addressing its intent."
+      },
+      "misconceptionTags": [
+        "CATEGORY_TYPE_AXIS_CONFUSION"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-028",
+      "unitIds": [
+        "UNIT-1.1-01"
+      ],
+      "conceptIds": [
+        "CON-1.1-TECHNICAL"
+      ],
+      "activityType": "scenario",
+      "difficulty": "medium",
+      "prompt": "Which statement best separates category from type?",
+      "answerOptions": [
+        "Category is implementation; type is primary purpose",
+        "Category is purpose; type is ownership",
+        "They are interchangeable",
+        "Only technical controls have types"
+      ],
+      "correctAnswer": "Category is implementation; type is primary purpose",
+      "fullRationale": "The two axes answer different questions.",
+      "incorrectOptionRationales": {
+        "Category is purpose; type is ownership": "Category is purpose; type is ownership does not match the scenario's primary implementation mechanism or intended effect.",
+        "They are interchangeable": "They are interchangeable does not match the scenario's primary implementation mechanism or intended effect.",
+        "Only technical controls have types": "Only technical controls have types does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Category is implementation; type is primary purpose."
+      },
+      "misconceptionTags": [
+        "CATEGORY_TYPE_AXIS_CONFUSION"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-029",
+      "unitIds": [
+        "UNIT-1.1-01"
+      ],
+      "conceptIds": [
+        "CON-1.1-MANAGERIAL"
+      ],
+      "activityType": "scenario",
+      "difficulty": "medium",
+      "prompt": "An MSP uses a risk register, a firewall rule, a technician checklist, and a locked rack. What does this demonstrate?",
+      "answerOptions": [
+        "One control can only have one owner",
+        "A security programme needs multiple control categories",
+        "All controls are technical",
+        "Physical controls replace governance"
+      ],
+      "correctAnswer": "A security programme needs multiple control categories",
+      "fullRationale": "Governance, technology, process, and physical protection work together.",
+      "incorrectOptionRationales": {
+        "One control can only have one owner": "One control can only have one owner does not match the scenario's primary implementation mechanism or intended effect.",
+        "All controls are technical": "All controls are technical does not match the scenario's primary implementation mechanism or intended effect.",
+        "Physical controls replace governance": "Physical controls replace governance does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: A security programme needs multiple control categories."
+      },
+      "misconceptionTags": [
+        "CATEGORY_TYPE_AXIS_CONFUSION"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    },
+    {
+      "questionId": "Q-1.1-030",
+      "unitIds": [
+        "UNIT-1.1-02"
+      ],
+      "conceptIds": [
+        "CON-1.1-DETERRENT"
+      ],
+      "activityType": "scenario",
+      "difficulty": "medium",
+      "prompt": "A warning banner states unauthorised access may be prosecuted. Primary type?",
+      "answerOptions": [
+        "Preventive",
+        "Deterrent",
+        "Detective",
+        "Corrective"
+      ],
+      "correctAnswer": "Deterrent",
+      "fullRationale": "The banner mainly discourages through perceived consequences.",
+      "incorrectOptionRationales": {
+        "Preventive": "Preventive does not match the scenario's primary implementation mechanism or intended effect.",
+        "Detective": "Detective does not match the scenario's primary implementation mechanism or intended effect.",
+        "Corrective": "Corrective does not match the scenario's primary implementation mechanism or intended effect."
+      },
+      "hints": {
+        "level1": "Focus on the primary mechanism or intended effect described.",
+        "level2": "Separate category (how implemented) from type (what it does), then eliminate mismatches.",
+        "level3": "The guided answer is: Deterrent."
+      },
+      "misconceptionTags": [
+        "CATEGORY_TYPE_AXIS_CONFUSION"
+      ],
+      "estimatedResponseTimeSeconds": 60,
+      "confidencePrompt": "Knew it / Reasoned it out / Educated guess / No idea"
+    }
+  ]
+}

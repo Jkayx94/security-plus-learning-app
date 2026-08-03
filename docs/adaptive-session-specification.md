@@ -1,0 +1,2 @@
+# Adaptive Session Specification
+Candidate score combines overdue review, unseen status, low mastery, recurring misconceptions, objective priority, confidence weakness and mode. Session length determines activity count. Every activity exposes its selection reason. Correct guesses receive minimal mastery gain and a one-day review. Confident first-attempt answers receive longer intervals. Incorrect or hinted answers return sooner.
