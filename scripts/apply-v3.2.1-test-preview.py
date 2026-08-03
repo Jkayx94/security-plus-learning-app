@@ -1,21 +1,30 @@
 from pathlib import Path
-import re,sys
-p=Path(sys.argv[1]);s=p.read_text(encoding='utf-8')
-about="""function aboutView(){const remaining=Math.max(0,5-versionTapCount);return shell(`<main class="shell"><h1>About</h1><section class="card"><h2>Security+ Adaptive Learning</h2><dl class="aboutGrid"><dt>Application version</dt><dd><button class="versionTap" data-action="version-tap">Version ${APP_VERSION}</button></dd><dt>Content version</dt><dd>${esc(contentPack.contentVersion)}</dd><dt>Curriculum version</dt><dd>1.2</dd><dt>Storage mode</dt><dd>Local browser storage</dd><dt>Offline status</dt><dd>${navigator.onLine?'Online · offline files available':'Offline'}</dd></dl><p class="notice">Tap the version five times to enable local testing tools.</p>${!developerCodeVisible?`<p class="tapProgress">${remaining===5?'Five taps required':`${remaining} tap${remaining===1?'':'s'} remaining`}</p>`:`<p class="tapProgress"><b>Testing tools unlocked</b></p><label>Developer code <input id="test-code" autocomplete="off" spellcheck="false"></label><button class="primary" data-action="test-enable">Enable Test Mode</button><p class="muted">Test Mode is local QA tooling. It does not affect genuine learning progress, readiness or rewards.</p>`}<div class="buttonStack"><button data-action="check-updates">Check for updates</button><button data-action="refresh-files">Refresh application files</button></div><p>${updateAvailable?'Update available.':'The application files are up to date.'}</p>${state.testMode.enabled?`<p class="testWarning"><b>TEST MODE</b> Test actions do not affect genuine mastery, readiness or rewards.</p><button data-nav="testlab">Open Developer Lab</button><button data-action="test-exit">Exit Test Mode</button>`:''}</section></main>`)}"""
-s=re.sub(r"function aboutView\(\)\{.*?\}\nfunction reviewView",about+"\nfunction reviewView",s,flags=re.S)
-s=s.replace("function achievementsView(){return shell(`<main class=\"shell\"><h1>Achievements</h1>","function achievementsView(){return shell(`<main class=\"shell\">${state.testMode.enabled?'<p class=\"eyebrow\">TEST PREVIEW</p>':''}<h1>Achievements</h1>")
-s=s.replace("function cosmeticsView(){return shell(`<main class=\"shell\"><h1>Cosmetics</h1>","function cosmeticsView(){return shell(`<main class=\"shell\">${state.testMode.enabled?'<p class=\"eyebrow\">TEST PREVIEW</p>':''}<h1>Cosmetics</h1>")
-s=s.replace("<p>${state.coins} coins available</p>","<p>${state.testMode.enabled?`Real coins: ${state.coins} · Test coins: ${state.testMode.unlimitedCoins?'Unlimited':state.testMode.coins}`:`${state.coins} coins available`}</p>")
-s=s.replace("if(a==='update-now'){location.reload();return}","if(a==='update-now'){navigator.serviceWorker?.getRegistration().then(r=>r?.waiting?.postMessage({type:'SKIP_WAITING'}));return}")
-s=s.replace("const exportState={...state,testMode:freshTestSandbox(false)};","const exportState=sanitiseTestState(state);")
-# Declare the action once before Developer Lab handlers and remove the later duplicate.
-if "if(a==='test-unlock-everything'" in s and "const a=t.dataset.action;if(a==='test-unlock-everything'" not in s:
-    s=s.replace("if(a==='test-unlock-everything'","const a=t.dataset.action;if(a==='test-unlock-everything'",1)
-s=s.replace("}const a=t.dataset.action;if(a==='complete-onboarding'","}if(a==='complete-onboarding'",1)
-# Ensure the catch block is a complete statement before the following destructuring assignment.
-s=s.replace("catch{profile=null}[curriculum,units]", "catch{profile=null;}[curriculum,units]")
-# Existing learners must always start on Home so the persistent bottom navigation is rendered deterministically.
-s=s.replace("if(!profile){view='onboarding'}else{state.learnerId=profile.id}","view=profile?'home':'onboarding';if(profile)state.learnerId=profile.id")
-# The Developer Lab's reviewed-question preview is deliberately one activity so Continue returns to a shell view with navigation.
-s=s.replace("if(t.dataset.testScreen==='session'){try{start(2,'adaptive',true)}", "if(t.dataset.testScreen==='session'){try{start(.5,'adaptive',true)}")
-p.write_text(s,encoding='utf-8')
+import sys
+
+path = Path(sys.argv[1])
+source = path.read_text(encoding="utf-8")
+
+# Repair the malformed boundary left by the earlier migration script.
+# The explicit leading semicolon makes the destructuring assignment a new statement.
+source = source.replace(
+    "catch{profile=null}[curriculum,units]=await Promise.all(",
+    "catch{profile=null;}\n;[curriculum,units]=await Promise.all(",
+)
+source = source.replace(
+    "catch{profile=null;}[curriculum,units]=await Promise.all(",
+    "catch{profile=null;}\n;[curriculum,units]=await Promise.all(",
+)
+
+# Existing learners must start on Home so the persistent navigation is rendered.
+source = source.replace(
+    "if(!profile){view='onboarding'}else{state.learnerId=profile.id}",
+    "view=profile?'home':'onboarding';if(profile)state.learnerId=profile.id",
+)
+
+# Developer Lab reviewed-question preview must be a single activity.
+source = source.replace(
+    "if(t.dataset.testScreen==='session'){try{start(2,'adaptive',true)}",
+    "if(t.dataset.testScreen==='session'){try{start(.5,'adaptive',true)}",
+)
+
+path.write_text(source, encoding="utf-8")
