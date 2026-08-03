@@ -24,7 +24,9 @@ jobs:
           fetch-depth: 0
 
       - name: Apply v3.2 platform migration
-        run: python3 scripts/apply-v3.2-platform-content.py src/app.ts src/styles.css
+        run: |
+          python3 scripts/apply-v3.2-platform-content.py src/app.ts src/styles.css
+          python3 scripts/repair-v3.2-content-syntax.py
 
       - name: Set v3.2 manifest and service worker
         shell: bash
@@ -91,7 +93,7 @@ jobs:
             cp v3.2-build.log V3_2_BUILD_ERROR.txt
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add src/app.ts src/styles.css public/manifest.webmanifest public/sw.js V3_2_BUILD_ERROR.txt reports/ 2>/dev/null || true
+            git add src/app.ts src/styles.css src/content/security-plus-v3.2.ts public/manifest.webmanifest public/sw.js V3_2_BUILD_ERROR.txt reports/ 2>/dev/null || true
             git commit -m "Preserve v3.2 source and build failure [skip ci]" || true
             git push origin HEAD:main || true
             exit $code
@@ -117,7 +119,7 @@ jobs:
           JavaScript syntax validation: passed
           Production UI audit: passed
           EOF
-          git add src/app.ts src/styles.css public/manifest.webmanifest public/sw.js reports/ V3_2_BUILD_PASSED.md
+          git add src/app.ts src/styles.css src/content/security-plus-v3.2.ts public/manifest.webmanifest public/sw.js reports/ V3_2_BUILD_PASSED.md
           git add -u -- V3_2_BUILD_ERROR.txt 2>/dev/null || true
           git commit -m "Apply Security+ v3.2 platform and content infrastructure [skip ci]" || true
           git push origin HEAD:main || true
