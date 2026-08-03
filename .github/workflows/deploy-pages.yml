@@ -25,7 +25,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Apply deterministic startup fix
+      - name: Apply deterministic v3.2.1 source fixes
         run: python3 scripts/apply-v3.2.1-test-preview.py src/app.ts
 
       - name: Set up Node
@@ -68,8 +68,12 @@ jobs:
           grep -q "Developer Lab" dist/assets/app.js
           grep -q "JAKE-SECPLUS-TEST" dist/assets/app.js
           grep -q "sanitiseTestState" dist/assets/app.js
+          grep -q "Test cosmetic preview applied" dist/assets/app.js
+          grep -q "FINISH MODE ARMED" dist/assets/app.js
+          grep -q "FINAL STRIKE CONFIRMED" dist/assets/app.js
           grep -q "SKIP_WAITING" dist/sw.js
           grep -q "clients.claim" dist/sw.js
+          grep -q "v3.2.1 cosmetic and persistent boss UX" dist/assets/styles.css
           grep -q "prefers-reduced-motion" dist/assets/styles.css
           node --check dist/assets/app.js
           node --check dist/assets/engine/notification-queue.js
@@ -77,13 +81,13 @@ jobs:
 
       - name: Commit corrected canonical source
         run: |
-          if git diff --quiet -- src/app.ts; then
+          if git diff --quiet -- src/app.ts src/styles.css; then
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/app.ts
-          git commit -m "Render Home navigation deterministically for existing learners"
+          git add src/app.ts src/styles.css
+          git commit -m "Apply Test Mode cosmetics and persistent boss presentation"
           git push origin HEAD:main
 
       - name: Configure Pages
