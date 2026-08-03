@@ -32,36 +32,50 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Validate, test, type-check and build
-        run: npm run build
-
-      - name: Verify v3.1 production output
+      - name: Validate, test, type-check, build and audit
         shell: bash
         run: |
-          set -euo pipefail
-          test -f dist/index.html
-          test -f dist/assets/app.js
-          test -f dist/assets/styles.css
-          test -f dist/manifest.webmanifest
-          test -f dist/sw.js
-          test -f dist/icons/icon-192.png
-          test -f dist/icons/icon-512.png
-          grep -q "3.1.0" dist/assets/app.js
-          grep -q "security-plus-v3.1.0" dist/sw.js
-          grep -q "Correct, but low confidence" dist/assets/app.js
-          grep -q "Why your selected answer was tempting" dist/assets/app.js
-          grep -q "Why each other option is wrong" dist/assets/app.js
-          grep -q "Boss health" dist/assets/app.js
-          grep -q "learnerShieldBar" dist/assets/app.js
-          grep -q "Start targeted review" dist/assets/app.js
-          grep -q "Developer Lab" dist/assets/app.js
-          grep -q "JAKE-SECPLUS-TEST" dist/assets/app.js
-          grep -q "Cosmetics" dist/assets/app.js
-          grep -q "version-tap" dist/assets/app.js
-          grep -q "reward:150" scripts/progression-rules.mjs
-          grep -q "questions:5" scripts/progression-rules.mjs
-          grep -q "prefers-reduced-motion" dist/assets/styles.css
-          node --check dist/assets/app.js
+          set +e
+          {
+            npm run build
+            code=$?
+            if [ $code -ne 0 ]; then exit $code; fi
+            set -e
+            test -f dist/index.html
+            test -f dist/assets/app.js
+            test -f dist/assets/styles.css
+            test -f dist/manifest.webmanifest
+            test -f dist/sw.js
+            test -f dist/icons/icon-192.png
+            test -f dist/icons/icon-512.png
+            grep -q "3.1.0" dist/assets/app.js
+            grep -q "security-plus-v3.1.0" dist/sw.js
+            grep -q "Correct, but low confidence" dist/assets/app.js
+            grep -q "Why your selected answer was tempting" dist/assets/app.js
+            grep -q "Why each other option is wrong" dist/assets/app.js
+            grep -q "Boss health" dist/assets/app.js
+            grep -q "learnerShieldBar" dist/assets/app.js
+            grep -q "Start targeted review" dist/assets/app.js
+            grep -q "Developer Lab" dist/assets/app.js
+            grep -q "JAKE-SECPLUS-TEST" dist/assets/app.js
+            grep -q "Cosmetics" dist/assets/app.js
+            grep -q "version-tap" dist/assets/app.js
+            grep -q "reward:150" scripts/progression-rules.mjs
+            grep -q "questions:5" scripts/progression-rules.mjs
+            grep -q "prefers-reduced-motion" dist/assets/styles.css
+            node --check dist/assets/app.js
+          } > v3.1-direct-build.log 2>&1
+          code=$?
+          cat v3.1-direct-build.log
+          if [ $code -ne 0 ]; then
+            cp v3.1-direct-build.log V3_1_BUILD_ERROR.txt
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add V3_1_BUILD_ERROR.txt
+            git commit -m "Record direct v3.1 build failure [skip ci]" || true
+            git push origin HEAD:main || true
+            exit $code
+          fi
 
       - name: Record passed build
         shell: bash
@@ -81,7 +95,9 @@ jobs:
           EOF
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm -f V3_1_BUILD_ERROR.txt
           git add V3_1_BUILD_PASSED.md
+          git add -u -- V3_1_BUILD_ERROR.txt 2>/dev/null || true
           git commit -m "Record Security+ v3.1 build success [skip ci]" || true
           git push origin HEAD:main || true
 
