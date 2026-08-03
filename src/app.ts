@@ -31,6 +31,13 @@ function ensureV3(s:any):State{
 }
 function toast(message:string,kind='success'){toastMessage=message;toastKind=kind;render();setTimeout(()=>{if(toastMessage===message){toastMessage='';render()}},2200)}
 function level(){return Math.max(1,Math.floor(state.xp/250)+1)}
+function awardOnce(key:string,coins:number,eventType:string,payload:Record<string,unknown>):boolean{
+  if(state.rewardedEventIds.includes(key))return false;
+  state.rewardedEventIds.push(key);
+  state.coins+=coins;
+  state.events.push(emit(eventType,[],{...payload,rewardKey:key,coins}));
+  return true;
+}
 const achievementDefs=[
 {id:'first-lesson',name:'First Lesson',coins:2,progress:()=>state.events.some(e=>e.type==='concept_introduced')?1:0,target:1},
 {id:'first-correct',name:'First Correct Answer',coins:2,progress:()=>state.events.filter(e=>e.type==='activity_answered'&&e.payload.correct===true).length,target:1},
