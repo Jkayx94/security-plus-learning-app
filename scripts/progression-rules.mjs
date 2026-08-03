@@ -3,9 +3,13 @@ export const stageRewards={unseen:0,introduced:0,recognised:0,understood:2,appli
 export function bossResult(type,correct,total,claimed=false){const rule=bossRules[type];if(!rule)throw new Error('Unknown boss type');const complete=total>=rule.questions;const score=total?Math.round(correct/total*100):0;const passed=complete&&score>=rule.threshold;return {complete,score,passed,reward:passed&&!claimed?rule.reward:0};}
 export function answerReward({correct,firstAttempt=false,confident=false,previousStage='unseen',newStage='unseen',alreadyRewarded=false,testOnly=false}){if(testOnly)return {xp:0,coins:0,testCoins:correct?1:0};const xp=correct&&firstAttempt&&confident?2:correct?1:0;const coins=!alreadyRewarded&&previousStage!==newStage?(stageRewards[newStage]||0):0;return {xp,coins,testCoins:0};}
 export function shieldTier(e){if(e.readiness>=80&&e.examReady>=300&&e.retained>=400&&e.finalBoss)return 'Security+ Master';if(e.understood>=450&&e.applied>=300&&e.retained>=200&&e.domainBosses>=5)return 'Diamond';if(e.understood>=300&&e.applied>=150&&e.retained>=75&&e.domainBosses>=2)return 'Platinum';if(e.understood>=150&&e.applied>=75&&e.retained>=25&&e.objectiveBosses>=1)return 'Gold';if(e.understood>=50&&e.applied>=20&&e.unitBosses>=3)return 'Silver';if(e.understood>=10&&e.unitBosses>=1)return 'Bronze';return 'Basic';}
-export function resetTestMode(real,test){return {real:{...real},test:{enabled:true,coins:0,unlockedCosmetics:[],previewShield:null,font:'system',overlay:null,animation:null}};}
+export const freshTestState=(enabled=false)=>({enabled,unlimitedCoins:false,coins:0,unlockEverything:false,unlockedCosmetics:[],previewShield:null,font:'system',overlay:null,animation:null,equippedTheme:null,equippedShield:null,achievementState:'locked',bossScenario:null});
+export function resetTestMode(real){return {real:structuredClone(real),test:freshTestState(true)};}
 export function reducedMotionCss(css){return /prefers-reduced-motion\s*:\s*reduce/.test(css)&&/animation\s*:\s*none!important/.test(css);}
 export function developerCodeValid(code){return code==='JAKE-SECPLUS-TEST';}
-export function fiveTapUnlocked(count){return count>=5;}
-export function exportWithoutTest(state){return {...state,testMode:{enabled:false,coins:0,unlockedCosmetics:[],previewShield:null,font:'system',overlay:null,animation:null}};}
+export function fiveTapUnlocked(count){return count===5;}
+export function exportWithoutTest(state){return {...structuredClone(state),testMode:freshTestState(false)};}
 export function cosmeticPurchase({coins,cost,owned=false}){if(owned)return {coins,owned:true,purchased:false};if(cost<0||coins<cost)return {coins,owned:false,purchased:false};return {coins:coins-cost,owned:true,purchased:true};}
+export function unlockTestEverything(test,items){return {...test,enabled:true,unlimitedCoins:true,coins:Number.MAX_SAFE_INTEGER,unlockEverything:true,unlockedCosmetics:[...new Set(items)]};}
+export function applyTestCosmetic(real,test,item){return {real:structuredClone(real),test:{...test,equippedTheme:item.startsWith('theme-')?item:test.equippedTheme,equippedShield:item.startsWith('theme-')?test.equippedShield:item}};}
+export function applyTestBoss(real,test,scenario){return {real:structuredClone(real),test:{...test,bossScenario:scenario}};}
