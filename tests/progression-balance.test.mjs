@@ -18,4 +18,4 @@ test('developer activation requires five taps and exact code',()=>{assert.equal(
 test('reduced-motion disables nonessential animation',()=>{const css=fs.readFileSync(new URL('../src/styles.css',import.meta.url),'utf8');assert.equal(reducedMotionCss(css),true)});
 test('feedback branches are distinct',()=>{const s=app();assert.match(s,/Correct, but low confidence/);assert.match(s,/Why each other option is wrong/);assert.match(s,/Why your selected answer was tempting/);assert.match(s,/Targeted remediation/)});
 test('question status is hidden outside developer mode',()=>{const s=app();assert.match(s,/state\.testMode\.enabled\?`<span class="quality/)});
-test('boss UI and developer lab are present',()=>{const s=app();for(const term of ['Boss health','learnerShieldBar','Developer Lab','Cosmetics','version-tap','Start targeted review'])assert.match(s,new RegExp(term))});
+test('boss UI and developer lab are present',()=>{const s=app();for(const term of ['Boss health','shieldMarkup','bossConsole','Developer Lab','Cosmetics','version-tap','Start targeted review'])assert.match(s,new RegExp(term))});
