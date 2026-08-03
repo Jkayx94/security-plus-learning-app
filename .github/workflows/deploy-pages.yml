@@ -52,7 +52,8 @@ jobs:
             grep -q "Why your selected answer was tempting" dist/assets/app.js
             grep -q "Why each other option is wrong" dist/assets/app.js
             grep -q "Boss health" dist/assets/app.js
-            grep -q "learnerShieldBar" dist/assets/app.js
+            grep -q "shieldMarkup" dist/assets/app.js
+            grep -q "bossConsole" dist/assets/app.js
             grep -q "Start targeted review" dist/assets/app.js
             grep -q "Developer Lab" dist/assets/app.js
             grep -q "JAKE-SECPLUS-TEST" dist/assets/app.js
