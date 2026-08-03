@@ -1,0 +1,48 @@
+name: Question quality report
+description: Report wording, answer, scope, distractor, or explanation problems
+title: "[Question]: "
+labels: [question-quality]
+body:
+  - type: markdown
+    attributes:
+      value: Do not submit real exam content, exam dumps, personal learner data, or workplace/customer information.
+  - type: input
+    id: question_id
+    attributes:
+      label: Question ID
+      description: Use the ID from the in-app exported question report when available.
+  - type: input
+    id: concept
+    attributes:
+      label: Concept or objective
+      placeholder: CON-1.1-PREVENTIVE / Objective 1.1
+  - type: dropdown
+    id: reason
+    attributes:
+      label: Problem type
+      options:
+        - Poor wording
+        - Unrealistic scenario
+        - Wrong explanation
+        - Wrong answer
+        - Multiple possible answers
+        - Implausible distractors
+        - Typo
+        - Too easy
+        - Too hard
+        - Outside SY0-701 scope
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What should be improved?
+      description: Explain the ambiguity or technical problem without reproducing protected exam content.
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested correction
+      description: Optional original wording or rationale.
