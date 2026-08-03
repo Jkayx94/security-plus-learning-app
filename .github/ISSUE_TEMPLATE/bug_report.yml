@@ -1,0 +1,50 @@
+name: Bug report
+description: Report a reproducible application problem
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Do not include exported progress files, personal notes, customer data, credentials, or private workplace information.
+  - type: input
+    id: version
+    attributes:
+      label: App version
+      placeholder: v3.0.0
+    validations:
+      required: true
+  - type: dropdown
+    id: device
+    attributes:
+      label: Device/browser
+      options:
+        - Android installed PWA
+        - Android Chrome
+        - Android Samsung Internet
+        - Android Brave
+        - Desktop browser
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Describe the visible behaviour and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open...
+        2. Tap...
+        3. Observe...
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Anonymised diagnostics
+      description: Paste only anonymised information. Remove names, notes, answers, and identifiers.
