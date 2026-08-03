@@ -24,7 +24,22 @@ jobs:
           fetch-depth: 0
 
       - name: Apply v3 learning experience migration
-        run: python3 scripts/migrate-v3-learning-experience.py src/app.ts src/styles.css
+        id: migrate
+        shell: bash
+        run: |
+          set +e
+          python3 scripts/migrate-v3-learning-experience.py src/app.ts src/styles.css > migration.log 2>&1
+          code=$?
+          cat migration.log
+          if [ $code -ne 0 ]; then
+            cp migration.log V3_MIGRATION_ERROR.txt
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add V3_MIGRATION_ERROR.txt
+            git commit -m "Record v3 migration failure [skip ci]" || true
+            git push origin HEAD:main || true
+            exit $code
+          fi
 
       - name: Set v3 manifest and service worker
         shell: bash
@@ -51,7 +66,21 @@ jobs:
         run: npm ci
 
       - name: Validate, test, type-check and build
-        run: npm run build
+        shell: bash
+        run: |
+          set +e
+          npm run build > build.log 2>&1
+          code=$?
+          cat build.log
+          if [ $code -ne 0 ]; then
+            cp build.log V3_BUILD_ERROR.txt
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add V3_BUILD_ERROR.txt
+            git commit -m "Record v3 build failure [skip ci]" || true
+            git push origin HEAD:main || true
+            exit $code
+          fi
 
       - name: Verify v3 production output
         shell: bash
@@ -84,7 +113,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/app.ts src/styles.css public/manifest.webmanifest public/sw.js
+          rm -f V3_MIGRATION_ERROR.txt V3_BUILD_ERROR.txt
+          git add -A src/app.ts src/styles.css public/manifest.webmanifest public/sw.js V3_MIGRATION_ERROR.txt V3_BUILD_ERROR.txt
           if ! git diff --cached --quiet; then
             git commit -m "Apply Security+ v3.0 learning experience [skip ci]"
             git push origin HEAD:main
