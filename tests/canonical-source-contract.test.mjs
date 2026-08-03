@@ -4,6 +4,8 @@ import fs from 'node:fs';
 
 const workflow = fs.readFileSync('.github/workflows/deploy-pages.yml', 'utf8');
 const app = fs.readFileSync('src/app.ts', 'utf8');
+const loader = fs.readFileSync('src/content/loader.ts', 'utf8');
+const contentPack = fs.readFileSync('src/content/security-plus-v3.2.ts', 'utf8');
 const styles = fs.readFileSync('src/styles.css', 'utf8');
 
 test('CI builds canonical source without repair scripts or generated commits', () => {
@@ -14,11 +16,12 @@ test('CI builds canonical source without repair scripts or generated commits', (
   assert.match(workflow, /git diff --exit-code -- .*scripts/);
 });
 
-test('course storage and content loaders remain stable', () => {
+test('course storage and reviewed content loader remain stable', () => {
   assert.match(app, /KEY\s*=\s*['"]security-plus-mastery-state['"]/);
   assert.match(app, /loadContentPack/);
-  assert.match(app, /sy0-701-curriculum-v1\.2\.json/);
-  assert.match(app, /sy0-701-learning-units-v1\.2\.json/);
+  assert.match(loader, /securityPlusContentPack/);
+  assert.match(loader, /curriculumVersion!=='1\.2'/);
+  assert.match(contentPack, /curriculumVersion:\s*'1\.2'/);
 });
 
 test('every catalogue theme has an explicit rendered selector', () => {
