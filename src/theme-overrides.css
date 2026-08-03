@@ -1,0 +1,156 @@
+/* v3.2.1 complete theme rendering */
+:root[data-theme="theme-blue"]{
+  --theme-bg:#090d14;
+  --theme-bg-top:#152238;
+  --theme-surface:#111a28;
+  --theme-surface-strong:#182234;
+  --theme-surface-soft:#0d1725;
+  --theme-border:#2a3950;
+  --theme-border-strong:#3a4c68;
+  --theme-accent:#3ba0ff;
+  --theme-accent-strong:#1777d3;
+  --theme-accent-soft:#183a5c;
+  --theme-text:#f4f7fb;
+  --theme-muted:#aebbd0;
+  --theme-success:#62dfb6;
+}
+
+:root[data-theme="theme-purple"]{
+  --theme-bg:#0d0915;
+  --theme-bg-top:#2b1740;
+  --theme-surface:#1a1227;
+  --theme-surface-strong:#271a38;
+  --theme-surface-soft:#20142f;
+  --theme-border:#4b3562;
+  --theme-border-strong:#674a82;
+  --theme-accent:#be8cff;
+  --theme-accent-strong:#7b45c7;
+  --theme-accent-soft:#3d2457;
+  --theme-text:#faf6ff;
+  --theme-muted:#c7b8d8;
+  --theme-success:#78e6c0;
+}
+
+:root[data-theme="theme-green"]{
+  --theme-bg:#07110e;
+  --theme-bg-top:#113228;
+  --theme-surface:#0d201a;
+  --theme-surface-strong:#153128;
+  --theme-surface-soft:#10271f;
+  --theme-border:#285443;
+  --theme-border-strong:#3b725d;
+  --theme-accent:#55d99f;
+  --theme-accent-strong:#16885e;
+  --theme-accent-soft:#174b3a;
+  --theme-text:#f2fff9;
+  --theme-muted:#acd0c1;
+  --theme-success:#7cf2bd;
+}
+
+:root[data-theme="theme-oled"]{
+  --theme-bg:#000;
+  --theme-bg-top:#000;
+  --theme-surface:#050505;
+  --theme-surface-strong:#0b0b0b;
+  --theme-surface-soft:#080808;
+  --theme-border:#303030;
+  --theme-border-strong:#505050;
+  --theme-accent:#f4f4f4;
+  --theme-accent-strong:#292929;
+  --theme-accent-soft:#181818;
+  --theme-text:#fff;
+  --theme-muted:#b8b8b8;
+  --theme-success:#7fffc6;
+}
+
+:root[data-theme] body{
+  color:var(--theme-text);
+  background:radial-gradient(circle at top,var(--theme-bg-top) 0,var(--theme-bg) 45%);
+}
+:root[data-theme] header,
+:root[data-theme] nav{
+  background:color-mix(in srgb,var(--theme-bg) 94%,transparent);
+  border-color:var(--theme-border);
+}
+:root[data-theme] .card,
+:root[data-theme] .metrics article,
+:root[data-theme] .profileSummary,
+:root[data-theme] .onboardingCard,
+:root[data-theme] .bottomSheet,
+:root[data-theme] .appNotification,
+:root[data-theme] .testOverlay,
+:root[data-theme] .bossHud{
+  color:var(--theme-text);
+  background:var(--theme-surface);
+  border-color:var(--theme-border);
+}
+:root[data-theme] button{
+  color:var(--theme-text);
+  background:var(--theme-surface-strong);
+  border-color:var(--theme-border-strong);
+}
+:root[data-theme] button.primary,
+:root[data-theme] .primary{
+  background:var(--theme-accent-strong);
+  border-color:var(--theme-accent);
+}
+:root[data-theme] button.selected,
+:root[data-theme] .selected{
+  background:var(--theme-accent-soft)!important;
+  border-color:var(--theme-accent)!important;
+}
+:root[data-theme] input,
+:root[data-theme] textarea,
+:root[data-theme] .hint,
+:root[data-theme] .cue,
+:root[data-theme] .trap,
+:root[data-theme] aside,
+:root[data-theme] .explanationPanel,
+:root[data-theme] .flagPanel,
+:root[data-theme] .tutorOutput{
+  color:var(--theme-text);
+  background:var(--theme-surface-soft);
+  border-color:var(--theme-border-strong);
+}
+:root[data-theme] .muted,
+:root[data-theme] .row,
+:root[data-theme] .metrics span,
+:root[data-theme] header span,
+:root[data-theme] .privacyNote,
+:root[data-theme] .tapProgress{
+  color:var(--theme-muted);
+}
+:root[data-theme] .progress,
+:root[data-theme] .bossHealth{
+  background:var(--theme-border);
+}
+:root[data-theme] .progress i{
+  background:linear-gradient(90deg,var(--theme-accent),var(--theme-success));
+}
+:root[data-theme] .selectionReason,
+:root[data-theme] .notice{
+  background:var(--theme-accent-soft);
+  border-left-color:var(--theme-success);
+}
+:root[data-theme="theme-oled"] body,
+:root[data-theme="theme-oled"] header,
+:root[data-theme="theme-oled"] nav{
+  background:#000;
+}
+:root[data-theme="theme-oled"] .card,
+:root[data-theme="theme-oled"] .metrics article,
+:root[data-theme="theme-oled"] .profileSummary,
+:root[data-theme="theme-oled"] .onboardingCard,
+:root[data-theme="theme-oled"] .bottomSheet{
+  box-shadow:none;
+}
+
+@media(prefers-reduced-motion:reduce){
+  :root[data-theme] *,
+  :root[data-theme] *::before,
+  :root[data-theme] *::after{
+    animation:none!important;
+    transition:none!important;
+    scroll-behavior:auto!important;
+  }
+}
