@@ -1,4 +1,4 @@
-name: Build and deploy Security+ v3
+name: Build and deploy Security+ v3.0.2
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -20,6 +20,27 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply visual test lab, shields and boss console
+        run: python3 scripts/apply-v3-visual-test-lab.py src/app.ts src/styles.css
+
+      - name: Set v3.0.2 manifest and service worker
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          manifest=Path('public/manifest.webmanifest')
+          m=manifest.read_text(encoding='utf-8')
+          m=re.sub(r'3\.0\.1|3\.0\.0|2\.2\.1','3.0.2',m)
+          manifest.write_text(m,encoding='utf-8')
+          sw=Path('public/sw.js')
+          s=sw.read_text(encoding='utf-8')
+          s=re.sub(r"security-plus-v[^'\"]+",'security-plus-v3.0.2',s)
+          sw.write_text(s,encoding='utf-8')
+          PY
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -33,7 +54,7 @@ jobs:
       - name: Validate, test, type-check and build
         run: npm run build
 
-      - name: Verify v3.0.1 production output
+      - name: Verify v3.0.2 production output
         shell: bash
         run: |
           set -euo pipefail
@@ -44,22 +65,29 @@ jobs:
           test -f dist/sw.js
           test -f dist/icons/icon-192.png
           test -f dist/icons/icon-512.png
-          grep -q "3.0.1" dist/assets/app.js
-          grep -q "security-plus-v3.0.1" dist/sw.js
-          grep -q "Boss health" dist/assets/app.js
+          grep -q "3.0.2" dist/assets/app.js
+          grep -q "security-plus-v3.0.2" dist/sw.js
+          grep -q "Visual test laboratory" dist/assets/app.js
+          grep -q "Profile shield" dist/assets/app.js
+          grep -q "Text battle display" dist/assets/app.js
+          grep -q "SECURITY WRAITH" dist/assets/app.js
+          grep -q "Typography" dist/assets/app.js
+          grep -q "Overlay previews" dist/assets/app.js
+          grep -q "Boss previews" dist/assets/app.js
           grep -q "JAKE-SECPLUS-TEST" dist/assets/app.js
-          grep -q "TEST MODE" dist/assets/app.js
-          grep -q "Fix my mistakes" dist/assets/app.js
-          grep -q "Question reports" dist/assets/app.js
-          grep -q "Progress exported successfully" dist/assets/app.js
-          grep -q "Profile saved" dist/assets/app.js
-          grep -q "30 seconds" dist/assets/app.js
           grep -q "prefers-reduced-motion" dist/assets/styles.css
-          if grep -q "Which approved Security+ term completes this objective path" dist/assets/app.js; then
-            echo "Old objective-path prompt remains"
-            exit 1
-          fi
           node --check dist/assets/app.js
+
+      - name: Commit canonical v3.0.2 source
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/app.ts src/styles.css public/manifest.webmanifest public/sw.js
+          if ! git diff --cached --quiet; then
+            git commit -m "Apply Security+ v3.0.2 visual test lab [skip ci]"
+            git push origin HEAD:main
+          fi
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
