@@ -1,4 +1,4 @@
-name: Migrate source and deploy Security+ PWA
+name: Build and deploy Security+ PWA
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -20,113 +20,40 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Extract current application
-        shell: bash
-        run: |
-          set -euo pipefail
-          ZIP_FILE=$(find . -maxdepth 1 -type f -iname '*.zip' | head -n 1)
-          test -n "${ZIP_FILE:-}"
-          unzip -t "$ZIP_FILE"
-          rm -rf extracted app
-          mkdir -p extracted app
-          unzip -q "$ZIP_FILE" -d extracted
-          PACKAGE_FILE=$(find extracted -type f -name package.json ! -path '*/tools/*' | head -n 1)
-          test -n "$PACKAGE_FILE"
-          APP_DIR=$(dirname "$PACKAGE_FILE")
-          cp -a "$APP_DIR"/. app/
-          test -f app/package-lock.json
-          test -f app/src/app.ts
-          test -f app/src/styles.css
-          test -f app/public/manifest.webmanifest
-          test -f app/public/sw.js
-
-      - name: Apply approved application changes once
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 scripts/patch-mobile-ui.py app/src/app.ts app/src/styles.css
-          python3 scripts/patch-question-quality.py app/src/app.ts
-          python3 scripts/patch-answer-feedback-flow.py app/src/app.ts app/src/styles.css
-          python3 - <<'PY'
-          from pathlib import Path
-          import re
-
-          app = Path('app/src/app.ts')
-          text = app.read_text(encoding='utf-8')
-          text = re.sub(r"const APP_VERSION='[^']+'", "const APP_VERSION='2.2.1'", text, count=1)
-          app.write_text(text, encoding='utf-8')
-
-          manifest = Path('app/public/manifest.webmanifest')
-          manifest.write_text(manifest.read_text(encoding='utf-8').replace('2.2.0','2.2.1').replace('2.1.1','2.2.1').replace('2.1.0','2.2.1'), encoding='utf-8')
-          PY
-          python3 scripts/patch-service-worker-update.py app/public/sw.js
-          cp scripts/feature-audit.mjs app/scripts/feature-audit.mjs
 
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: app/package-lock.json
 
       - name: Install dependencies
-        working-directory: app
         run: npm ci
 
       - name: Validate, test, type-check and build
-        working-directory: app
         run: npm run build
 
-      - name: Verify essential production files
-        shell: bash
-        run: |
-          set -euo pipefail
-          test -f app/dist/index.html
-          test -f app/dist/assets/app.js
-          test -f app/dist/assets/styles.css
-          test -f app/dist/manifest.webmanifest
-          test -f app/dist/sw.js
-          test -f app/dist/icons/icon-192.png
-          test -f app/dist/icons/icon-512.png
-          node --check app/dist/assets/app.js
+      - name: Audit production output
+        env:
+          APP_VERSION: 2.2.1
+        run: node scripts/feature-audit.mjs dist
 
-      - name: Replace archive repository with canonical source tree
+      - name: Verify production output
         shell: bash
         run: |
           set -euo pipefail
-          cp README.md /tmp/public-README.md
-          cp .github/workflows/deploy-pages.yml /tmp/migration-workflow.yml
-          rm -rf /tmp/security-plus-canonical
-          mkdir -p /tmp/security-plus-canonical
-          cp -a app/. /tmp/security-plus-canonical/
-          rm -rf /tmp/security-plus-canonical/node_modules
-          rsync -a --delete --exclude='.git/' /tmp/security-plus-canonical/ ./
-          cp /tmp/public-README.md README.md
-          mkdir -p .github/workflows
-          cp /tmp/migration-workflow.yml .github/workflows/deploy-pages.yml
-          cat > .gitignore <<'EOF'
-          node_modules/
-          extracted/
-          app/
-          *.zip
-          EOF
-
-      - name: Commit canonical source tree
-        shell: bash
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          if git diff --cached --quiet; then
-            echo "No source changes to commit"
-          else
-            git commit -m "Commit canonical application source tree [skip ci]"
-            git push origin HEAD:main
-          fi
+          test -f dist/index.html
+          test -f dist/assets/app.js
+          test -f dist/assets/styles.css
+          test -f dist/manifest.webmanifest
+          test -f dist/sw.js
+          test -f dist/icons/icon-192.png
+          test -f dist/icons/icon-512.png
+          grep -q "2.2.1" dist/assets/app.js
+          grep -q "security-plus-v2.2.1" dist/sw.js
+          grep -q "request.mode === 'navigate'" dist/sw.js
+          grep -q "cache: 'no-store'" dist/sw.js
+          node --check dist/assets/app.js
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
