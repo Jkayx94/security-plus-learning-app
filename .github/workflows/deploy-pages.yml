@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -20,27 +20,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Apply v3.1 learning engine completion
-        run: python3 scripts/apply-v3.1-learning-engine.py src/app.ts src/styles.css
-
-      - name: Set v3.1 manifest and service worker
-        shell: bash
-        run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          import re
-          manifest=Path('public/manifest.webmanifest')
-          m=manifest.read_text(encoding='utf-8')
-          m=re.sub(r'3\.0\.2|3\.0\.1|3\.0\.0','3.1.0',m)
-          manifest.write_text(m,encoding='utf-8')
-          sw=Path('public/sw.js')
-          s=sw.read_text(encoding='utf-8')
-          s=re.sub(r"security-plus-v[^'\"]+",'security-plus-v3.1.0',s)
-          sw.write_text(s,encoding='utf-8')
-          PY
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -52,21 +31,7 @@ jobs:
         run: npm ci
 
       - name: Validate, test, type-check and build
-        shell: bash
-        run: |
-          set +e
-          npm run build > v3.1-build.log 2>&1
-          code=$?
-          cat v3.1-build.log
-          if [ $code -ne 0 ]; then
-            cp v3.1-build.log V3_1_BUILD_ERROR.txt
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add src/app.ts src/styles.css public/manifest.webmanifest public/sw.js V3_1_BUILD_ERROR.txt
-            git commit -m "Preserve v3.1 source and build failure [skip ci]" || true
-            git push origin HEAD:main || true
-            exit $code
-          fi
+        run: npm run build
 
       - name: Verify v3.1 production output
         shell: bash
@@ -85,7 +50,7 @@ jobs:
           grep -q "Why your selected answer was tempting" dist/assets/app.js
           grep -q "Why each other option is wrong" dist/assets/app.js
           grep -q "Boss health" dist/assets/app.js
-          grep -q "Learner shield" dist/assets/app.js
+          grep -q "learnerShieldBar" dist/assets/app.js
           grep -q "Start targeted review" dist/assets/app.js
           grep -q "Developer Lab" dist/assets/app.js
           grep -q "JAKE-SECPLUS-TEST" dist/assets/app.js
@@ -95,19 +60,6 @@ jobs:
           grep -q "questions:5" scripts/progression-rules.mjs
           grep -q "prefers-reduced-motion" dist/assets/styles.css
           node --check dist/assets/app.js
-
-      - name: Commit canonical v3.1 source
-        shell: bash
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          rm -f V3_1_BUILD_ERROR.txt
-          git add src/app.ts src/styles.css public/manifest.webmanifest public/sw.js
-          git add -u -- V3_1_BUILD_ERROR.txt 2>/dev/null || true
-          if ! git diff --cached --quiet; then
-            git commit -m "Apply Security+ v3.1 learning engine [skip ci]"
-            git push origin HEAD:main
-          fi
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
