@@ -1,0 +1,4 @@
+export type TestSandbox={enabled:boolean;unlimitedCoins:boolean;coins:number;unlockEverything:boolean;unlockedCosmetics:string[];previewShield:string|null;font:string;overlay:string|null;animation:string|null;equippedTheme:string|null;equippedShield:string|null;achievementState:string;bossScenario:string|null};
+export const freshTestSandbox=(enabled=false):TestSandbox=>({enabled,unlimitedCoins:false,coins:0,unlockEverything:false,unlockedCosmetics:[],previewShield:null,font:'system',overlay:null,animation:null,equippedTheme:null,equippedShield:null,achievementState:'locked',bossScenario:null});
+export function sanitiseTestState<T extends {testMode?:unknown}>(state:T):T{return {...state,testMode:freshTestSandbox(false)}}
+export function unlockEverything(test:TestSandbox,cosmetics:string[]):TestSandbox{return {...test,enabled:true,unlimitedCoins:true,coins:Number.MAX_SAFE_INTEGER,unlockEverything:true,unlockedCosmetics:[...new Set(cosmetics)]}}
