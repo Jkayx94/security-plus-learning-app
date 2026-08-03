@@ -22,6 +22,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply deterministic startup fix
+        run: python3 scripts/apply-v3.2.1-test-preview.py src/app.ts
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -69,6 +74,17 @@ jobs:
           node --check dist/assets/app.js
           node --check dist/assets/engine/notification-queue.js
           node --check dist/sw.js
+
+      - name: Commit corrected canonical source
+        run: |
+          if git diff --quiet -- src/app.ts; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/app.ts
+          git commit -m "Render Home navigation deterministically for existing learners"
+          git push origin HEAD:main
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
