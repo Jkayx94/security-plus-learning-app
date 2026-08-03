@@ -76,8 +76,8 @@ jobs:
             cp build.log V3_BUILD_ERROR.txt
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add V3_BUILD_ERROR.txt
-            git commit -m "Record v3 build failure [skip ci]" || true
+            git add src/app.ts src/styles.css public/manifest.webmanifest public/sw.js V3_BUILD_ERROR.txt
+            git commit -m "Preserve transformed v3 source for repair [skip ci]" || true
             git push origin HEAD:main || true
             exit $code
           fi
