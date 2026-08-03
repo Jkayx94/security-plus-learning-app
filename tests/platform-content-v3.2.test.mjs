@@ -3,8 +3,8 @@ const app=()=>fs.readFileSync(new URL('../src/app.ts',import.meta.url),'utf8');c
 test('storage key remains compatible',()=>assert.match(app(),/KEY='security-plus-mastery-state'/));
 test('persistent More navigation and routes exist',()=>{const s=app();for(const term of ['<small>More</small>','function moreView','function backupView','function aboutView'])assert.match(s,new RegExp(term))});
 test('backup and separate exports are reachable',()=>{const s=app();for(const term of ['Export complete progress','Export notes and memory bank','Export question reports','Progress exported successfully'])assert.match(s,new RegExp(term))});
-test('developer activation remains five-tap and code gated',()=>{const s=app();assert.match(s,/versionTapCount>=5/);assert.match(s,/JAKE-SECPLUS-TEST/);assert.match(s,/Developer Lab/)});
-test('test state is excluded from genuine export',()=>assert.match(app(),/testMode:\{enabled:false,coins:0,unlockedCosmetics:\[\]/));
+test('developer activation remains five-tap and code gated',()=>{const s=app();assert.match(s,/versionTapCount=Math\.min\(5,versionTapCount\+1\)/);assert.match(s,/versionTapCount===5/);assert.match(s,/JAKE-SECPLUS-TEST/);assert.match(s,/Developer Lab/)});
+test('test state is excluded from genuine export',()=>{const s=app();assert.match(s,/sanitiseTestState\(state\)/);assert.match(s,/freshTestSandbox\(false\)/)});
 test('normal question UI hides internal quality metadata',()=>{const s=app();assert.match(s,/state\.testMode\.enabled\?`<span class="quality/);assert.doesNotMatch(s,/>GENERATED-FALLBACK</)});
 test('retired universal prompt is absent',()=>{assert.doesNotMatch(app(),/selecting the most precise SY0-701 term/);assert.doesNotMatch(content(),/selecting the most precise SY0-701 term/)});
 test('question and lesson content are outside app.ts',()=>{const s=app();assert.match(s,/loadContentPack/);assert.doesNotMatch(s,/const special:Record<string,string>/);assert.match(content(),/Q-1\.1-CAT-TECH-01/)});
