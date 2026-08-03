@@ -26,7 +26,9 @@ jobs:
           fetch-depth: 0
 
       - name: Apply deterministic v3.2.1 source fixes
-        run: python3 scripts/apply-v3.2.1-test-preview.py src/app.ts
+        run: |
+          python3 scripts/apply-v3.2.1-test-preview.py src/app.ts
+          python3 scripts/fix-boss-hit-and-cosmetics.py src/app.ts
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -45,7 +47,7 @@ jobs:
           npm install --no-save --no-package-lock playwright@1.54.2
           npx playwright install --with-deps chromium
 
-      - name: Rendered Samsung portrait interaction audit
+      - name: Rendered mobile portrait interaction audit
         run: node scripts/rendered-mobile-v3.2.1.mjs
 
       - name: Production and service-worker audit
@@ -71,9 +73,14 @@ jobs:
           grep -q "Test cosmetic equipped" dist/assets/app.js
           grep -q "FINISH MODE ARMED" dist/assets/app.js
           grep -q "FINAL STRIKE CONFIRMED" dist/assets/app.js
+          grep -q "session?.bossId&&correct" dist/assets/app.js
+          grep -q "testMode.equippedShield" dist/assets/app.js
           grep -q "SKIP_WAITING" dist/sw.js
           grep -q "clients.claim" dist/sw.js
           grep -q "v3.2.1 cosmetic and persistent boss UX" dist/assets/styles.css
+          grep -q "v3.2.1 boss-hit and complete cosmetic preview repair" dist/assets/styles.css
+          grep -q "avatar-sentinel" dist/assets/styles.css
+          grep -q "shield-gold-style" dist/assets/styles.css
           grep -q "prefers-reduced-motion" dist/assets/styles.css
           node --check dist/assets/app.js
           node --check dist/assets/engine/notification-queue.js
@@ -87,7 +94,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add src/app.ts src/styles.css
-          git commit -m "Apply Test Mode cosmetics and persistent boss presentation"
+          git commit -m "Repair boss hit tracking and cosmetic previews"
           git push origin HEAD:main
 
       - name: Configure Pages
