@@ -1,0 +1,24 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {freshTestState,resetTestMode,developerCodeValid,fiveTapUnlocked,exportWithoutTest,unlockTestEverything,applyTestCosmetic,applyTestBoss,reducedMotionCss} from '../scripts/progression-rules.mjs';
+const app=()=>fs.readFileSync(new URL('../src/app.ts',import.meta.url),'utf8');
+const styles=()=>fs.readFileSync(new URL('../src/styles.css',import.meta.url),'utf8');
+const queue=()=>fs.readFileSync(new URL('../src/engine/notification-queue.ts',import.meta.url),'utf8');
+
+test('notifications auto-dismiss and can be manually dismissed',()=>{const q=queue();assert.match(q,/dismissAfterMs/);assert.match(app(),/setTimeout\(\(\)=>notifications\.dismiss/);assert.match(app(),/dismiss-notification/)});
+test('notifications are queued one at a time',()=>{const q=queue();assert.match(q,/this\.items\.push/);assert.match(q,/current\(\)\{return this\.items\[0\]/)});
+test('notification has no full-screen backdrop and does not disable page input',()=>{const c=styles();assert.doesNotMatch(c,/appNotificationHost[^}]*pointer-events:all/);assert.match(c,/appNotificationHost[^}]*pointer-events:none/);assert.match(c,/appNotification[^}]*pointer-events:auto/)});
+test('question and feedback screens reserve safe notification space',()=>{const c=styles();assert.match(c,/\.questionScreen,\.feedbackScreen\{padding-bottom:220px\}/);assert.match(c,/bottom:calc\(env\(safe-area-inset-bottom/)});
+test('five exact taps and exact code are required',()=>{assert.equal(fiveTapUnlocked(4),false);assert.equal(fiveTapUnlocked(5),true);assert.equal(fiveTapUnlocked(6),false);assert.equal(developerCodeValid('JAKE-SECPLUS-TEST'),true);assert.equal(developerCodeValid('wrong'),false)});
+test('About renders visible Test Mode instructions',()=>{const s=app();assert.match(s,/Tap the version five times to enable local testing tools/);assert.match(s,/Testing tools unlocked/);assert.match(s,/Developer code/)});
+test('Developer Lab is conditional and unlock everything is available',()=>{const s=app();assert.match(s,/state\.testMode\.enabled\?\[\['testlab'/);assert.match(s,/UNLOCK EVERYTHING FOR TESTING/);assert.match(s,/test-unlock-everything/)});
+test('unlock everything exposes all test cosmetics without real changes',()=>{const real={coins:33,cosmetics:{owned:['theme-blue'],equippedTheme:'theme-blue'},progress:{x:42}};const testState=unlockTestEverything(freshTestState(true),['a','b','a']);assert.equal(testState.unlimitedCoins,true);assert.deepEqual(testState.unlockedCosmetics,['a','b']);assert.deepEqual(real,{coins:33,cosmetics:{owned:['theme-blue'],equippedTheme:'theme-blue'},progress:{x:42}})});
+test('test cosmetics do not alter real ownership or appearance',()=>{const real={coins:40,cosmetics:{owned:['theme-blue'],equippedTheme:'theme-blue'}};const result=applyTestCosmetic(real,freshTestState(true),'theme-purple');assert.deepEqual(result.real,real);assert.equal(result.test.equippedTheme,'theme-purple')});
+test('test bosses do not alter genuine boss history',()=>{const real={bossHistory:[{id:'real'}],mastery:52,readiness:40};const result=applyTestBoss(real,freshTestState(true),'perfect');assert.deepEqual(result.real,real);assert.equal(result.test.bossScenario,'perfect')});
+test('normal export excludes every test field',()=>{const state={coins:12,xp:10,testMode:{enabled:true,coins:999,unlockEverything:true,unlockedCosmetics:['all'],bossScenario:'perfect'}};const out=exportWithoutTest(state);assert.equal(out.coins,12);assert.equal(out.xp,10);assert.deepEqual(out.testMode,freshTestState(false))});
+test('reset test-only data preserves genuine state',()=>{const real={coins:7,xp:9,mastery:44,readiness:35,bossHistory:[1],cosmetics:{owned:['x']}};const result=resetTestMode(real);assert.deepEqual(result.real,real);assert.deepEqual(result.test,freshTestState(true))});
+test('all shield and achievement preview states exist',()=>{const s=app();for(const shield of ['basic','bronze','silver','gold','platinum','diamond','master'])assert.match(s,new RegExp(`shield-${shield}`));for(const state of ['locked','partial','almost','unlocked','queued','complete'])assert.match(s,new RegExp(`data-achievement-state=\\"${state}\\"`))});
+test('all boss launch types and scenarios exist',()=>{const s=app();for(const mode of ['boss','boss-objective','boss-domain','boss-final'])assert.match(s,new RegExp(`data-test-boss=\\"${mode}\\"`));for(const scenario of ['all-correct','threshold','below-threshold','perfect','entrance','hit','critical','defeated','survived','claimed','repeat'])assert.match(s,new RegExp(`data-boss-scenario=\\"${scenario}\\"`))});
+test('achievement history is independent of notification dismissal',()=>{const s=app();assert.match(s,/state\.achievements\.push/);assert.doesNotMatch(s,/dismiss-notification[^}]*achievements/)});
+test('reduced motion removes nonessential animation',()=>assert.equal(reducedMotionCss(styles()),true));
