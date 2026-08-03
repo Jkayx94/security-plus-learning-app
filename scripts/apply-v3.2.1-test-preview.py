@@ -12,4 +12,6 @@ s=s.replace("const exportState={...state,testMode:freshTestSandbox(false)};","co
 if "if(a==='test-unlock-everything'" in s and "const a=t.dataset.action;if(a==='test-unlock-everything'" not in s:
     s=s.replace("if(a==='test-unlock-everything'","const a=t.dataset.action;if(a==='test-unlock-everything'",1)
 s=s.replace("}const a=t.dataset.action;if(a==='complete-onboarding'","}if(a==='complete-onboarding'",1)
+# Existing learners must always start on Home so the persistent bottom navigation is rendered deterministically.
+s=s.replace("if(!profile){view='onboarding'}else{state.learnerId=profile.id}","view=profile?'home':'onboarding';if(profile)state.learnerId=profile.id")
 p.write_text(s,encoding='utf-8')
