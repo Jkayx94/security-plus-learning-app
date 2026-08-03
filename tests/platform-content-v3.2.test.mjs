@@ -1,0 +1,15 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
+const app=()=>fs.readFileSync(new URL('../src/app.ts',import.meta.url),'utf8');const content=()=>fs.readFileSync(new URL('../src/content/security-plus-v3.2.ts',import.meta.url),'utf8');const loader=()=>fs.readFileSync(new URL('../src/content/loader.ts',import.meta.url),'utf8');
+test('storage key remains compatible',()=>assert.match(app(),/KEY='security-plus-mastery-state'/));
+test('persistent More navigation and routes exist',()=>{const s=app();for(const term of ['<small>More</small>','function moreView','function backupView','function aboutView'])assert.match(s,new RegExp(term))});
+test('backup and separate exports are reachable',()=>{const s=app();for(const term of ['Export complete progress','Export notes and memory bank','Export question reports','Progress exported successfully'])assert.match(s,new RegExp(term))});
+test('developer activation remains five-tap and code gated',()=>{const s=app();assert.match(s,/versionTapCount>=5/);assert.match(s,/JAKE-SECPLUS-TEST/);assert.match(s,/Developer Lab/)});
+test('test state is excluded from genuine export',()=>assert.match(app(),/testMode:\{enabled:false,coins:0,unlockedCosmetics:\[\]/));
+test('normal question UI hides internal quality metadata',()=>{const s=app();assert.match(s,/state\.testMode\.enabled\?`<span class="quality/);assert.doesNotMatch(s,/>GENERATED-FALLBACK</)});
+test('retired universal prompt is absent',()=>{assert.doesNotMatch(app(),/selecting the most precise SY0-701 term/);assert.doesNotMatch(content(),/selecting the most precise SY0-701 term/)});
+test('question and lesson content are outside app.ts',()=>{const s=app();assert.match(s,/loadContentPack/);assert.doesNotMatch(s,/const special:Record<string,string>/);assert.match(content(),/Q-1\.1-CAT-TECH-01/)});
+test('mode eligibility is derived from review evidence',()=>{const s=loader();assert.match(s,/approvedForLearn/);assert.match(s,/approvedForBoss/);assert.match(s,/approvedForExam/)});
+test('boss and exam modes cannot use raw generated fallback',()=>{const s=app();assert.match(s,/eligibleQuestions\(contentPack,contentMode\)/);assert.doesNotMatch(s,/generated-fallback/)});
+test('malformed content produces a readable error',()=>assert.match(loader(),/Learning content could not load/));
+test('reviewed questions use explicit confusion groups',()=>{const s=content();for(const group of ['control-categories','control-types','access-control-models','resilience-metrics','certificate-status','federation-authorisation'])assert.match(s,new RegExp(group))});
+test('reviewed questions contain valid options and specific rationales',()=>{const s=content();assert.match(s,/explanations:\{/);assert.match(s,/correctAnswer:/);assert.doesNotMatch(s,/not as precise as/)});
