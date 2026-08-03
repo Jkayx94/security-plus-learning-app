@@ -51,50 +51,76 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Validate, test, type-check and build
-        run: npm run build
-
-      - name: Production UI and content audit
+      - name: Validate, test, type-check, build and audit
         shell: bash
         run: |
-          set -euo pipefail
-          test -f dist/index.html
-          test -f dist/assets/app.js
-          test -f dist/assets/content/loader.js
-          test -f dist/assets/content/security-plus-v3.2.js
-          test -f dist/assets/styles.css
-          test -f dist/manifest.webmanifest
-          test -f dist/sw.js
-          test -f dist/icons/icon-192.png
-          test -f dist/icons/icon-512.png
-          grep -q "3.2.0" dist/assets/app.js
-          grep -q "security-plus-v3.2.0" dist/sw.js
-          grep -q "<small>More</small>" dist/assets/app.js
-          grep -q "Backup and restore" dist/assets/app.js
-          grep -q "Export complete progress" dist/assets/app.js
-          grep -q "Progress exported successfully" dist/assets/app.js
-          grep -q "Developer Lab" dist/assets/app.js
-          grep -q "JAKE-SECPLUS-TEST" dist/assets/app.js
-          grep -q "loadContentPack" dist/assets/app.js
-          grep -q "approvedForBoss" dist/assets/content/loader.js
-          ! grep -q "selecting the most precise SY0-701 term" dist/assets/app.js
-          ! grep -q "generated-fallback" dist/assets/app.js
-          grep -q "prefers-reduced-motion" dist/assets/styles.css
-          test -f reports/question-inventory-v3.2.json
-          test -f reports/concepts-with-no-valid-question-v3.2.json
-          node --check dist/assets/app.js
-          node --check dist/assets/content/loader.js
+          set +e
+          (
+            set -euo pipefail
+            npm run build
+            test -f dist/index.html
+            test -f dist/assets/app.js
+            test -f dist/assets/content/loader.js
+            test -f dist/assets/content/security-plus-v3.2.js
+            test -f dist/assets/styles.css
+            test -f dist/manifest.webmanifest
+            test -f dist/sw.js
+            test -f dist/icons/icon-192.png
+            test -f dist/icons/icon-512.png
+            grep -q "3.2.0" dist/assets/app.js
+            grep -q "security-plus-v3.2.0" dist/sw.js
+            grep -q "<small>More</small>" dist/assets/app.js
+            grep -q "Backup and restore" dist/assets/app.js
+            grep -q "Export complete progress" dist/assets/app.js
+            grep -q "Progress exported successfully" dist/assets/app.js
+            grep -q "Developer Lab" dist/assets/app.js
+            grep -q "JAKE-SECPLUS-TEST" dist/assets/app.js
+            grep -q "loadContentPack" dist/assets/app.js
+            grep -q "approvedForBoss" dist/assets/content/loader.js
+            ! grep -q "selecting the most precise SY0-701 term" dist/assets/app.js
+            ! grep -q "generated-fallback" dist/assets/app.js
+            grep -q "prefers-reduced-motion" dist/assets/styles.css
+            test -f reports/question-inventory-v3.2.json
+            test -f reports/concepts-with-no-valid-question-v3.2.json
+            node --check dist/assets/app.js
+            node --check dist/assets/content/loader.js
+          ) > v3.2-build.log 2>&1
+          code=$?
+          cat v3.2-build.log
+          if [ $code -ne 0 ]; then
+            cp v3.2-build.log V3_2_BUILD_ERROR.txt
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add src/app.ts src/styles.css public/manifest.webmanifest public/sw.js V3_2_BUILD_ERROR.txt reports/ 2>/dev/null || true
+            git commit -m "Preserve v3.2 source and build failure [skip ci]" || true
+            git push origin HEAD:main || true
+            exit $code
+          fi
 
       - name: Commit canonical v3.2 source and reports
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/app.ts src/styles.css public/manifest.webmanifest public/sw.js reports/
-          if ! git diff --cached --quiet; then
-            git commit -m "Apply Security+ v3.2 platform and content infrastructure [skip ci]"
-            git push origin HEAD:main
-          fi
+          rm -f V3_2_BUILD_ERROR.txt
+          cat > V3_2_BUILD_PASSED.md <<EOF
+          # Security+ v3.2 Build Passed
+
+          Version: 3.2.0
+          Source commit: $GITHUB_SHA
+          Workflow run: $GITHUB_RUN_ID
+          Validation: passed
+          Content validation: passed
+          Automated tests: passed
+          TypeScript compilation: passed
+          Production build: passed
+          JavaScript syntax validation: passed
+          Production UI audit: passed
+          EOF
+          git add src/app.ts src/styles.css public/manifest.webmanifest public/sw.js reports/ V3_2_BUILD_PASSED.md
+          git add -u -- V3_2_BUILD_ERROR.txt 2>/dev/null || true
+          git commit -m "Apply Security+ v3.2 platform and content infrastructure [skip ci]" || true
+          git push origin HEAD:main || true
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
