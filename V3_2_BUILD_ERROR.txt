@@ -16,181 +16,181 @@ TAP version 13
 # Subtest: authoritative record counts
 ok 1 - authoritative record counts
   ---
-  duration_ms: 1.099224
+  duration_ms: 1.436565
   type: 'test'
   ...
 # Subtest: all unit concept references resolve
 ok 2 - all unit concept references resolve
   ---
-  duration_ms: 0.826585
+  duration_ms: 1.189684
   type: 'test'
   ...
 # Subtest: all objective concepts have a learning unit
 ok 3 - all objective concepts have a learning unit
   ---
-  duration_ms: 0.485097
+  duration_ms: 0.700991
   type: 'test'
   ...
 # Subtest: storage key remains compatible
 ok 4 - storage key remains compatible
   ---
-  duration_ms: 1.628493
+  duration_ms: 1.545529
   type: 'test'
   ...
 # Subtest: persistent More navigation and routes exist
 ok 5 - persistent More navigation and routes exist
   ---
-  duration_ms: 0.605161
+  duration_ms: 0.543957
   type: 'test'
   ...
 # Subtest: backup and separate exports are reachable
 ok 6 - backup and separate exports are reachable
   ---
-  duration_ms: 0.457895
+  duration_ms: 0.503692
   type: 'test'
   ...
 # Subtest: developer activation remains five-tap and code gated
 ok 7 - developer activation remains five-tap and code gated
   ---
-  duration_ms: 0.432989
+  duration_ms: 0.418352
   type: 'test'
   ...
 # Subtest: test state is excluded from genuine export
 ok 8 - test state is excluded from genuine export
   ---
-  duration_ms: 0.386913
+  duration_ms: 0.437799
   type: 'test'
   ...
 # Subtest: normal question UI hides internal quality metadata
 ok 9 - normal question UI hides internal quality metadata
   ---
-  duration_ms: 0.467673
+  duration_ms: 0.433391
   type: 'test'
   ...
 # Subtest: retired universal prompt is absent
 ok 10 - retired universal prompt is absent
   ---
-  duration_ms: 0.630569
+  duration_ms: 0.664112
   type: 'test'
   ...
 # Subtest: question and lesson content are outside app.ts
 ok 11 - question and lesson content are outside app.ts
   ---
-  duration_ms: 0.468996
+  duration_ms: 0.534259
   type: 'test'
   ...
 # Subtest: mode eligibility is derived from review evidence
 ok 12 - mode eligibility is derived from review evidence
   ---
-  duration_ms: 0.443168
+  duration_ms: 0.438399
   type: 'test'
   ...
 # Subtest: boss and exam modes cannot use raw generated fallback
 ok 13 - boss and exam modes cannot use raw generated fallback
   ---
-  duration_ms: 1.852772
+  duration_ms: 1.582449
   type: 'test'
   ...
 # Subtest: malformed content produces a readable error
 ok 14 - malformed content produces a readable error
   ---
-  duration_ms: 0.266168
+  duration_ms: 0.216194
   type: 'test'
   ...
 # Subtest: reviewed questions use explicit confusion groups
 ok 15 - reviewed questions use explicit confusion groups
   ---
-  duration_ms: 0.189986
+  duration_ms: 0.188863
   type: 'test'
   ...
 # Subtest: reviewed questions contain valid options and specific rationales
 ok 16 - reviewed questions contain valid options and specific rationales
   ---
-  duration_ms: 0.16036
+  duration_ms: 0.174607
   type: 'test'
   ...
 # Subtest: boss rules match v3.1 specification
 ok 17 - boss rules match v3.1 specification
   ---
-  duration_ms: 3.862919
+  duration_ms: 3.745623
   type: 'test'
   ...
 # Subtest: one question cannot defeat a boss
 ok 18 - one question cannot defeat a boss
   ---
-  duration_ms: 0.422891
+  duration_ms: 0.451223
   type: 'test'
   ...
 # Subtest: full battle completion and threshold are required
 ok 19 - full battle completion and threshold are required
   ---
-  duration_ms: 0.191097
+  duration_ms: 0.189054
   type: 'test'
   ...
 # Subtest: boss rewards issue once
 ok 20 - boss rewards issue once
   ---
-  duration_ms: 0.210443
+  duration_ms: 0.177673
   type: 'test'
   ...
 # Subtest: normal reward baseline is restrained and idempotent
 ok 21 - normal reward baseline is restrained and idempotent
   ---
-  duration_ms: 0.415226
+  duration_ms: 0.45975
   type: 'test'
   ...
 # Subtest: shield thresholds require substantial real evidence
 ok 22 - shield thresholds require substantial real evidence
   ---
-  duration_ms: 0.265145
+  duration_ms: 0.264835
   type: 'test'
   ...
 # Subtest: test mode leaves real state unchanged and resets separately
 ok 23 - test mode leaves real state unchanged and resets separately
   ---
-  duration_ms: 0.400227
+  duration_ms: 0.349664
   type: 'test'
   ...
 # Subtest: test mode is excluded from export
 ok 24 - test mode is excluded from export
   ---
-  duration_ms: 0.244016
+  duration_ms: 0.275144
   type: 'test'
   ...
 # Subtest: cosmetic purchase cannot affect learning progress
 ok 25 - cosmetic purchase cannot affect learning progress
   ---
-  duration_ms: 0.541963
+  duration_ms: 0.532786
   type: 'test'
   ...
 # Subtest: developer activation requires five taps and exact code
 ok 26 - developer activation requires five taps and exact code
   ---
-  duration_ms: 0.601745
+  duration_ms: 0.568723
   type: 'test'
   ...
 # Subtest: reduced-motion disables nonessential animation
 ok 27 - reduced-motion disables nonessential animation
   ---
-  duration_ms: 2.36515
+  duration_ms: 0.726559
   type: 'test'
   ...
 # Subtest: feedback branches are distinct
 ok 28 - feedback branches are distinct
   ---
-  duration_ms: 0.638924
+  duration_ms: 2.365112
   type: 'test'
   ...
 # Subtest: question status is hidden outside developer mode
 ok 29 - question status is hidden outside developer mode
   ---
-  duration_ms: 0.370703
+  duration_ms: 0.562302
   type: 'test'
   ...
 # Subtest: boss UI and developer lab are present
 ok 30 - boss UI and developer lab are present
   ---
-  duration_ms: 0.537334
+  duration_ms: 0.743019
   type: 'test'
   ...
 1..30
@@ -201,7 +201,7 @@ ok 30 - boss UI and developer lab are present
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 110.356845
+# duration_ms 119.228713
 
 > security-plus-learning-app@3.2.0 typecheck
 > node tools/typescript/bin/tsc -p tsconfig.json --noEmit
