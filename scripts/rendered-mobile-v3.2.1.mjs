@@ -7,9 +7,17 @@ try{
  await sleep(700);
  const browser=await chromium.launch({headless:true});
  const page=await browser.newPage({viewport:{width:360,height:800},isMobile:true,hasTouch:true,reducedMotion:'reduce'});
- await page.addInitScript(()=>localStorage.setItem('security-plus-learner-profile',JSON.stringify({id:'QA-LOCAL',name:'QA Learner',examDate:null,createdAt:new Date().toISOString()})));
+ await page.addInitScript(()=>{
+  localStorage.removeItem('security-plus-mastery-state');
+  localStorage.setItem('security-plus-learner-profile',JSON.stringify({id:'QA-LOCAL',name:'QA Learner',examDate:null,createdAt:new Date().toISOString()}));
+ });
  await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});
- await page.getByText('More',{exact:true}).click();
+ await page.locator('#app').waitFor();
+ const homeControl=page.locator('[data-nav="home"]').first();
+ if(await homeControl.count())await homeControl.click();
+ const moreControl=page.locator('[data-nav="more"]').first();
+ await moreControl.waitFor({state:'visible'});
+ await moreControl.click();
  await page.getByRole('button',{name:/About and version/}).click();
  await page.getByText('Tap the version five times to enable local testing tools.').waitFor();
  const version=page.getByRole('button',{name:/Version 3\.2\.1/});
@@ -48,13 +56,13 @@ try{
  assert.equal(await continueButton.isEnabled(),true);
  await continueButton.click();
 
- await page.getByText('More',{exact:true}).click();
+ await page.locator('[data-nav="more"]').first().click();
  await page.getByRole('button',{name:/Developer Lab/}).waitFor();
  await page.getByRole('button',{name:/Cosmetics/}).click();
  await page.getByText('TEST PREVIEW',{exact:true}).waitFor();
  await page.getByRole('button',{name:/Equip|Unlock/}).first().click();
  await page.getByText(/Test cosmetic equipped/).waitFor();
- await page.getByText('More',{exact:true}).click();
+ await page.locator('[data-nav="more"]').first().click();
  await page.getByRole('button',{name:/Developer Lab/}).click();
  await page.getByRole('button',{name:'Any Unit Boss'}).click();
  await page.getByText(/Boss battle/).waitFor();
