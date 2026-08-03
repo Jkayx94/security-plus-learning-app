@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -20,13 +20,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Apply v3.2.1 hotfix
-        run: |
-          python3 scripts/apply-v3.2.1-hotfix.py src/app.ts src/styles.css
-          python3 scripts/apply-v3.2.1-test-preview.py src/app.ts
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -38,81 +31,42 @@ jobs:
         run: npm ci
 
       - name: Validate, test, type-check and build
-        run: npm run build 2>&1 | tee v3.2.1-build.log
+        run: npm run build
 
       - name: Install rendered-test browser
         run: |
-          (npm install --no-save --no-package-lock playwright@1.54.2 && npx playwright install --with-deps chromium) 2>&1 | tee v3.2.1-browser.log
+          npm install --no-save --no-package-lock playwright@1.54.2
+          npx playwright install --with-deps chromium
 
       - name: Rendered Samsung portrait interaction audit
-        run: node scripts/rendered-mobile-v3.2.1.mjs 2>&1 | tee v3.2.1-rendered.log
+        run: node scripts/rendered-mobile-v3.2.1.mjs
 
       - name: Production and service-worker audit
         shell: bash
         run: |
-          (
-            set -euo pipefail
-            test -f dist/index.html
-            test -f dist/assets/app.js
-            test -f dist/assets/engine/notification-queue.js
-            test -f dist/assets/engine/test-sandbox.js
-            test -f dist/assets/styles.css
-            test -f dist/sw.js
-            grep -q "3.2.1" dist/assets/app.js
-            grep -q "security-plus-v3.2.1" dist/sw.js
-            grep -q "NotificationQueue" dist/assets/app.js
-            grep -q "appNotificationHost" dist/assets/app.js
-            grep -q "dismiss-notification" dist/assets/app.js
-            grep -q "Tap the version five times to enable local testing tools" dist/assets/app.js
-            grep -q "UNLOCK EVERYTHING FOR TESTING" dist/assets/app.js
-            grep -q "Developer Lab" dist/assets/app.js
-            grep -q "JAKE-SECPLUS-TEST" dist/assets/app.js
-            grep -q "sanitiseTestState" dist/assets/app.js
-            grep -q "SKIP_WAITING" dist/sw.js
-            grep -q "clients.claim" dist/sw.js
-            grep -q "prefers-reduced-motion" dist/assets/styles.css
-            node --check dist/assets/app.js
-            node --check dist/assets/engine/notification-queue.js
-            node --check dist/sw.js
-          ) 2>&1 | tee v3.2.1-audit.log
-
-      - name: Preserve failure details
-        if: failure()
-        shell: bash
-        run: |
-          cat v3.2.1-build.log v3.2.1-browser.log v3.2.1-rendered.log v3.2.1-audit.log 2>/dev/null > V3_2_1_BUILD_ERROR.txt || true
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/app.ts src/styles.css V3_2_1_BUILD_ERROR.txt
-          git commit -m "Preserve v3.2.1 source and build failure [skip ci]" || true
-          git push origin HEAD:main || true
-
-      - name: Commit canonical v3.2.1 source
-        shell: bash
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          rm -f V3_2_1_BUILD_ERROR.txt
-          cat > V3_2_1_BUILD_PASSED.md <<EOF
-          # Security+ v3.2.1 Build Passed
-
-          Version: 3.2.1
-          Source commit: $GITHUB_SHA
-          Workflow run: $GITHUB_RUN_ID
-          Curriculum validation: passed
-          Content validation: passed
-          Automated tests: passed
-          TypeScript compilation: passed
-          Production build: passed
-          Rendered mobile audit: passed at 360x800
-          JavaScript syntax validation: passed
-          Service-worker audit: passed
-          Production interaction audit: passed
-          EOF
-          git add src/app.ts src/styles.css src/engine/ public/sw.js public/manifest.webmanifest package.json tests/ scripts/ V3_2_1_BUILD_PASSED.md
-          git add -u -- V3_2_1_BUILD_ERROR.txt 2>/dev/null || true
-          git commit -m "Apply Security+ v3.2.1 notification and Test Mode hotfix [skip ci]" || true
-          git push origin HEAD:main || true
+          set -euo pipefail
+          test -f dist/index.html
+          test -f dist/assets/app.js
+          test -f dist/assets/engine/notification-queue.js
+          test -f dist/assets/engine/test-sandbox.js
+          test -f dist/assets/styles.css
+          test -f dist/sw.js
+          grep -q "3.2.1" dist/assets/app.js
+          grep -q "security-plus-v3.2.1" dist/sw.js
+          grep -q "NotificationQueue" dist/assets/app.js
+          grep -q "appNotificationHost" dist/assets/app.js
+          grep -q "dismiss-notification" dist/assets/app.js
+          grep -q "Tap the version five times to enable local testing tools" dist/assets/app.js
+          grep -q "UNLOCK EVERYTHING FOR TESTING" dist/assets/app.js
+          grep -q "Developer Lab" dist/assets/app.js
+          grep -q "JAKE-SECPLUS-TEST" dist/assets/app.js
+          grep -q "sanitiseTestState" dist/assets/app.js
+          grep -q "SKIP_WAITING" dist/sw.js
+          grep -q "clients.claim" dist/sw.js
+          grep -q "prefers-reduced-motion" dist/assets/styles.css
+          node --check dist/assets/app.js
+          node --check dist/assets/engine/notification-queue.js
+          node --check dist/sw.js
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
