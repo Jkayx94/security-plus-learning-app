@@ -28,10 +28,7 @@ jobs:
         run: |
           set -euo pipefail
           ZIP_FILE=$(find . -maxdepth 1 -type f -iname '*.zip' | head -n 1)
-          if [ -z "${ZIP_FILE:-}" ]; then
-            echo "No source ZIP found for one-time migration"
-            exit 1
-          fi
+          test -n "${ZIP_FILE:-}"
           unzip -t "$ZIP_FILE"
           rm -rf extracted app
           mkdir -p extracted app
@@ -57,8 +54,7 @@ jobs:
           from pathlib import Path
           for name in ('app/src/app.ts', 'app/public/manifest.webmanifest'):
               path = Path(name)
-              text = path.read_text(encoding='utf-8').replace('2.2.0', '2.2.1')
-              path.write_text(text, encoding='utf-8')
+              path.write_text(path.read_text(encoding='utf-8').replace('2.2.0', '2.2.1'), encoding='utf-8')
           PY
           python3 scripts/patch-service-worker-update.py app/public/sw.js
           cp scripts/feature-audit.mjs app/scripts/feature-audit.mjs
@@ -78,111 +74,45 @@ jobs:
         working-directory: app
         run: npm run build
 
-      - name: Audit production output
-        run: node app/scripts/feature-audit.mjs app/dist
-
-      - name: Verify canonical build
-        working-directory: app
+      - name: Audit and verify canonical build
         shell: bash
         run: |
           set -euo pipefail
-          test -f dist/index.html
-          test -f dist/assets/app.js
-          test -f dist/assets/styles.css
-          test -f dist/manifest.webmanifest
-          test -f dist/sw.js
-          test -f dist/icons/icon-192.png
-          test -f dist/icons/icon-512.png
-          grep -q "Flag this question" dist/assets/app.js
-          grep -q "Did you know it?" dist/assets/app.js
-          grep -q "Why this answer is correct" dist/assets/app.js
-          grep -q "What should we call you" dist/assets/app.js
-          grep -q "Security+ Adaptive Learning" dist/assets/app.js
-          grep -q "objective-path-recognition" dist/assets/app.js
-          grep -q "2.2.1" dist/assets/app.js
-          grep -q "security-plus-v2.2.1" dist/sw.js
-          grep -q "request.mode === 'navigate'" dist/sw.js
-          grep -q "cache: 'no-store'" dist/sw.js
-          ! grep -q "A scenario points to" dist/assets/app.js
-          ! grep -q "How confident are you?</b>" dist/assets/app.js
-          node --check dist/assets/app.js
+          node app/scripts/feature-audit.mjs app/dist
+          test -f app/dist/index.html
+          test -f app/dist/assets/app.js
+          test -f app/dist/assets/styles.css
+          test -f app/dist/manifest.webmanifest
+          test -f app/dist/sw.js
+          test -f app/dist/icons/icon-192.png
+          test -f app/dist/icons/icon-512.png
+          grep -q "Flag this question" app/dist/assets/app.js
+          grep -q "Did you know it?" app/dist/assets/app.js
+          grep -q "Why this answer is correct" app/dist/assets/app.js
+          grep -q "What should we call you" app/dist/assets/app.js
+          grep -q "Security+ Adaptive Learning" app/dist/assets/app.js
+          grep -q "objective-path-recognition" app/dist/assets/app.js
+          grep -q "2.2.1" app/dist/assets/app.js
+          grep -q "security-plus-v2.2.1" app/dist/sw.js
+          grep -q "request.mode === 'navigate'" app/dist/sw.js
+          grep -q "cache: 'no-store'" app/dist/sw.js
+          ! grep -q "A scenario points to" app/dist/assets/app.js
+          ! grep -q "How confident are you?</b>" app/dist/assets/app.js
+          node --check app/dist/assets/app.js
 
       - name: Replace archive repository with canonical source tree
         shell: bash
         run: |
           set -euo pipefail
           cp README.md /tmp/public-README.md
+          cp .github/workflows/deploy-pages.yml /tmp/migration-workflow.yml
           rm -rf /tmp/security-plus-canonical
           mkdir -p /tmp/security-plus-canonical
           cp -a app/. /tmp/security-plus-canonical/
           rsync -a --delete --exclude='.git/' /tmp/security-plus-canonical/ ./
           cp /tmp/public-README.md README.md
           mkdir -p .github/workflows
-          cat > .github/workflows/deploy-pages.yml <<'YAML'
-          name: Build and deploy Security+ PWA
-
-          on:
-            push:
-              branches: [main]
-            workflow_dispatch:
-
-          permissions:
-            contents: read
-            pages: write
-            id-token: write
-
-          concurrency:
-            group: pages
-            cancel-in-progress: true
-
-          jobs:
-            build:
-              runs-on: ubuntu-latest
-              steps:
-                - name: Checkout
-                  uses: actions/checkout@v4
-                - name: Set up Node
-                  uses: actions/setup-node@v4
-                  with:
-                    node-version: 22
-                    cache: npm
-                - name: Install dependencies
-                  run: npm ci
-                - name: Validate, test, type-check and build
-                  run: npm run build
-                - name: Audit production output
-                  run: node scripts/feature-audit.mjs dist
-                - name: Verify production output
-                  shell: bash
-                  run: |
-                    set -euo pipefail
-                    test -f dist/index.html
-                    test -f dist/assets/app.js
-                    test -f dist/assets/styles.css
-                    test -f dist/manifest.webmanifest
-                    test -f dist/sw.js
-                    test -f dist/icons/icon-192.png
-                    test -f dist/icons/icon-512.png
-                    grep -q "2.2.1" dist/assets/app.js
-                    grep -q "security-plus-v2.2.1" dist/sw.js
-                    node --check dist/assets/app.js
-                - name: Configure Pages
-                  uses: actions/configure-pages@v5
-                - name: Upload Pages artifact
-                  uses: actions/upload-pages-artifact@v3
-                  with:
-                    path: dist
-            deploy:
-              environment:
-                name: github-pages
-                url: ${{ steps.deployment.outputs.page_url }}
-              runs-on: ubuntu-latest
-              needs: build
-              steps:
-                - name: Deploy to GitHub Pages
-                  id: deployment
-                  uses: actions/deploy-pages@v4
-          YAML
+          cp /tmp/migration-workflow.yml .github/workflows/deploy-pages.yml
           cat > .gitignore <<'EOF'
           node_modules/
           extracted/
@@ -197,12 +127,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
-          if git diff --cached --quiet; then
-            echo "No source migration changes to commit"
-          else
-            git commit -m "Commit canonical application source tree [skip ci]"
-            git push origin HEAD:main
-          fi
+          git commit -m "Commit canonical application source tree [skip ci]"
+          git push origin HEAD:main
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
