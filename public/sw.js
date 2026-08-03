@@ -1,4 +1,4 @@
-const CACHE = 'security-plus-v2.2.1';
+const CACHE = 'security-plus-v3.0.0';
 const ROOT = new URL('./', self.location).pathname;
 const APP_SHELL = `${ROOT}index.html`;
 const CORE = [
