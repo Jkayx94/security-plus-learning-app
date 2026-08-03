@@ -8,4 +8,8 @@ s=s.replace("function cosmeticsView(){return shell(`<main class=\"shell\"><h1>Co
 s=s.replace("<p>${state.coins} coins available</p>","<p>${state.testMode.enabled?`Real coins: ${state.coins} · Test coins: ${state.testMode.unlimitedCoins?'Unlimited':state.testMode.coins}`:`${state.coins} coins available`}</p>")
 s=s.replace("if(a==='update-now'){location.reload();return}","if(a==='update-now'){navigator.serviceWorker?.getRegistration().then(r=>r?.waiting?.postMessage({type:'SKIP_WAITING'}));return}")
 s=s.replace("const exportState={...state,testMode:freshTestSandbox(false)};","const exportState=sanitiseTestState(state);")
+# Declare the action once before Developer Lab handlers and remove the later duplicate.
+if "if(a==='test-unlock-everything'" in s and "const a=t.dataset.action;if(a==='test-unlock-everything'" not in s:
+    s=s.replace("if(a==='test-unlock-everything'","const a=t.dataset.action;if(a==='test-unlock-everything'",1)
+s=s.replace("}const a=t.dataset.action;if(a==='complete-onboarding'","}if(a==='complete-onboarding'",1)
 p.write_text(s,encoding='utf-8')
