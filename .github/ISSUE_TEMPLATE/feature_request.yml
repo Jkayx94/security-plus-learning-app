@@ -1,0 +1,42 @@
+name: Feature request
+description: Suggest a learning, accessibility, analytics, or interface improvement
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Learning problem
+      description: What learner problem should this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behaviour
+      description: Describe the user flow rather than implementation details where possible.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Questions and explanations
+        - Adaptive review
+        - Lessons
+        - Acronyms
+        - PBQs and boss battles
+        - Dashboard and analytics
+        - Achievements and cosmetics
+        - Accessibility
+        - Offline/PWA
+        - Backup and migration
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: privacy
+    attributes:
+      label: Privacy considerations
+      description: Note whether the proposal affects personal data, cloud sync, or exported progress.
