@@ -1,4 +1,4 @@
-name: Build and deploy Security+ v3.1
+name: Build and deploy Security+ v3.2
 
 on:
   push:
@@ -23,10 +23,24 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Restore missing reward helper
+      - name: Apply v3.2 platform migration
+        run: python3 scripts/apply-v3.2-platform-content.py src/app.ts src/styles.css
+
+      - name: Set v3.2 manifest and service worker
+        shell: bash
         run: |
-          python3 scripts/restore-award-once.py
-          grep -q "function awardOnce" src/app.ts
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          manifest=Path('public/manifest.webmanifest')
+          m=manifest.read_text(encoding='utf-8')
+          m=re.sub(r'3\.[01]\.\d+|2\.\d+\.\d+','3.2.0',m)
+          manifest.write_text(m,encoding='utf-8')
+          sw=Path('public/sw.js')
+          s=sw.read_text(encoding='utf-8')
+          s=re.sub(r"security-plus-v[^'\"]+",'security-plus-v3.2.0',s)
+          sw.write_text(s,encoding='utf-8')
+          PY
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -37,74 +51,50 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Validate, test, type-check, build and audit
+      - name: Validate, test, type-check and build
+        run: npm run build
+
+      - name: Production UI and content audit
         shell: bash
         run: |
-          set +e
-          (
-            set -euo pipefail
-            npm run build
-            test -f dist/index.html
-            test -f dist/assets/app.js
-            test -f dist/assets/styles.css
-            test -f dist/manifest.webmanifest
-            test -f dist/sw.js
-            test -f dist/icons/icon-192.png
-            test -f dist/icons/icon-512.png
-            grep -q "3.1.0" dist/assets/app.js
-            grep -q "security-plus-v3.1.0" dist/sw.js
-            grep -q "Correct, but low confidence" dist/assets/app.js
-            grep -q "Why your selected answer was tempting" dist/assets/app.js
-            grep -q "Why each other option is wrong" dist/assets/app.js
-            grep -q "Boss health" dist/assets/app.js
-            grep -q "shieldMarkup" dist/assets/app.js
-            grep -q "bossConsole" dist/assets/app.js
-            grep -q "function awardOnce" dist/assets/app.js
-            grep -q "Start targeted review" dist/assets/app.js
-            grep -q "Developer Lab" dist/assets/app.js
-            grep -q "JAKE-SECPLUS-TEST" dist/assets/app.js
-            grep -q "Cosmetics" dist/assets/app.js
-            grep -q "version-tap" dist/assets/app.js
-            grep -q "reward:150" scripts/progression-rules.mjs
-            grep -q "questions:5" scripts/progression-rules.mjs
-            grep -q "prefers-reduced-motion" dist/assets/styles.css
-            node --check dist/assets/app.js
-          ) > v3.1-direct-build.log 2>&1
-          code=$?
-          cat v3.1-direct-build.log
-          if [ $code -ne 0 ]; then
-            cp v3.1-direct-build.log V3_1_BUILD_ERROR.txt
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add V3_1_BUILD_ERROR.txt
-            git commit -m "Record direct v3.1 build failure [skip ci]" || true
-            git push origin HEAD:main || true
-            exit $code
-          fi
+          set -euo pipefail
+          test -f dist/index.html
+          test -f dist/assets/app.js
+          test -f dist/assets/content/loader.js
+          test -f dist/assets/content/security-plus-v3.2.js
+          test -f dist/assets/styles.css
+          test -f dist/manifest.webmanifest
+          test -f dist/sw.js
+          test -f dist/icons/icon-192.png
+          test -f dist/icons/icon-512.png
+          grep -q "3.2.0" dist/assets/app.js
+          grep -q "security-plus-v3.2.0" dist/sw.js
+          grep -q "<small>More</small>" dist/assets/app.js
+          grep -q "Backup and restore" dist/assets/app.js
+          grep -q "Export complete progress" dist/assets/app.js
+          grep -q "Progress exported successfully" dist/assets/app.js
+          grep -q "Developer Lab" dist/assets/app.js
+          grep -q "JAKE-SECPLUS-TEST" dist/assets/app.js
+          grep -q "loadContentPack" dist/assets/app.js
+          grep -q "approvedForBoss" dist/assets/content/loader.js
+          ! grep -q "selecting the most precise SY0-701 term" dist/assets/app.js
+          ! grep -q "generated-fallback" dist/assets/app.js
+          grep -q "prefers-reduced-motion" dist/assets/styles.css
+          test -f reports/question-inventory-v3.2.json
+          test -f reports/concepts-with-no-valid-question-v3.2.json
+          node --check dist/assets/app.js
+          node --check dist/assets/content/loader.js
 
-      - name: Record passed build and canonical source
+      - name: Commit canonical v3.2 source and reports
         shell: bash
         run: |
-          cat > V3_1_BUILD_PASSED.md <<EOF
-          # Security+ v3.1 Build Passed
-
-          Version: 3.1.0
-          Source commit: $GITHUB_SHA
-          Workflow run: $GITHUB_RUN_ID
-          Validation: passed
-          Automated tests: passed
-          TypeScript compilation: passed
-          Production build: passed
-          JavaScript syntax validation: passed
-          Production feature audit: passed
-          EOF
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          rm -f V3_1_BUILD_ERROR.txt
-          git add src/app.ts V3_1_BUILD_PASSED.md
-          git add -u -- V3_1_BUILD_ERROR.txt 2>/dev/null || true
-          git commit -m "Restore v3.1 reward helper and record build success [skip ci]" || true
-          git push origin HEAD:main || true
+          git add src/app.ts src/styles.css public/manifest.webmanifest public/sw.js reports/
+          if ! git diff --cached --quiet; then
+            git commit -m "Apply Security+ v3.2 platform and content infrastructure [skip ci]"
+            git push origin HEAD:main
+          fi
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
