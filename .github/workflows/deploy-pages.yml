@@ -52,7 +52,21 @@ jobs:
         run: npm ci
 
       - name: Validate, test, type-check and build
-        run: npm run build
+        shell: bash
+        run: |
+          set +e
+          npm run build > v3.1-build.log 2>&1
+          code=$?
+          cat v3.1-build.log
+          if [ $code -ne 0 ]; then
+            cp v3.1-build.log V3_1_BUILD_ERROR.txt
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add src/app.ts src/styles.css public/manifest.webmanifest public/sw.js V3_1_BUILD_ERROR.txt
+            git commit -m "Preserve v3.1 source and build failure [skip ci]" || true
+            git push origin HEAD:main || true
+            exit $code
+          fi
 
       - name: Verify v3.1 production output
         shell: bash
@@ -87,7 +101,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm -f V3_1_BUILD_ERROR.txt
           git add src/app.ts src/styles.css public/manifest.webmanifest public/sw.js
+          git add -u -- V3_1_BUILD_ERROR.txt 2>/dev/null || true
           if ! git diff --cached --quiet; then
             git commit -m "Apply Security+ v3.1 learning engine [skip ci]"
             git push origin HEAD:main
