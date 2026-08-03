@@ -1,4 +1,4 @@
-name: Migrate and deploy Security+ v3
+name: Build and deploy Security+ v3
 
 on:
   push:
@@ -24,38 +24,27 @@ jobs:
           fetch-depth: 0
 
       - name: Apply v3 learning experience migration
-        id: migrate
-        shell: bash
-        run: |
-          set +e
-          python3 scripts/migrate-v3-learning-experience.py src/app.ts src/styles.css > migration.log 2>&1
-          code=$?
-          cat migration.log
-          if [ $code -ne 0 ]; then
-            cp migration.log V3_MIGRATION_ERROR.txt
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add V3_MIGRATION_ERROR.txt
-            git commit -m "Record v3 migration failure [skip ci]" || true
-            git push origin HEAD:main || true
-            exit $code
-          fi
+        run: python3 scripts/migrate-v3-learning-experience.py src/app.ts src/styles.css
 
       - name: Repair v3 import handler
         run: python3 scripts/repair-v3-handler.py src/app.ts
 
-      - name: Set v3 manifest and service worker
+      - name: Apply balanced bosses, rewards and test mode
+        run: python3 scripts/apply-v3-progression-balance.py src/app.ts src/styles.css
+
+      - name: Set v3.0.1 manifest and service worker
         shell: bash
         run: |
           python3 - <<'PY'
           from pathlib import Path
           import re
           manifest=Path('public/manifest.webmanifest')
-          m=manifest.read_text(encoding='utf-8').replace('2.2.1','3.0.0')
+          m=manifest.read_text(encoding='utf-8')
+          m=re.sub(r'3\.0\.0|2\.2\.1','3.0.1',m)
           manifest.write_text(m,encoding='utf-8')
           sw=Path('public/sw.js')
           s=sw.read_text(encoding='utf-8')
-          s=re.sub(r"security-plus-v[^'\"]+",'security-plus-v3.0.0',s)
+          s=re.sub(r"security-plus-v[^'\"]+",'security-plus-v3.0.1',s)
           sw.write_text(s,encoding='utf-8')
           PY
 
@@ -80,12 +69,12 @@ jobs:
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add src/app.ts src/styles.css public/manifest.webmanifest public/sw.js V3_BUILD_ERROR.txt
-            git commit -m "Preserve transformed v3 source for repair [skip ci]" || true
+            git commit -m "Preserve balanced v3 source for repair [skip ci]" || true
             git push origin HEAD:main || true
             exit $code
           fi
 
-      - name: Verify v3 production output
+      - name: Verify v3.0.1 production output
         shell: bash
         run: |
           set -euo pipefail
@@ -96,22 +85,24 @@ jobs:
           test -f dist/sw.js
           test -f dist/icons/icon-192.png
           test -f dist/icons/icon-512.png
-          grep -q "3.0.0" dist/assets/app.js
-          grep -q "security-plus-v3.0.0" dist/sw.js
+          grep -q "3.0.1" dist/assets/app.js
+          grep -q "security-plus-v3.0.1" dist/sw.js
+          grep -q "Boss health" dist/assets/app.js
+          grep -q "JAKE-SECPLUS-TEST" dist/assets/app.js
+          grep -q "TEST MODE" dist/assets/app.js
           grep -q "Fix my mistakes" dist/assets/app.js
           grep -q "Question reports" dist/assets/app.js
-          grep -q "Achievement unlocked" dist/assets/app.js
-          grep -q "Grounded tutor" dist/assets/app.js
           grep -q "Progress exported successfully" dist/assets/app.js
           grep -q "Profile saved" dist/assets/app.js
           grep -q "30 seconds" dist/assets/app.js
+          grep -q "prefers-reduced-motion" dist/assets/styles.css
           if grep -q "Which approved Security+ term completes this objective path" dist/assets/app.js; then
             echo "Old objective-path prompt remains"
             exit 1
           fi
           node --check dist/assets/app.js
 
-      - name: Commit canonical v3 source
+      - name: Commit canonical v3.0.1 source
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
@@ -120,7 +111,7 @@ jobs:
           git add src/app.ts src/styles.css public/manifest.webmanifest public/sw.js
           git add -u -- V3_MIGRATION_ERROR.txt V3_BUILD_ERROR.txt 2>/dev/null || true
           if ! git diff --cached --quiet; then
-            git commit -m "Apply Security+ v3.0 learning experience [skip ci]"
+            git commit -m "Apply Security+ v3.0.1 balanced learning experience [skip ci]"
             git push origin HEAD:main
           fi
 
