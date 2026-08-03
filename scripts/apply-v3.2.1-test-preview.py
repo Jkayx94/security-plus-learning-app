@@ -12,7 +12,8 @@ s=s.replace("const exportState={...state,testMode:freshTestSandbox(false)};","co
 if "if(a==='test-unlock-everything'" in s and "const a=t.dataset.action;if(a==='test-unlock-everything'" not in s:
     s=s.replace("if(a==='test-unlock-everything'","const a=t.dataset.action;if(a==='test-unlock-everything'",1)
 s=s.replace("}const a=t.dataset.action;if(a==='complete-onboarding'","}if(a==='complete-onboarding'",1)
-# Keep the minified boot sequence syntactically valid, then select Home explicitly for an existing profile.
-s=s.replace("catch{profile=null}[curriculum,units]","catch{profile=null;}[curriculum,units]")
-s=s.replace("if(!profile){view='onboarding'}else{state.learnerId=profile.id}","view=profile?'home':'onboarding';if(profile){state.learnerId=profile.id}")
+# Existing learners must always start on Home so the persistent bottom navigation is rendered deterministically.
+s=s.replace("if(!profile){view='onboarding'}else{state.learnerId=profile.id}","view=profile?'home':'onboarding';if(profile)state.learnerId=profile.id")
+# The Developer Lab's reviewed-question preview is deliberately one activity so Continue returns to a shell view with navigation.
+s=s.replace("if(t.dataset.testScreen==='session'){try{start(2,'adaptive',true)}", "if(t.dataset.testScreen==='session'){try{start(.5,'adaptive',true)}")
 p.write_text(s,encoding='utf-8')
