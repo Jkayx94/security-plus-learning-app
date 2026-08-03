@@ -1,23 +1,44 @@
 import {chromium} from 'playwright';
 import {spawn} from 'node:child_process';
 import assert from 'node:assert/strict';
+
+const origin='http://127.0.0.1:4173';
+const profile=JSON.stringify({id:'QA-LOCAL',name:'QA Learner',examDate:null,createdAt:new Date().toISOString()});
 const server=spawn(process.execPath,['scripts/serve-dist.mjs'],{stdio:'inherit'});
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+
+async function waitForServer(timeoutMs=15000){
+ const deadline=Date.now()+timeoutMs;
+ while(Date.now()<deadline){
+  try{const response=await fetch(origin,{cache:'no-store'});if(response.ok)return}
+  catch{}
+  await sleep(150);
+ }
+ throw new Error('Timed out waiting for the dist server');
+}
+
 try{
- await sleep(700);
+ await waitForServer();
  const browser=await chromium.launch({headless:true});
- const page=await browser.newPage({viewport:{width:360,height:800},isMobile:true,hasTouch:true,reducedMotion:'reduce'});
- await page.addInitScript(()=>{
-  localStorage.removeItem('security-plus-mastery-state');
-  localStorage.setItem('security-plus-learner-profile',JSON.stringify({id:'QA-LOCAL',name:'QA Learner',examDate:null,createdAt:new Date().toISOString()}));
+ const context=await browser.newContext({
+  viewport:{width:360,height:800},
+  isMobile:true,
+  hasTouch:true,
+  reducedMotion:'reduce',
+  storageState:{cookies:[],origins:[{origin,localStorage:[{name:'security-plus-learner-profile',value:profile}]}]}
  });
- await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});
- await page.locator('#app').waitFor();
- const homeControl=page.locator('[data-nav="home"]').first();
- if(await homeControl.count())await homeControl.click();
- const moreControl=page.locator('[data-nav="more"]').first();
+ const page=await context.newPage();
+ const browserErrors=[];
+ page.on('pageerror',error=>browserErrors.push(String(error)));
+ page.on('console',message=>{if(message.type()==='error')browserErrors.push(message.text())});
+ await page.goto(`${origin}/`,{waitUntil:'networkidle'});
+ await page.getByRole('heading',{name:/Welcome back, QA Learner\./}).waitFor({state:'visible',timeout:15000});
+ assert.deepEqual(browserErrors,[],`Browser errors during startup: ${browserErrors.join(' | ')}`);
+
+ const moreControl=page.locator('nav [data-nav="more"]');
  await moreControl.waitFor({state:'visible'});
  await moreControl.click();
+ await page.getByRole('heading',{name:'More'}).waitFor();
  await page.getByRole('button',{name:/About and version/}).click();
  await page.getByText('Tap the version five times to enable local testing tools.').waitFor();
  const version=page.getByRole('button',{name:/Version 3\.2\.1/});
@@ -41,7 +62,6 @@ try{
  await page.waitForTimeout(3700);
  assert.ok((await page.locator('.appNotification').count())<=1);
 
- // Verify a real question action remains usable while a notification is displayed.
  await page.getByRole('button',{name:'Start reviewed question'}).click();
  await page.getByRole('button',{name:'Report question'}).click();
  await page.getByRole('button',{name:'Save report'}).click();
@@ -56,13 +76,13 @@ try{
  assert.equal(await continueButton.isEnabled(),true);
  await continueButton.click();
 
- await page.locator('[data-nav="more"]').first().click();
+ await page.locator('nav [data-nav="more"]').click();
  await page.getByRole('button',{name:/Developer Lab/}).waitFor();
  await page.getByRole('button',{name:/Cosmetics/}).click();
  await page.getByText('TEST PREVIEW',{exact:true}).waitFor();
  await page.getByRole('button',{name:/Equip|Unlock/}).first().click();
  await page.getByText(/Test cosmetic equipped/).waitFor();
- await page.locator('[data-nav="more"]').first().click();
+ await page.locator('nav [data-nav="more"]').click();
  await page.getByRole('button',{name:/Developer Lab/}).click();
  await page.getByRole('button',{name:'Any Unit Boss'}).click();
  await page.getByText(/Boss battle/).waitFor();
@@ -73,6 +93,9 @@ try{
  await page.getByRole('button',{name:'Exit Test Mode'}).click();
  await page.getByRole('heading',{name:'About'}).waitFor();
  assert.equal(await page.getByText('TEST MODE',{exact:true}).count(),0);
+ await context.close();
  await browser.close();
- console.log('RENDERED MOBILE AUDIT PASSED: 360x800 touch viewport; notifications, Submit and Continue verified.');
-} finally {server.kill('SIGTERM')}
+ console.log('RENDERED MOBILE AUDIT PASSED: startup, More, Test Mode, notifications, Submit and Continue verified.');
+} finally {
+ server.kill('SIGTERM');
+}
