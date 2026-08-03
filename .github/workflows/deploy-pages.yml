@@ -36,11 +36,9 @@ jobs:
         shell: bash
         run: |
           set +e
-          {
+          (
+            set -euo pipefail
             npm run build
-            code=$?
-            if [ $code -ne 0 ]; then exit $code; fi
-            set -e
             test -f dist/index.html
             test -f dist/assets/app.js
             test -f dist/assets/styles.css
@@ -64,7 +62,7 @@ jobs:
             grep -q "questions:5" scripts/progression-rules.mjs
             grep -q "prefers-reduced-motion" dist/assets/styles.css
             node --check dist/assets/app.js
-          } > v3.1-direct-build.log 2>&1
+          ) > v3.1-direct-build.log 2>&1
           code=$?
           cat v3.1-direct-build.log
           if [ $code -ne 0 ]; then
