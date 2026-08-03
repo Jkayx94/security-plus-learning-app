@@ -47,6 +47,7 @@ jobs:
           test -f app/src/app.ts
           test -f app/src/styles.css
           test -f app/public/manifest.webmanifest
+          test -f app/public/sw.js
 
       - name: Apply public app and mobile UI update
         run: python3 scripts/patch-mobile-ui.py app/src/app.ts app/src/styles.css
@@ -56,6 +57,19 @@ jobs:
 
       - name: Apply post-answer feedback flow
         run: python3 scripts/patch-answer-feedback-flow.py app/src/app.ts app/src/styles.css
+
+      - name: Set v2.2.1 and robust update handling
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          for name in ('app/src/app.ts', 'app/public/manifest.webmanifest'):
+              path = Path(name)
+              text = path.read_text(encoding='utf-8')
+              text = text.replace('2.2.0', '2.2.1')
+              path.write_text(text, encoding='utf-8')
+          PY
+          python3 scripts/patch-service-worker-update.py app/public/sw.js
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -94,8 +108,10 @@ jobs:
           grep -q "Security+ Adaptive Learning" dist/assets/app.js
           grep -q "objective-path-recognition" dist/assets/app.js
           grep -q "document.querySelector('nav')?.remove" dist/assets/app.js
-          grep -q "2.2.0" dist/assets/app.js
-          grep -q "security-plus-v2.2.0" dist/sw.js
+          grep -q "2.2.1" dist/assets/app.js
+          grep -q "security-plus-v2.2.1" dist/sw.js
+          grep -q "request.mode === 'navigate'" dist/sw.js
+          grep -q "cache: 'no-store'" dist/sw.js
           if grep -q "A scenario points to" dist/assets/app.js; then
             echo "Invalid fabricated scenario generator remains"
             exit 1
