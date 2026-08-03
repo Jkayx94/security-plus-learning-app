@@ -23,6 +23,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Restore missing reward helper
+        run: |
+          python3 scripts/restore-award-once.py
+          grep -q "function awardOnce" src/app.ts
+
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
@@ -54,6 +59,7 @@ jobs:
             grep -q "Boss health" dist/assets/app.js
             grep -q "shieldMarkup" dist/assets/app.js
             grep -q "bossConsole" dist/assets/app.js
+            grep -q "function awardOnce" dist/assets/app.js
             grep -q "Start targeted review" dist/assets/app.js
             grep -q "Developer Lab" dist/assets/app.js
             grep -q "JAKE-SECPLUS-TEST" dist/assets/app.js
@@ -76,7 +82,7 @@ jobs:
             exit $code
           fi
 
-      - name: Record passed build
+      - name: Record passed build and canonical source
         shell: bash
         run: |
           cat > V3_1_BUILD_PASSED.md <<EOF
@@ -95,9 +101,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           rm -f V3_1_BUILD_ERROR.txt
-          git add V3_1_BUILD_PASSED.md
+          git add src/app.ts V3_1_BUILD_PASSED.md
           git add -u -- V3_1_BUILD_ERROR.txt 2>/dev/null || true
-          git commit -m "Record Security+ v3.1 build success [skip ci]" || true
+          git commit -m "Restore v3.1 reward helper and record build success [skip ci]" || true
           git push origin HEAD:main || true
 
       - name: Configure Pages
