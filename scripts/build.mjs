@@ -3,6 +3,7 @@ fs.rmSync('dist',{recursive:true,force:true});fs.mkdirSync('dist/assets',{recurs
 execFileSync(process.execPath,['tools/typescript/bin/tsc','-p','tsconfig.json'],{stdio:'inherit'});
 for(const f of ['index.html'])fs.copyFileSync(f,path.join('dist',f));
 fs.copyFileSync('src/styles.css','dist/assets/styles.css');
+fs.appendFileSync('dist/assets/styles.css',`\n${fs.readFileSync('src/theme-overrides.css','utf8')}\n`);
 for(const name of fs.readdirSync('public',{withFileTypes:true}))fs.cpSync(path.join('public',name.name),path.join('dist',name.name),{recursive:true});
 fs.cpSync('src/data','dist/data',{recursive:true});
 let html=fs.readFileSync('dist/index.html','utf8');html=html.replace('</head>','<link rel="stylesheet" href="./assets/styles.css"/></head>');fs.writeFileSync('dist/index.html',html);
