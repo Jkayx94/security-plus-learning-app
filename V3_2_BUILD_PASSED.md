@@ -1,8 +1,8 @@
 # Security+ v3.2 Build Passed
 
 Version: 3.2.0
-Source commit: 1f88b03c96b412cd26f7839b397ea5f5576c7ff4
-Workflow run: 30795329175
+Source commit: 685671a172842918bb17bc2dcf49e20d9a735fa0
+Workflow run: 30795492176
 Validation: passed
 Content validation: passed
 Automated tests: passed
