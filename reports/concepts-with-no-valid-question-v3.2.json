@@ -1,0 +1,2820 @@
+{
+  "count": 563,
+  "concepts": [
+    {
+      "conceptId": "CON-1.2-AUTHENTICATING-PEOPLE",
+      "name": "Authenticating people",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.2-AUTHENTICATING-SYSTEMS",
+      "name": "Authenticating systems",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.2-AUTHORIZATION-MODELS",
+      "name": "Authorization models",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.2-ADAPTIVE-IDENTITY",
+      "name": "Adaptive identity",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.2-THREAT-SCOPE-REDUCTION",
+      "name": "Threat scope reduction",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.2-POLICY-DRIVEN-ACCESS-CONTROL",
+      "name": "Policy-driven access control",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.2-POLICY-ADMINISTRATOR",
+      "name": "Policy Administrator",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.2-POLICY-ENGINE",
+      "name": "Policy Engine",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.2-IMPLICIT-TRUST-ZONES",
+      "name": "Implicit trust zones",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.2-SUBJECT-SYSTEM",
+      "name": "Subject/System",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.2-POLICY-ENFORCEMENT-POINT",
+      "name": "Policy Enforcement Point",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.2-BOLLARDS",
+      "name": "Bollards",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.2-ACCESS-CONTROL-VESTIBULE",
+      "name": "Access control vestibule",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.2-FENCING",
+      "name": "Fencing",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.2-VIDEO-SURVEILLANCE",
+      "name": "Video surveillance",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.2-GUARD",
+      "name": "Security guard",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.2-ACCESS-BADGE",
+      "name": "Access badge",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.2-LIGHTING",
+      "name": "Lighting",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.2-INFRARED",
+      "name": "Infrared",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.2-PRESSURE",
+      "name": "Pressure",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.2-MICROWAVE",
+      "name": "Microwave",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.2-ULTRASONIC",
+      "name": "Ultrasonic",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.2-HONEYPOT",
+      "name": "Honeypot",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.2-HONEYNET",
+      "name": "Honeynet",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.2-HONEYFILE",
+      "name": "Honeyfile",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.2-HONEYTOKEN",
+      "name": "Honeytoken",
+      "objective": "1.2"
+    },
+    {
+      "conceptId": "CON-1.3-APPROVAL-PROCESS",
+      "name": "Approval process",
+      "objective": "1.3"
+    },
+    {
+      "conceptId": "CON-1.3-OWNERSHIP",
+      "name": "Ownership",
+      "objective": "1.3"
+    },
+    {
+      "conceptId": "CON-1.3-STAKEHOLDERS",
+      "name": "Stakeholders",
+      "objective": "1.3"
+    },
+    {
+      "conceptId": "CON-1.3-ANALYSIS",
+      "name": "Impact analysis",
+      "objective": "1.3"
+    },
+    {
+      "conceptId": "CON-1.3-TEST-RESULTS",
+      "name": "Test results",
+      "objective": "1.3"
+    },
+    {
+      "conceptId": "CON-1.3-BACKOUT-PLAN",
+      "name": "Backout plan",
+      "objective": "1.3"
+    },
+    {
+      "conceptId": "CON-1.3-MAINTENANCE-WINDOW",
+      "name": "Maintenance window",
+      "objective": "1.3"
+    },
+    {
+      "conceptId": "CON-1.3-STANDARD-OPERATING-PROCEDURE",
+      "name": "Standard operating procedure",
+      "objective": "1.3"
+    },
+    {
+      "conceptId": "CON-1.3-ALLOW-LISTS-DENY-LISTS",
+      "name": "Allow lists/deny lists",
+      "objective": "1.3"
+    },
+    {
+      "conceptId": "CON-1.3-RESTRICTED-ACTIVITIES",
+      "name": "Restricted activities",
+      "objective": "1.3"
+    },
+    {
+      "conceptId": "CON-1.3-DOWNTIME",
+      "name": "Downtime",
+      "objective": "1.3"
+    },
+    {
+      "conceptId": "CON-1.3-SERVICE-RESTART",
+      "name": "Service restart",
+      "objective": "1.3"
+    },
+    {
+      "conceptId": "CON-1.3-APPLICATION-RESTART",
+      "name": "Application restart",
+      "objective": "1.3"
+    },
+    {
+      "conceptId": "CON-1.3-LEGACY-APPLICATIONS",
+      "name": "Legacy applications",
+      "objective": "1.3"
+    },
+    {
+      "conceptId": "CON-1.3-DEPENDENCIES",
+      "name": "Dependencies",
+      "objective": "1.3"
+    },
+    {
+      "conceptId": "CON-1.3-UPDATING-DIAGRAMS",
+      "name": "Updating diagrams",
+      "objective": "1.3"
+    },
+    {
+      "conceptId": "CON-1.3-UPDATING-POLICIES-PROCEDURES",
+      "name": "Updating policies/procedures",
+      "objective": "1.3"
+    },
+    {
+      "conceptId": "CON-1.4-PUBLIC-KEY",
+      "name": "Public key",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-PRIVATE-KEY",
+      "name": "Private key",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-KEY-ESCROW",
+      "name": "Key escrow",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-FULL-DISK",
+      "name": "Full-disk",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-PARTITION",
+      "name": "Partition",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-FILE",
+      "name": "File",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-VOLUME",
+      "name": "Volume",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-DATABASE",
+      "name": "Database",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-RECORD",
+      "name": "Record",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-TRANSPORT-COMMUNICATION",
+      "name": "Transport/communication",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-ASYMMETRIC",
+      "name": "Asymmetric",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-SYMMETRIC",
+      "name": "Symmetric",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-KEY-EXCHANGE",
+      "name": "Key exchange",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-ALGORITHMS",
+      "name": "Algorithms",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-KEY-LENGTH",
+      "name": "Key length",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-TPM",
+      "name": "Trusted Platform Module (TPM)",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-HSM",
+      "name": "Hardware security module (HSM)",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-KEY-MANAGEMENT-SYSTEM",
+      "name": "Key management system",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-SECURE-ENCLAVE",
+      "name": "Secure enclave",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-STEGANOGRAPHY",
+      "name": "Steganography",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-TOKENIZATION",
+      "name": "Tokenization",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-DATA-MASKING",
+      "name": "Data masking",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-CERTIFICATE-AUTHORITIES",
+      "name": "Certificate authorities",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-CERTIFICATE-REVOCATION-LISTS",
+      "name": "Certificate revocation lists (CRLs)",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-OCSP",
+      "name": "Online Certificate Status Protocol (OCSP)",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-SELF-SIGNED",
+      "name": "Self-signed",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-THIRD-PARTY",
+      "name": "Third-party",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-ROOT-TRUST",
+      "name": "Root of trust",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-CSR",
+      "name": "Certificate signing request (CSR) generation",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-1.4-WILDCARD",
+      "name": "Wildcard",
+      "objective": "1.4"
+    },
+    {
+      "conceptId": "CON-2.1-NATION-STATE",
+      "name": "Nation-state",
+      "objective": "2.1"
+    },
+    {
+      "conceptId": "CON-2.1-UNSKILLED-ATTACKER",
+      "name": "Unskilled attacker",
+      "objective": "2.1"
+    },
+    {
+      "conceptId": "CON-2.1-HACKTIVIST",
+      "name": "Hacktivist",
+      "objective": "2.1"
+    },
+    {
+      "conceptId": "CON-2.1-INSIDER-THREAT",
+      "name": "Insider threat",
+      "objective": "2.1"
+    },
+    {
+      "conceptId": "CON-2.1-ORGANIZED-CRIME",
+      "name": "Organized crime",
+      "objective": "2.1"
+    },
+    {
+      "conceptId": "CON-2.1-SHADOW-IT",
+      "name": "Shadow IT",
+      "objective": "2.1"
+    },
+    {
+      "conceptId": "CON-2.1-INTERNAL-EXTERNAL",
+      "name": "Internal/external",
+      "objective": "2.1"
+    },
+    {
+      "conceptId": "CON-2.1-RESOURCES-FUNDING",
+      "name": "Resources/funding",
+      "objective": "2.1"
+    },
+    {
+      "conceptId": "CON-2.1-LEVEL-SOPHISTICATION-CAPABILITY",
+      "name": "Level of sophistication/capability",
+      "objective": "2.1"
+    },
+    {
+      "conceptId": "CON-2.1-DATA-EXFILTRATION",
+      "name": "Data exfiltration",
+      "objective": "2.1"
+    },
+    {
+      "conceptId": "CON-2.1-ESPIONAGE",
+      "name": "Espionage",
+      "objective": "2.1"
+    },
+    {
+      "conceptId": "CON-2.1-SERVICE-DISRUPTION",
+      "name": "Service disruption",
+      "objective": "2.1"
+    },
+    {
+      "conceptId": "CON-2.1-BLACKMAIL",
+      "name": "Blackmail",
+      "objective": "2.1"
+    },
+    {
+      "conceptId": "CON-2.1-FINANCIAL-GAIN",
+      "name": "Financial gain",
+      "objective": "2.1"
+    },
+    {
+      "conceptId": "CON-2.1-PHILOSOPHICAL-POLITICAL-BELIEFS",
+      "name": "Philosophical/political beliefs",
+      "objective": "2.1"
+    },
+    {
+      "conceptId": "CON-2.1-ETHICAL",
+      "name": "Ethical",
+      "objective": "2.1"
+    },
+    {
+      "conceptId": "CON-2.1-REVENGE",
+      "name": "Revenge",
+      "objective": "2.1"
+    },
+    {
+      "conceptId": "CON-2.1-DISRUPTION-CHAOS",
+      "name": "Disruption/chaos",
+      "objective": "2.1"
+    },
+    {
+      "conceptId": "CON-2.1-WAR",
+      "name": "War",
+      "objective": "2.1"
+    },
+    {
+      "conceptId": "CON-2.2-EMAIL",
+      "name": "Email",
+      "objective": "2.2"
+    },
+    {
+      "conceptId": "CON-2.2-SMS",
+      "name": "Short Message Service (SMS)",
+      "objective": "2.2"
+    },
+    {
+      "conceptId": "CON-2.2-IM",
+      "name": "Instant messaging (IM)",
+      "objective": "2.2"
+    },
+    {
+      "conceptId": "CON-2.2-CLIENT-BASED-VS-AGENTLESS",
+      "name": "Client-based vs. agentless",
+      "objective": "2.2"
+    },
+    {
+      "conceptId": "CON-2.2-WIRELESS",
+      "name": "Wireless",
+      "objective": "2.2"
+    },
+    {
+      "conceptId": "CON-2.2-WIRED",
+      "name": "Wired",
+      "objective": "2.2"
+    },
+    {
+      "conceptId": "CON-2.2-BLUETOOTH",
+      "name": "Bluetooth",
+      "objective": "2.2"
+    },
+    {
+      "conceptId": "CON-2.2-MANAGED-SERVICE-PROVIDERS",
+      "name": "Managed service providers (MSPs)",
+      "objective": "2.2"
+    },
+    {
+      "conceptId": "CON-2.2-VENDORS",
+      "name": "Vendors",
+      "objective": "2.2"
+    },
+    {
+      "conceptId": "CON-2.2-SUPPLIERS",
+      "name": "Suppliers",
+      "objective": "2.2"
+    },
+    {
+      "conceptId": "CON-2.2-PHISHING",
+      "name": "Phishing",
+      "objective": "2.2"
+    },
+    {
+      "conceptId": "CON-2.2-VISHING",
+      "name": "Vishing",
+      "objective": "2.2"
+    },
+    {
+      "conceptId": "CON-2.2-SMISHING",
+      "name": "Smishing",
+      "objective": "2.2"
+    },
+    {
+      "conceptId": "CON-2.2-MISINFORMATION-DISINFORMATION",
+      "name": "Misinformation/disinformation",
+      "objective": "2.2"
+    },
+    {
+      "conceptId": "CON-2.2-IMPERSONATION",
+      "name": "Impersonation",
+      "objective": "2.2"
+    },
+    {
+      "conceptId": "CON-2.2-BUSINESS-EMAIL-COMPROMISE",
+      "name": "Business email compromise",
+      "objective": "2.2"
+    },
+    {
+      "conceptId": "CON-2.2-PRETEXTING",
+      "name": "Pretexting",
+      "objective": "2.2"
+    },
+    {
+      "conceptId": "CON-2.2-WATERING-HOLE",
+      "name": "Watering hole",
+      "objective": "2.2"
+    },
+    {
+      "conceptId": "CON-2.2-BRAND-IMPERSONATION",
+      "name": "Brand impersonation",
+      "objective": "2.2"
+    },
+    {
+      "conceptId": "CON-2.2-TYPOSQUATTING",
+      "name": "Typosquatting",
+      "objective": "2.2"
+    },
+    {
+      "conceptId": "CON-2.3-MEMORY-INJECTION",
+      "name": "Memory injection",
+      "objective": "2.3"
+    },
+    {
+      "conceptId": "CON-2.3-BUFFER-OVERFLOW",
+      "name": "Buffer overflow",
+      "objective": "2.3"
+    },
+    {
+      "conceptId": "CON-2.3-TOC",
+      "name": "Time-of-check (TOC)",
+      "objective": "2.3"
+    },
+    {
+      "conceptId": "CON-2.3-TOU",
+      "name": "Time-of-use (TOU)",
+      "objective": "2.3"
+    },
+    {
+      "conceptId": "CON-2.3-MALICIOUS-UPDATE",
+      "name": "Malicious update",
+      "objective": "2.3"
+    },
+    {
+      "conceptId": "CON-2.3-SQLI",
+      "name": "Structured Query Language injection (SQLi)",
+      "objective": "2.3"
+    },
+    {
+      "conceptId": "CON-2.3-XSS",
+      "name": "Cross-site scripting (XSS)",
+      "objective": "2.3"
+    },
+    {
+      "conceptId": "CON-2.3-FIRMWARE",
+      "name": "Firmware",
+      "objective": "2.3"
+    },
+    {
+      "conceptId": "CON-2.3-END-LIFE",
+      "name": "End-of-life",
+      "objective": "2.3"
+    },
+    {
+      "conceptId": "CON-2.3-LEGACY",
+      "name": "Legacy",
+      "objective": "2.3"
+    },
+    {
+      "conceptId": "CON-2.3-VM",
+      "name": "Virtual machine (VM) escape",
+      "objective": "2.3"
+    },
+    {
+      "conceptId": "CON-2.3-RESOURCE-REUSE",
+      "name": "Resource reuse",
+      "objective": "2.3"
+    },
+    {
+      "conceptId": "CON-2.3-SERVICE-PROVIDER",
+      "name": "Service provider",
+      "objective": "2.3"
+    },
+    {
+      "conceptId": "CON-2.3-HARDWARE-PROVIDER",
+      "name": "Hardware provider",
+      "objective": "2.3"
+    },
+    {
+      "conceptId": "CON-2.3-SOFTWARE-PROVIDER",
+      "name": "Software provider",
+      "objective": "2.3"
+    },
+    {
+      "conceptId": "CON-2.3-SIDE-LOADING",
+      "name": "Side loading",
+      "objective": "2.3"
+    },
+    {
+      "conceptId": "CON-2.3-JAILBREAKING",
+      "name": "Jailbreaking",
+      "objective": "2.3"
+    },
+    {
+      "conceptId": "CON-2.4-RANSOMWARE",
+      "name": "Ransomware",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-TROJAN",
+      "name": "Trojan",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-WORM",
+      "name": "Worm",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-SPYWARE",
+      "name": "Spyware",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-BLOATWARE",
+      "name": "Bloatware",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-VIRUS",
+      "name": "Virus",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-KEYLOGGER",
+      "name": "Keylogger",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-LOGIC-BOMB",
+      "name": "Logic bomb",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-ROOTKIT",
+      "name": "Rootkit",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-BRUTE-FORCE",
+      "name": "Brute force",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-RFID",
+      "name": "Radio frequency identification (RFID) cloning",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-ENVIRONMENTAL",
+      "name": "Environmental",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-AMPLIFIED",
+      "name": "Amplified",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-REFLECTED",
+      "name": "Reflected",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-DNS",
+      "name": "Domain Name System (DNS) attacks",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-WIRELESS",
+      "name": "Wireless",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-PATH",
+      "name": "On-path",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-CREDENTIAL-REPLAY",
+      "name": "Credential replay",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-MALICIOUS-CODE",
+      "name": "Malicious code",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-INJECTION",
+      "name": "Injection",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-BUFFER-OVERFLOW",
+      "name": "Buffer overflow",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-REPLAY",
+      "name": "Replay",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-PRIVILEGE-ESCALATION",
+      "name": "Privilege escalation",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-FORGERY",
+      "name": "Forgery",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-DIRECTORY-TRAVERSAL",
+      "name": "Directory traversal",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-DOWNGRADE",
+      "name": "Downgrade",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-COLLISION",
+      "name": "Collision",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-BIRTHDAY",
+      "name": "Birthday",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-SPRAYING",
+      "name": "Spraying",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-BRUTE-FORCE-02",
+      "name": "Brute force",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-ACCOUNT-LOCKOUT",
+      "name": "Account lockout",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-CONCURRENT-SESSION-USAGE",
+      "name": "Concurrent session usage",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-BLOCKED-CONTENT",
+      "name": "Blocked content",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-IMPOSSIBLE-TRAVEL",
+      "name": "Impossible travel",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-RESOURCE-CONSUMPTION",
+      "name": "Resource consumption",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-RESOURCE-INACCESSIBILITY",
+      "name": "Resource inaccessibility",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-OUT-CYCLE-LOGGING",
+      "name": "Out-of-cycle logging",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-PUBLISHED-DOCUMENTED",
+      "name": "Published/documented",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.4-MISSING-LOGS",
+      "name": "Missing logs",
+      "objective": "2.4"
+    },
+    {
+      "conceptId": "CON-2.5-ACL",
+      "name": "Access control list (ACL)",
+      "objective": "2.5"
+    },
+    {
+      "conceptId": "CON-2.5-PERMISSIONS",
+      "name": "Permissions",
+      "objective": "2.5"
+    },
+    {
+      "conceptId": "CON-2.5-ENCRYPTION",
+      "name": "Encryption",
+      "objective": "2.5"
+    },
+    {
+      "conceptId": "CON-2.5-INSTALLATION-ENDPOINT-PROTECTION",
+      "name": "Installation of endpoint protection",
+      "objective": "2.5"
+    },
+    {
+      "conceptId": "CON-2.5-HOST-BASED-FIREWALL",
+      "name": "Host-based firewall",
+      "objective": "2.5"
+    },
+    {
+      "conceptId": "CON-2.5-HIPS",
+      "name": "Host-based intrusion prevention system (HIPS)",
+      "objective": "2.5"
+    },
+    {
+      "conceptId": "CON-2.5-DISABLING-PORTS-PROTOCOLS",
+      "name": "Disabling ports/protocols",
+      "objective": "2.5"
+    },
+    {
+      "conceptId": "CON-2.5-DEFAULT-PASSWORD-CHANGES",
+      "name": "Default password changes",
+      "objective": "2.5"
+    },
+    {
+      "conceptId": "CON-2.5-REMOVAL-UNNECESSARY-SOFTWARE",
+      "name": "Removal of unnecessary software",
+      "objective": "2.5"
+    },
+    {
+      "conceptId": "CON-3.1-RESPONSIBILITY-MATRIX",
+      "name": "Responsibility matrix",
+      "objective": "3.1"
+    },
+    {
+      "conceptId": "CON-3.1-HYBRID-CONSIDERATIONS",
+      "name": "Hybrid considerations",
+      "objective": "3.1"
+    },
+    {
+      "conceptId": "CON-3.1-THIRD-PARTY-VENDORS",
+      "name": "Third-party vendors",
+      "objective": "3.1"
+    },
+    {
+      "conceptId": "CON-3.1-AIR-GAPPED",
+      "name": "Air-gapped",
+      "objective": "3.1"
+    },
+    {
+      "conceptId": "CON-3.1-LOGICAL-SEGMENTATION",
+      "name": "Logical segmentation",
+      "objective": "3.1"
+    },
+    {
+      "conceptId": "CON-3.1-SDN",
+      "name": "Software-defined networking (SDN)",
+      "objective": "3.1"
+    },
+    {
+      "conceptId": "CON-3.1-AVAILABILITY",
+      "name": "Availability",
+      "objective": "3.1"
+    },
+    {
+      "conceptId": "CON-3.1-RESILIENCE",
+      "name": "Resilience",
+      "objective": "3.1"
+    },
+    {
+      "conceptId": "CON-3.1-COST",
+      "name": "Cost",
+      "objective": "3.1"
+    },
+    {
+      "conceptId": "CON-3.1-RESPONSIVENESS",
+      "name": "Responsiveness",
+      "objective": "3.1"
+    },
+    {
+      "conceptId": "CON-3.1-SCALABILITY",
+      "name": "Scalability",
+      "objective": "3.1"
+    },
+    {
+      "conceptId": "CON-3.1-EASE-DEPLOYMENT",
+      "name": "Ease of deployment",
+      "objective": "3.1"
+    },
+    {
+      "conceptId": "CON-3.1-RISK-TRANSFERENCE",
+      "name": "Risk transference",
+      "objective": "3.1"
+    },
+    {
+      "conceptId": "CON-3.1-EASE-RECOVERY",
+      "name": "Ease of recovery",
+      "objective": "3.1"
+    },
+    {
+      "conceptId": "CON-3.1-PATCH-AVAILABILITY",
+      "name": "Patch availability",
+      "objective": "3.1"
+    },
+    {
+      "conceptId": "CON-3.1-INABILITY-PATCH",
+      "name": "Inability to patch",
+      "objective": "3.1"
+    },
+    {
+      "conceptId": "CON-3.1-POWER",
+      "name": "Power",
+      "objective": "3.1"
+    },
+    {
+      "conceptId": "CON-3.1-COMPUTE",
+      "name": "Compute",
+      "objective": "3.1"
+    },
+    {
+      "conceptId": "CON-3.2-DEVICE-PLACEMENT",
+      "name": "Device placement",
+      "objective": "3.2"
+    },
+    {
+      "conceptId": "CON-3.2-ZONES",
+      "name": "Security zones",
+      "objective": "3.2"
+    },
+    {
+      "conceptId": "CON-3.2-ATTACK-SURFACE",
+      "name": "Attack surface",
+      "objective": "3.2"
+    },
+    {
+      "conceptId": "CON-3.2-CONNECTIVITY",
+      "name": "Connectivity",
+      "objective": "3.2"
+    },
+    {
+      "conceptId": "CON-3.2-FAIL-OPEN",
+      "name": "Fail-open",
+      "objective": "3.2"
+    },
+    {
+      "conceptId": "CON-3.2-FAIL-CLOSED",
+      "name": "Fail-closed",
+      "objective": "3.2"
+    },
+    {
+      "conceptId": "CON-3.2-ACTIVE-VS-PASSIVE",
+      "name": "Active vs. passive",
+      "objective": "3.2"
+    },
+    {
+      "conceptId": "CON-3.2-INLINE-VS-TAP-MONITOR",
+      "name": "Inline vs. tap/monitor",
+      "objective": "3.2"
+    },
+    {
+      "conceptId": "CON-3.2-JUMP-SERVER",
+      "name": "Jump server",
+      "objective": "3.2"
+    },
+    {
+      "conceptId": "CON-3.2-PROXY-SERVER",
+      "name": "Proxy server",
+      "objective": "3.2"
+    },
+    {
+      "conceptId": "CON-3.2-IDS",
+      "name": "Intrusion prevention system (IPS)/intrusion detection system (IDS)",
+      "objective": "3.2"
+    },
+    {
+      "conceptId": "CON-3.2-LOAD-BALANCER",
+      "name": "Load balancer",
+      "objective": "3.2"
+    },
+    {
+      "conceptId": "CON-3.2-SENSORS",
+      "name": "Sensors",
+      "objective": "3.2"
+    },
+    {
+      "conceptId": "CON-3.2-802-1X",
+      "name": "802.1X",
+      "objective": "3.2"
+    },
+    {
+      "conceptId": "CON-3.2-EAP",
+      "name": "Extensible Authentication Protocol (EAP)",
+      "objective": "3.2"
+    },
+    {
+      "conceptId": "CON-3.2-WAF",
+      "name": "Web application firewall (WAF)",
+      "objective": "3.2"
+    },
+    {
+      "conceptId": "CON-3.2-UTM",
+      "name": "Unified threat management (UTM)",
+      "objective": "3.2"
+    },
+    {
+      "conceptId": "CON-3.2-NGFW",
+      "name": "Next-generation firewall (NGFW)",
+      "objective": "3.2"
+    },
+    {
+      "conceptId": "CON-3.2-LAYER-4-LAYER-7",
+      "name": "Layer 4/Layer 7",
+      "objective": "3.2"
+    },
+    {
+      "conceptId": "CON-3.2-VPN",
+      "name": "Virtual private network (VPN)",
+      "objective": "3.2"
+    },
+    {
+      "conceptId": "CON-3.2-REMOTE-ACCESS",
+      "name": "Remote access",
+      "objective": "3.2"
+    },
+    {
+      "conceptId": "CON-3.2-TLS",
+      "name": "Transport Layer Security (TLS)",
+      "objective": "3.2"
+    },
+    {
+      "conceptId": "CON-3.2-IPSEC",
+      "name": "Internet protocol security (IPSec)",
+      "objective": "3.2"
+    },
+    {
+      "conceptId": "CON-3.2-SD-WAN",
+      "name": "Software-defined wide area network (SD-WAN)",
+      "objective": "3.2"
+    },
+    {
+      "conceptId": "CON-3.2-SASE",
+      "name": "Secure access service edge (SASE)",
+      "objective": "3.2"
+    },
+    {
+      "conceptId": "CON-3.3-REGULATED",
+      "name": "Regulated",
+      "objective": "3.3"
+    },
+    {
+      "conceptId": "CON-3.3-TRADE-SECRET",
+      "name": "Trade secret",
+      "objective": "3.3"
+    },
+    {
+      "conceptId": "CON-3.3-INTELLECTUAL-PROPERTY",
+      "name": "Intellectual property",
+      "objective": "3.3"
+    },
+    {
+      "conceptId": "CON-3.3-LEGAL-INFORMATION",
+      "name": "Legal information",
+      "objective": "3.3"
+    },
+    {
+      "conceptId": "CON-3.3-FINANCIAL-INFORMATION",
+      "name": "Financial information",
+      "objective": "3.3"
+    },
+    {
+      "conceptId": "CON-3.3-HUMAN-NON-HUMAN-READABLE",
+      "name": "Human- and non-human-readable",
+      "objective": "3.3"
+    },
+    {
+      "conceptId": "CON-3.3-SENSITIVE",
+      "name": "Sensitive",
+      "objective": "3.3"
+    },
+    {
+      "conceptId": "CON-3.3-CONFIDENTIAL",
+      "name": "Confidential",
+      "objective": "3.3"
+    },
+    {
+      "conceptId": "CON-3.3-PUBLIC",
+      "name": "Public",
+      "objective": "3.3"
+    },
+    {
+      "conceptId": "CON-3.3-RESTRICTED",
+      "name": "Restricted",
+      "objective": "3.3"
+    },
+    {
+      "conceptId": "CON-3.3-PRIVATE",
+      "name": "Private",
+      "objective": "3.3"
+    },
+    {
+      "conceptId": "CON-3.3-CRITICAL",
+      "name": "Critical",
+      "objective": "3.3"
+    },
+    {
+      "conceptId": "CON-3.3-DATA-AT-REST",
+      "name": "Data at rest",
+      "objective": "3.3"
+    },
+    {
+      "conceptId": "CON-3.3-DATA-TRANSIT",
+      "name": "Data in transit",
+      "objective": "3.3"
+    },
+    {
+      "conceptId": "CON-3.3-DATA-USE",
+      "name": "Data in use",
+      "objective": "3.3"
+    },
+    {
+      "conceptId": "CON-3.3-DATA-SOVEREIGNTY",
+      "name": "Data sovereignty",
+      "objective": "3.3"
+    },
+    {
+      "conceptId": "CON-3.3-GEOLOCATION",
+      "name": "Geolocation",
+      "objective": "3.3"
+    },
+    {
+      "conceptId": "CON-3.3-GEOGRAPHIC-RESTRICTIONS",
+      "name": "Geographic restrictions",
+      "objective": "3.3"
+    },
+    {
+      "conceptId": "CON-3.3-ENCRYPTION",
+      "name": "Encryption",
+      "objective": "3.3"
+    },
+    {
+      "conceptId": "CON-3.3-HASHING",
+      "name": "Hashing",
+      "objective": "3.3"
+    },
+    {
+      "conceptId": "CON-3.3-MASKING",
+      "name": "Masking",
+      "objective": "3.3"
+    },
+    {
+      "conceptId": "CON-3.3-TOKENIZATION",
+      "name": "Tokenization",
+      "objective": "3.3"
+    },
+    {
+      "conceptId": "CON-3.3-OBFUSCATION",
+      "name": "Obfuscation",
+      "objective": "3.3"
+    },
+    {
+      "conceptId": "CON-3.3-SEGMENTATION",
+      "name": "Segmentation",
+      "objective": "3.3"
+    },
+    {
+      "conceptId": "CON-3.3-PERMISSION-RESTRICTIONS",
+      "name": "Permission restrictions",
+      "objective": "3.3"
+    },
+    {
+      "conceptId": "CON-3.4-LOAD-BALANCING-VS-CLUSTERING",
+      "name": "Load balancing vs. clustering",
+      "objective": "3.4"
+    },
+    {
+      "conceptId": "CON-3.4-HOT",
+      "name": "Hot",
+      "objective": "3.4"
+    },
+    {
+      "conceptId": "CON-3.4-COLD",
+      "name": "Cold",
+      "objective": "3.4"
+    },
+    {
+      "conceptId": "CON-3.4-WARM",
+      "name": "Warm",
+      "objective": "3.4"
+    },
+    {
+      "conceptId": "CON-3.4-GEOGRAPHIC-DISPERSION",
+      "name": "Geographic dispersion",
+      "objective": "3.4"
+    },
+    {
+      "conceptId": "CON-3.4-PEOPLE",
+      "name": "People",
+      "objective": "3.4"
+    },
+    {
+      "conceptId": "CON-3.4-TECHNOLOGY",
+      "name": "Technology",
+      "objective": "3.4"
+    },
+    {
+      "conceptId": "CON-3.4-INFRASTRUCTURE",
+      "name": "Infrastructure",
+      "objective": "3.4"
+    },
+    {
+      "conceptId": "CON-3.4-TABLETOP-EXERCISES",
+      "name": "Tabletop exercises",
+      "objective": "3.4"
+    },
+    {
+      "conceptId": "CON-3.4-FAIL-OVER",
+      "name": "Fail over",
+      "objective": "3.4"
+    },
+    {
+      "conceptId": "CON-3.4-SIMULATION",
+      "name": "Simulation",
+      "objective": "3.4"
+    },
+    {
+      "conceptId": "CON-3.4-PARALLEL-PROCESSING",
+      "name": "Parallel processing",
+      "objective": "3.4"
+    },
+    {
+      "conceptId": "CON-3.4-ONSITE-OFFSITE",
+      "name": "Onsite/offsite",
+      "objective": "3.4"
+    },
+    {
+      "conceptId": "CON-3.4-FREQUENCY",
+      "name": "Frequency",
+      "objective": "3.4"
+    },
+    {
+      "conceptId": "CON-3.4-ENCRYPTION",
+      "name": "Encryption",
+      "objective": "3.4"
+    },
+    {
+      "conceptId": "CON-3.4-SNAPSHOTS",
+      "name": "Snapshots",
+      "objective": "3.4"
+    },
+    {
+      "conceptId": "CON-3.4-RECOVERY",
+      "name": "Recovery",
+      "objective": "3.4"
+    },
+    {
+      "conceptId": "CON-3.4-REPLICATION",
+      "name": "Replication",
+      "objective": "3.4"
+    },
+    {
+      "conceptId": "CON-3.4-JOURNALING",
+      "name": "Journaling",
+      "objective": "3.4"
+    },
+    {
+      "conceptId": "CON-3.4-GENERATORS",
+      "name": "Generators",
+      "objective": "3.4"
+    },
+    {
+      "conceptId": "CON-3.4-UPS",
+      "name": "Uninterruptible power supply (UPS)",
+      "objective": "3.4"
+    },
+    {
+      "conceptId": "CON-4.1-ESTABLISH",
+      "name": "Establish",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-DEPLOY",
+      "name": "Deploy",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-MAINTAIN",
+      "name": "Maintain",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-MOBILE-DEVICES",
+      "name": "Mobile devices",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-WORKSTATIONS",
+      "name": "Workstations",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-SWITCHES",
+      "name": "Switches",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-ROUTERS",
+      "name": "Routers",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-CLOUD-INFRASTRUCTURE",
+      "name": "Cloud infrastructure",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-SERVERS",
+      "name": "Servers",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-ICS",
+      "name": "ICS/SCADA",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-EMBEDDED-SYSTEMS",
+      "name": "Embedded systems",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-RTOS",
+      "name": "RTOS",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-IOT",
+      "name": "IoT devices",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-SITE-SURVEYS",
+      "name": "Site surveys",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-HEAT-MAPS",
+      "name": "Heat maps",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-BYOD",
+      "name": "Bring your own device (BYOD)",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-COPE",
+      "name": "Corporate-owned, personally enabled (COPE)",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-CYOD",
+      "name": "Choose your own device (CYOD)",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-CELLULAR",
+      "name": "Cellular",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-WI-FI",
+      "name": "Wi-Fi",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-BLUETOOTH",
+      "name": "Bluetooth",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-WI-FI-PROTECTED-ACCESS-3",
+      "name": "Wi-Fi Protected Access 3 (WPA3)",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-AAA",
+      "name": "AAA/Remote Authentication Dial-In User Service (RADIUS)",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-CRYPTOGRAPHIC-PROTOCOLS",
+      "name": "Cryptographic protocols",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-AUTHENTICATION-PROTOCOLS",
+      "name": "Authentication protocols",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-INPUT-VALIDATION",
+      "name": "Input validation",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-SECURE-COOKIES",
+      "name": "Secure cookies",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-STATIC-CODE-ANALYSIS",
+      "name": "Static code analysis",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.1-CODE-SIGNING",
+      "name": "Code signing",
+      "objective": "4.1"
+    },
+    {
+      "conceptId": "CON-4.2-OWNERSHIP",
+      "name": "Ownership",
+      "objective": "4.2"
+    },
+    {
+      "conceptId": "CON-4.2-CLASSIFICATION",
+      "name": "Classification",
+      "objective": "4.2"
+    },
+    {
+      "conceptId": "CON-4.2-INVENTORY",
+      "name": "Inventory",
+      "objective": "4.2"
+    },
+    {
+      "conceptId": "CON-4.2-ENUMERATION",
+      "name": "Enumeration",
+      "objective": "4.2"
+    },
+    {
+      "conceptId": "CON-4.2-SANITIZATION",
+      "name": "Sanitization",
+      "objective": "4.2"
+    },
+    {
+      "conceptId": "CON-4.2-DESTRUCTION",
+      "name": "Destruction",
+      "objective": "4.2"
+    },
+    {
+      "conceptId": "CON-4.2-CERTIFICATION",
+      "name": "Certification",
+      "objective": "4.2"
+    },
+    {
+      "conceptId": "CON-4.2-DATA-RETENTION",
+      "name": "Data retention",
+      "objective": "4.2"
+    },
+    {
+      "conceptId": "CON-4.3-VULNERABILITY-SCAN",
+      "name": "Vulnerability scan",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-STATIC-ANALYSIS",
+      "name": "Static analysis",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-DYNAMIC-ANALYSIS",
+      "name": "Dynamic analysis",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-PACKAGE-MONITORING",
+      "name": "Package monitoring",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-OSINT",
+      "name": "Open-source intelligence (OSINT)",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-PROPRIETARY-THIRD-PARTY",
+      "name": "Proprietary/third-party",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-INFORMATION-SHARING-ORGANIZATION",
+      "name": "Information-sharing organization",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-DARK-WEB",
+      "name": "Dark web",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-PENETRATION-TESTING",
+      "name": "Penetration testing",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-BUG-BOUNTY-PROGRAM",
+      "name": "Bug bounty program",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-SYSTEM-PROCESS-AUDIT",
+      "name": "System/process audit",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-CONFIRMATION",
+      "name": "Confirmation",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-FALSE-POSITIVE",
+      "name": "False positive",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-FALSE-NEGATIVE",
+      "name": "False negative",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-PRIORITIZE",
+      "name": "Prioritize",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-CVSS",
+      "name": "Common Vulnerability Scoring System (CVSS)",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-CVE",
+      "name": "Common Vulnerability Enumeration (CVE)",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-VULNERABILITY-CLASSIFICATION",
+      "name": "Vulnerability classification",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-EXPOSURE-FACTOR",
+      "name": "Exposure factor",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-ENVIRONMENTAL-VARIABLES",
+      "name": "Environmental variables",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-INDUSTRY-ORGANIZATIONAL",
+      "name": "Industry/organizational impact",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-RISK-TOLERANCE",
+      "name": "Risk tolerance",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-PATCHING",
+      "name": "Patching",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-INSURANCE",
+      "name": "Insurance",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-SEGMENTATION",
+      "name": "Segmentation",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-COMPENSATING-CONTROLS",
+      "name": "Compensating controls",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-EXCEPTIONS-EXEMPTIONS",
+      "name": "Exceptions and exemptions",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-RESCANNING",
+      "name": "Rescanning",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-AUDIT",
+      "name": "Audit",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.3-VERIFICATION",
+      "name": "Verification",
+      "objective": "4.3"
+    },
+    {
+      "conceptId": "CON-4.4-SYSTEMS",
+      "name": "Systems",
+      "objective": "4.4"
+    },
+    {
+      "conceptId": "CON-4.4-APPLICATIONS",
+      "name": "Applications",
+      "objective": "4.4"
+    },
+    {
+      "conceptId": "CON-4.4-INFRASTRUCTURE",
+      "name": "Infrastructure",
+      "objective": "4.4"
+    },
+    {
+      "conceptId": "CON-4.4-LOG-AGGREGATION",
+      "name": "Log aggregation",
+      "objective": "4.4"
+    },
+    {
+      "conceptId": "CON-4.4-ALERTING",
+      "name": "Alerting",
+      "objective": "4.4"
+    },
+    {
+      "conceptId": "CON-4.4-SCANNING",
+      "name": "Scanning",
+      "objective": "4.4"
+    },
+    {
+      "conceptId": "CON-4.4-REPORTING",
+      "name": "Reporting",
+      "objective": "4.4"
+    },
+    {
+      "conceptId": "CON-4.4-ARCHIVING",
+      "name": "Archiving",
+      "objective": "4.4"
+    },
+    {
+      "conceptId": "CON-4.4-QUARANTINE",
+      "name": "Quarantine",
+      "objective": "4.4"
+    },
+    {
+      "conceptId": "CON-4.4-ALERT-TUNING",
+      "name": "Alert tuning",
+      "objective": "4.4"
+    },
+    {
+      "conceptId": "CON-4.4-SCAP",
+      "name": "Security Content Automation Protocol (SCAP)",
+      "objective": "4.4"
+    },
+    {
+      "conceptId": "CON-4.4-BENCHMARKS",
+      "name": "Benchmarks",
+      "objective": "4.4"
+    },
+    {
+      "conceptId": "CON-4.4-AGENTS-AGENTLESS",
+      "name": "Agents/agentless",
+      "objective": "4.4"
+    },
+    {
+      "conceptId": "CON-4.4-SIEM",
+      "name": "Security information and event management (SIEM)",
+      "objective": "4.4"
+    },
+    {
+      "conceptId": "CON-4.4-ANTIVIRUS",
+      "name": "Antivirus",
+      "objective": "4.4"
+    },
+    {
+      "conceptId": "CON-4.4-DLP",
+      "name": "Data loss prevention (DLP)",
+      "objective": "4.4"
+    },
+    {
+      "conceptId": "CON-4.4-SNMP",
+      "name": "Simple Network Management Protocol (SNMP) traps",
+      "objective": "4.4"
+    },
+    {
+      "conceptId": "CON-4.4-NETFLOW",
+      "name": "NetFlow",
+      "objective": "4.4"
+    },
+    {
+      "conceptId": "CON-4.4-VULNERABILITY-SCANNERS",
+      "name": "Vulnerability scanners",
+      "objective": "4.4"
+    },
+    {
+      "conceptId": "CON-4.5-RULES",
+      "name": "Rules",
+      "objective": "4.5"
+    },
+    {
+      "conceptId": "CON-4.5-ACCESS-LISTS",
+      "name": "Access lists",
+      "objective": "4.5"
+    },
+    {
+      "conceptId": "CON-4.5-PORTS-PROTOCOLS",
+      "name": "Ports/protocols",
+      "objective": "4.5"
+    },
+    {
+      "conceptId": "CON-4.5-SCREENED-SUBNETS",
+      "name": "Screened subnets",
+      "objective": "4.5"
+    },
+    {
+      "conceptId": "CON-4.5-TRENDS",
+      "name": "Trends",
+      "objective": "4.5"
+    },
+    {
+      "conceptId": "CON-4.5-SIGNATURES",
+      "name": "Signatures",
+      "objective": "4.5"
+    },
+    {
+      "conceptId": "CON-4.5-AGENT-BASED",
+      "name": "Agent-based",
+      "objective": "4.5"
+    },
+    {
+      "conceptId": "CON-4.5-CENTRALIZED-PROXY",
+      "name": "Centralized proxy",
+      "objective": "4.5"
+    },
+    {
+      "conceptId": "CON-4.5-URL",
+      "name": "Universal Resource Locator (URL) scanning",
+      "objective": "4.5"
+    },
+    {
+      "conceptId": "CON-4.5-CONTENT-CATEGORIZATION",
+      "name": "Content categorization",
+      "objective": "4.5"
+    },
+    {
+      "conceptId": "CON-4.5-BLOCK-RULES",
+      "name": "Block rules",
+      "objective": "4.5"
+    },
+    {
+      "conceptId": "CON-4.5-REPUTATION",
+      "name": "Reputation",
+      "objective": "4.5"
+    },
+    {
+      "conceptId": "CON-4.5-GROUP-POLICY",
+      "name": "Group Policy",
+      "objective": "4.5"
+    },
+    {
+      "conceptId": "CON-4.5-SELINUX",
+      "name": "SELinux",
+      "objective": "4.5"
+    },
+    {
+      "conceptId": "CON-4.5-PROTOCOL-SELECTION",
+      "name": "Protocol selection",
+      "objective": "4.5"
+    },
+    {
+      "conceptId": "CON-4.5-PORT-SELECTION",
+      "name": "Port selection",
+      "objective": "4.5"
+    },
+    {
+      "conceptId": "CON-4.5-TRANSPORT-METHOD",
+      "name": "Transport method",
+      "objective": "4.5"
+    },
+    {
+      "conceptId": "CON-4.5-DMARC",
+      "name": "Domain-based Message Authentication Reporting and Conformance (DMARC)",
+      "objective": "4.5"
+    },
+    {
+      "conceptId": "CON-4.5-DKIM",
+      "name": "DomainKeys Identified Mail (DKIM)",
+      "objective": "4.5"
+    },
+    {
+      "conceptId": "CON-4.5-SPF",
+      "name": "Sender Policy Framework (SPF)",
+      "objective": "4.5"
+    },
+    {
+      "conceptId": "CON-4.5-GATEWAY",
+      "name": "Gateway",
+      "objective": "4.5"
+    },
+    {
+      "conceptId": "CON-4.6-LDAP",
+      "name": "Lightweight Directory Access Protocol (LDAP)",
+      "objective": "4.6"
+    },
+    {
+      "conceptId": "CON-4.6-OAUTH",
+      "name": "Open authorization (OAuth)",
+      "objective": "4.6"
+    },
+    {
+      "conceptId": "CON-4.6-SAML",
+      "name": "Security Assertions Markup Language (SAML)",
+      "objective": "4.6"
+    },
+    {
+      "conceptId": "CON-4.6-TIME-DAY-RESTRICTIONS",
+      "name": "Time-of-day restrictions",
+      "objective": "4.6"
+    },
+    {
+      "conceptId": "CON-4.6-LEAST-PRIVILEGE",
+      "name": "Least privilege",
+      "objective": "4.6"
+    },
+    {
+      "conceptId": "CON-4.6-BIOMETRICS",
+      "name": "Biometrics",
+      "objective": "4.6"
+    },
+    {
+      "conceptId": "CON-4.6-HARD-SOFT-AUTHENTICATION-TOKENS",
+      "name": "Hard/soft authentication tokens",
+      "objective": "4.6"
+    },
+    {
+      "conceptId": "CON-4.6-KEYS",
+      "name": "Security keys",
+      "objective": "4.6"
+    },
+    {
+      "conceptId": "CON-4.6-SOMETHING-YOU-KNOW",
+      "name": "Something you know",
+      "objective": "4.6"
+    },
+    {
+      "conceptId": "CON-4.6-SOMETHING-YOU-HAVE",
+      "name": "Something you have",
+      "objective": "4.6"
+    },
+    {
+      "conceptId": "CON-4.6-SOMETHING-YOU-ARE",
+      "name": "Something you are",
+      "objective": "4.6"
+    },
+    {
+      "conceptId": "CON-4.6-SOMEWHERE-YOU-ARE",
+      "name": "Somewhere you are",
+      "objective": "4.6"
+    },
+    {
+      "conceptId": "CON-4.6-LENGTH",
+      "name": "Length",
+      "objective": "4.6"
+    },
+    {
+      "conceptId": "CON-4.6-COMPLEXITY",
+      "name": "Complexity",
+      "objective": "4.6"
+    },
+    {
+      "conceptId": "CON-4.6-REUSE",
+      "name": "Reuse",
+      "objective": "4.6"
+    },
+    {
+      "conceptId": "CON-4.6-EXPIRATION",
+      "name": "Expiration",
+      "objective": "4.6"
+    },
+    {
+      "conceptId": "CON-4.6-AGE",
+      "name": "Age",
+      "objective": "4.6"
+    },
+    {
+      "conceptId": "CON-4.6-PASSWORD-MANAGERS",
+      "name": "Password managers",
+      "objective": "4.6"
+    },
+    {
+      "conceptId": "CON-4.6-PASSWORDLESS",
+      "name": "Passwordless",
+      "objective": "4.6"
+    },
+    {
+      "conceptId": "CON-4.6-JUST-TIME-PERMISSIONS",
+      "name": "Just-in-time permissions",
+      "objective": "4.6"
+    },
+    {
+      "conceptId": "CON-4.6-PASSWORD-VAULTING",
+      "name": "Password vaulting",
+      "objective": "4.6"
+    },
+    {
+      "conceptId": "CON-4.6-EPHEMERAL-CREDENTIALS",
+      "name": "Ephemeral credentials",
+      "objective": "4.6"
+    },
+    {
+      "conceptId": "CON-4.7-USER-PROVISIONING",
+      "name": "User provisioning",
+      "objective": "4.7"
+    },
+    {
+      "conceptId": "CON-4.7-RESOURCE-PROVISIONING",
+      "name": "Resource provisioning",
+      "objective": "4.7"
+    },
+    {
+      "conceptId": "CON-4.7-GUARD-RAILS",
+      "name": "Guard rails",
+      "objective": "4.7"
+    },
+    {
+      "conceptId": "CON-4.7-GROUPS",
+      "name": "Security groups",
+      "objective": "4.7"
+    },
+    {
+      "conceptId": "CON-4.7-TICKET-CREATION",
+      "name": "Ticket creation",
+      "objective": "4.7"
+    },
+    {
+      "conceptId": "CON-4.7-ESCALATION",
+      "name": "Escalation",
+      "objective": "4.7"
+    },
+    {
+      "conceptId": "CON-4.7-ENABLING-DISABLING-SERVICES-ACCESS",
+      "name": "Enabling/disabling services and access",
+      "objective": "4.7"
+    },
+    {
+      "conceptId": "CON-4.7-CONTINUOUS-INTEGRATION-TESTING",
+      "name": "Continuous integration and testing",
+      "objective": "4.7"
+    },
+    {
+      "conceptId": "CON-4.7-INTEGRATIONS-APPLICATION-PROGRAMMING-INTERFACES",
+      "name": "Integrations and Application programming interfaces (APIs)",
+      "objective": "4.7"
+    },
+    {
+      "conceptId": "CON-4.7-EFFICIENCY-TIME-SAVING",
+      "name": "Efficiency/time saving",
+      "objective": "4.7"
+    },
+    {
+      "conceptId": "CON-4.7-ENFORCING-BASELINES",
+      "name": "Enforcing baselines",
+      "objective": "4.7"
+    },
+    {
+      "conceptId": "CON-4.7-STANDARD-INFRASTRUCTURE-CONFIGURATIONS",
+      "name": "Standard infrastructure configurations",
+      "objective": "4.7"
+    },
+    {
+      "conceptId": "CON-4.7-SCALING-SECURE-MANNER",
+      "name": "Scaling in a secure manner",
+      "objective": "4.7"
+    },
+    {
+      "conceptId": "CON-4.7-EMPLOYEE-RETENTION",
+      "name": "Employee retention",
+      "objective": "4.7"
+    },
+    {
+      "conceptId": "CON-4.7-REACTION-TIME",
+      "name": "Reaction time",
+      "objective": "4.7"
+    },
+    {
+      "conceptId": "CON-4.7-WORKFORCE-MULTIPLIER",
+      "name": "Workforce multiplier",
+      "objective": "4.7"
+    },
+    {
+      "conceptId": "CON-4.7-COMPLEXITY",
+      "name": "Complexity",
+      "objective": "4.7"
+    },
+    {
+      "conceptId": "CON-4.7-COST",
+      "name": "Cost",
+      "objective": "4.7"
+    },
+    {
+      "conceptId": "CON-4.7-SINGLE-POINT-FAILURE",
+      "name": "Single point of failure",
+      "objective": "4.7"
+    },
+    {
+      "conceptId": "CON-4.7-TECHNICAL-DEBT",
+      "name": "Technical debt",
+      "objective": "4.7"
+    },
+    {
+      "conceptId": "CON-4.7-ONGOING-SUPPORTABILITY",
+      "name": "Ongoing supportability",
+      "objective": "4.7"
+    },
+    {
+      "conceptId": "CON-4.8-PREPARATION",
+      "name": "Preparation",
+      "objective": "4.8"
+    },
+    {
+      "conceptId": "CON-4.8-DETECTION",
+      "name": "Detection",
+      "objective": "4.8"
+    },
+    {
+      "conceptId": "CON-4.8-ANALYSIS",
+      "name": "Analysis",
+      "objective": "4.8"
+    },
+    {
+      "conceptId": "CON-4.8-CONTAINMENT",
+      "name": "Containment",
+      "objective": "4.8"
+    },
+    {
+      "conceptId": "CON-4.8-ERADICATION",
+      "name": "Eradication",
+      "objective": "4.8"
+    },
+    {
+      "conceptId": "CON-4.8-RECOVERY",
+      "name": "Recovery",
+      "objective": "4.8"
+    },
+    {
+      "conceptId": "CON-4.8-LESSONS-LEARNED",
+      "name": "Lessons learned",
+      "objective": "4.8"
+    },
+    {
+      "conceptId": "CON-4.8-TABLETOP-EXERCISE",
+      "name": "Tabletop exercise",
+      "objective": "4.8"
+    },
+    {
+      "conceptId": "CON-4.8-SIMULATION",
+      "name": "Simulation",
+      "objective": "4.8"
+    },
+    {
+      "conceptId": "CON-4.8-LEGAL-HOLD",
+      "name": "Legal hold",
+      "objective": "4.8"
+    },
+    {
+      "conceptId": "CON-4.8-CHAIN-CUSTODY",
+      "name": "Chain of custody",
+      "objective": "4.8"
+    },
+    {
+      "conceptId": "CON-4.8-ACQUISITION",
+      "name": "Acquisition",
+      "objective": "4.8"
+    },
+    {
+      "conceptId": "CON-4.8-REPORTING",
+      "name": "Reporting",
+      "objective": "4.8"
+    },
+    {
+      "conceptId": "CON-4.8-PRESERVATION",
+      "name": "Preservation",
+      "objective": "4.8"
+    },
+    {
+      "conceptId": "CON-4.8-E-DISCOVERY",
+      "name": "E-discovery",
+      "objective": "4.8"
+    },
+    {
+      "conceptId": "CON-4.9-FIREWALL-LOGS",
+      "name": "Firewall logs",
+      "objective": "4.9"
+    },
+    {
+      "conceptId": "CON-4.9-APPLICATION-LOGS",
+      "name": "Application logs",
+      "objective": "4.9"
+    },
+    {
+      "conceptId": "CON-4.9-ENDPOINT-LOGS",
+      "name": "Endpoint logs",
+      "objective": "4.9"
+    },
+    {
+      "conceptId": "CON-4.9-OS",
+      "name": "OS-specific security logs",
+      "objective": "4.9"
+    },
+    {
+      "conceptId": "CON-4.9-IDS",
+      "name": "IPS/IDS logs",
+      "objective": "4.9"
+    },
+    {
+      "conceptId": "CON-4.9-NETWORK-LOGS",
+      "name": "Network logs",
+      "objective": "4.9"
+    },
+    {
+      "conceptId": "CON-4.9-METADATA",
+      "name": "Metadata",
+      "objective": "4.9"
+    },
+    {
+      "conceptId": "CON-4.9-VULNERABILITY-SCANS",
+      "name": "Vulnerability scans",
+      "objective": "4.9"
+    },
+    {
+      "conceptId": "CON-4.9-AUTOMATED-REPORTS",
+      "name": "Automated reports",
+      "objective": "4.9"
+    },
+    {
+      "conceptId": "CON-4.9-DASHBOARDS",
+      "name": "Dashboards",
+      "objective": "4.9"
+    },
+    {
+      "conceptId": "CON-4.9-PACKET-CAPTURES",
+      "name": "Packet captures",
+      "objective": "4.9"
+    },
+    {
+      "conceptId": "CON-5.1-AUP",
+      "name": "Acceptable use policy (AUP)",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-INFORMATION-POLICIES",
+      "name": "Information security policies",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-BUSINESS-CONTINUITY",
+      "name": "Business continuity",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-DISASTER-RECOVERY",
+      "name": "Disaster recovery",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-INCIDENT-RESPONSE",
+      "name": "Incident response",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-SDLC",
+      "name": "Software development lifecycle (SDLC)",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-CHANGE-MANAGEMENT",
+      "name": "Change management",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-PASSWORD",
+      "name": "Password",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-ACCESS-CONTROL",
+      "name": "Access control",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-PHYSICAL",
+      "name": "Physical security",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-ENCRYPTION",
+      "name": "Encryption",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-CHANGE-MANAGEMENT-02",
+      "name": "Change management",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-ONBOARDING-OFFBOARDING",
+      "name": "Onboarding/offboarding",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-PLAYBOOKS",
+      "name": "Playbooks",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-REGULATORY",
+      "name": "Regulatory",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-LEGAL",
+      "name": "Legal",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-INDUSTRY",
+      "name": "Industry",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-LOCAL-REGIONAL",
+      "name": "Local/regional",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-NATIONAL",
+      "name": "National",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-GLOBAL",
+      "name": "Global",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-BOARDS",
+      "name": "Boards",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-COMMITTEES",
+      "name": "Committees",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-GOVERNMENT-ENTITIES",
+      "name": "Government entities",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-CENTRALIZED-DECENTRALIZED",
+      "name": "Centralized/decentralized",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-OWNERS",
+      "name": "Owners",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-CONTROLLERS",
+      "name": "Controllers",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-PROCESSORS",
+      "name": "Processors",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.1-CUSTODIANS-STEWARDS",
+      "name": "Custodians/stewards",
+      "objective": "5.1"
+    },
+    {
+      "conceptId": "CON-5.2-AD-HOC",
+      "name": "Ad hoc",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-RECURRING",
+      "name": "Recurring",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-ONE-TIME",
+      "name": "One-time",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-CONTINUOUS",
+      "name": "Continuous",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-QUALITATIVE",
+      "name": "Qualitative",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-QUANTITATIVE",
+      "name": "Quantitative",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-SLE",
+      "name": "Single loss expectancy (SLE)",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-ALE",
+      "name": "Annualized loss expectancy (ALE)",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-ARO",
+      "name": "Annualized rate of occurrence (ARO)",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-PROBABILITY",
+      "name": "Probability",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-LIKELIHOOD",
+      "name": "Likelihood",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-EXPOSURE-FACTOR",
+      "name": "Exposure factor",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-ITEM",
+      "name": "Impact",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-KEY-RISK-INDICATORS",
+      "name": "Key risk indicators",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-RISK-OWNERS",
+      "name": "Risk owners",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-RISK-THRESHOLD",
+      "name": "Risk threshold",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-EXPANSIONARY",
+      "name": "Expansionary",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-CONSERVATIVE",
+      "name": "Conservative",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-NEUTRAL",
+      "name": "Neutral",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-TRANSFER",
+      "name": "Transfer",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-EXEMPTION",
+      "name": "Exemption",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-EXCEPTION",
+      "name": "Exception",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-AVOID",
+      "name": "Avoid",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-MITIGATE",
+      "name": "Mitigate",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-RTO",
+      "name": "Recovery time objective (RTO)",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-RPO",
+      "name": "Recovery point objective (RPO)",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-MTTR",
+      "name": "Mean time to repair (MTTR)",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.2-MTBF",
+      "name": "Mean time between failures (MTBF)",
+      "objective": "5.2"
+    },
+    {
+      "conceptId": "CON-5.3-PENETRATION-TESTING",
+      "name": "Penetration testing",
+      "objective": "5.3"
+    },
+    {
+      "conceptId": "CON-5.3-RIGHT-AUDIT-CLAUSE",
+      "name": "Right-to-audit clause",
+      "objective": "5.3"
+    },
+    {
+      "conceptId": "CON-5.3-EVIDENCE-INTERNAL-AUDITS",
+      "name": "Evidence of internal audits",
+      "objective": "5.3"
+    },
+    {
+      "conceptId": "CON-5.3-INDEPENDENT-ASSESSMENTS",
+      "name": "Independent assessments",
+      "objective": "5.3"
+    },
+    {
+      "conceptId": "CON-5.3-SUPPLY-CHAIN-ANALYSIS",
+      "name": "Supply chain analysis",
+      "objective": "5.3"
+    },
+    {
+      "conceptId": "CON-5.3-DUE-DILIGENCE",
+      "name": "Due diligence",
+      "objective": "5.3"
+    },
+    {
+      "conceptId": "CON-5.3-CONFLICT-INTEREST",
+      "name": "Conflict of interest",
+      "objective": "5.3"
+    },
+    {
+      "conceptId": "CON-5.3-SLA",
+      "name": "Service-level agreement (SLA)",
+      "objective": "5.3"
+    },
+    {
+      "conceptId": "CON-5.3-MOA",
+      "name": "Memorandum of agreement (MOA)",
+      "objective": "5.3"
+    },
+    {
+      "conceptId": "CON-5.3-MOU",
+      "name": "Memorandum of understanding (MOU)",
+      "objective": "5.3"
+    },
+    {
+      "conceptId": "CON-5.3-MSA",
+      "name": "Master service agreement (MSA)",
+      "objective": "5.3"
+    },
+    {
+      "conceptId": "CON-5.3-SOW",
+      "name": "Work order (WO)/statement of work (SOW)",
+      "objective": "5.3"
+    },
+    {
+      "conceptId": "CON-5.3-NDA",
+      "name": "Non-disclosure agreement (NDA)",
+      "objective": "5.3"
+    },
+    {
+      "conceptId": "CON-5.3-BPA",
+      "name": "Business partners agreement (BPA)",
+      "objective": "5.3"
+    },
+    {
+      "conceptId": "CON-5.4-INTERNAL",
+      "name": "Internal",
+      "objective": "5.4"
+    },
+    {
+      "conceptId": "CON-5.4-EXTERNAL",
+      "name": "External",
+      "objective": "5.4"
+    },
+    {
+      "conceptId": "CON-5.4-FINES",
+      "name": "Fines",
+      "objective": "5.4"
+    },
+    {
+      "conceptId": "CON-5.4-SANCTIONS",
+      "name": "Sanctions",
+      "objective": "5.4"
+    },
+    {
+      "conceptId": "CON-5.4-REPUTATIONAL-DAMAGE",
+      "name": "Reputational damage",
+      "objective": "5.4"
+    },
+    {
+      "conceptId": "CON-5.4-LOSS-LICENSE",
+      "name": "Loss of license",
+      "objective": "5.4"
+    },
+    {
+      "conceptId": "CON-5.4-CONTRACTUAL-IMPACTS",
+      "name": "Contractual impacts",
+      "objective": "5.4"
+    },
+    {
+      "conceptId": "CON-5.4-DUE-DILIGENCE-CARE",
+      "name": "Due diligence/care",
+      "objective": "5.4"
+    },
+    {
+      "conceptId": "CON-5.4-ATTESTATION-ACKNOWLEDGEMENT",
+      "name": "Attestation and acknowledgement",
+      "objective": "5.4"
+    },
+    {
+      "conceptId": "CON-5.4-INTERNAL-EXTERNAL",
+      "name": "Internal and external",
+      "objective": "5.4"
+    },
+    {
+      "conceptId": "CON-5.4-AUTOMATION",
+      "name": "Automation",
+      "objective": "5.4"
+    },
+    {
+      "conceptId": "CON-5.4-LOCAL-REGIONAL",
+      "name": "Local/regional",
+      "objective": "5.4"
+    },
+    {
+      "conceptId": "CON-5.4-NATIONAL",
+      "name": "National",
+      "objective": "5.4"
+    },
+    {
+      "conceptId": "CON-5.4-GLOBAL",
+      "name": "Global",
+      "objective": "5.4"
+    },
+    {
+      "conceptId": "CON-5.4-DATA-SUBJECT",
+      "name": "Data subject",
+      "objective": "5.4"
+    },
+    {
+      "conceptId": "CON-5.4-CONTROLLER-VS-PROCESSOR",
+      "name": "Controller vs. processor",
+      "objective": "5.4"
+    },
+    {
+      "conceptId": "CON-5.4-OWNERSHIP",
+      "name": "Ownership",
+      "objective": "5.4"
+    },
+    {
+      "conceptId": "CON-5.4-DATA-INVENTORY-RETENTION",
+      "name": "Data inventory and retention",
+      "objective": "5.4"
+    },
+    {
+      "conceptId": "CON-5.4-RIGHT-BE-FORGOTTEN",
+      "name": "Right to be forgotten",
+      "objective": "5.4"
+    },
+    {
+      "conceptId": "CON-5.5-COMPLIANCE",
+      "name": "Compliance",
+      "objective": "5.5"
+    },
+    {
+      "conceptId": "CON-5.5-AUDIT-COMMITTEE",
+      "name": "Audit committee",
+      "objective": "5.5"
+    },
+    {
+      "conceptId": "CON-5.5-SELF-ASSESSMENTS",
+      "name": "Self-assessments",
+      "objective": "5.5"
+    },
+    {
+      "conceptId": "CON-5.5-REGULATORY",
+      "name": "Regulatory",
+      "objective": "5.5"
+    },
+    {
+      "conceptId": "CON-5.5-EXAMINATIONS",
+      "name": "Examinations",
+      "objective": "5.5"
+    },
+    {
+      "conceptId": "CON-5.5-ASSESSMENT",
+      "name": "Assessment",
+      "objective": "5.5"
+    },
+    {
+      "conceptId": "CON-5.5-INDEPENDENT-THIRD-PARTY-AUDIT",
+      "name": "Independent third-party audit",
+      "objective": "5.5"
+    },
+    {
+      "conceptId": "CON-5.5-PHYSICAL",
+      "name": "Physical",
+      "objective": "5.5"
+    },
+    {
+      "conceptId": "CON-5.5-OFFENSIVE",
+      "name": "Offensive",
+      "objective": "5.5"
+    },
+    {
+      "conceptId": "CON-5.5-DEFENSIVE",
+      "name": "Defensive",
+      "objective": "5.5"
+    },
+    {
+      "conceptId": "CON-5.5-INTEGRATED",
+      "name": "Integrated",
+      "objective": "5.5"
+    },
+    {
+      "conceptId": "CON-5.5-KNOWN-ENVIRONMENT",
+      "name": "Known environment",
+      "objective": "5.5"
+    },
+    {
+      "conceptId": "CON-5.5-PARTIALLY-KNOWN-ENVIRONMENT",
+      "name": "Partially known environment",
+      "objective": "5.5"
+    },
+    {
+      "conceptId": "CON-5.5-UNKNOWN-ENVIRONMENT",
+      "name": "Unknown environment",
+      "objective": "5.5"
+    },
+    {
+      "conceptId": "CON-5.5-PASSIVE",
+      "name": "Passive",
+      "objective": "5.5"
+    },
+    {
+      "conceptId": "CON-5.5-ACTIVE",
+      "name": "Active",
+      "objective": "5.5"
+    },
+    {
+      "conceptId": "CON-5.6-CAMPAIGNS",
+      "name": "Campaigns",
+      "objective": "5.6"
+    },
+    {
+      "conceptId": "CON-5.6-RECOGNIZING-PHISHING-ATTEMPT",
+      "name": "Recognizing a phishing attempt",
+      "objective": "5.6"
+    },
+    {
+      "conceptId": "CON-5.6-RESPONDING-REPORTED-SUSPICIOUS-MESSAGES",
+      "name": "Responding to reported suspicious messages",
+      "objective": "5.6"
+    },
+    {
+      "conceptId": "CON-5.6-RISKY",
+      "name": "Risky",
+      "objective": "5.6"
+    },
+    {
+      "conceptId": "CON-5.6-UNEXPECTED",
+      "name": "Unexpected",
+      "objective": "5.6"
+    },
+    {
+      "conceptId": "CON-5.6-UNINTENTIONAL",
+      "name": "Unintentional",
+      "objective": "5.6"
+    },
+    {
+      "conceptId": "CON-5.6-POLICY-HANDBOOKS",
+      "name": "Policy/handbooks",
+      "objective": "5.6"
+    },
+    {
+      "conceptId": "CON-5.6-SITUATIONAL-AWARENESS",
+      "name": "Situational awareness",
+      "objective": "5.6"
+    },
+    {
+      "conceptId": "CON-5.6-INSIDER-THREAT",
+      "name": "Insider threat",
+      "objective": "5.6"
+    },
+    {
+      "conceptId": "CON-5.6-PASSWORD-MANAGEMENT",
+      "name": "Password management",
+      "objective": "5.6"
+    },
+    {
+      "conceptId": "CON-5.6-REMOVABLE-MEDIA-CABLES",
+      "name": "Removable media and cables",
+      "objective": "5.6"
+    },
+    {
+      "conceptId": "CON-5.6-SOCIAL-ENGINEERING",
+      "name": "Social engineering",
+      "objective": "5.6"
+    },
+    {
+      "conceptId": "CON-5.6-OPERATIONAL",
+      "name": "Operational security",
+      "objective": "5.6"
+    },
+    {
+      "conceptId": "CON-5.6-HYBRID-REMOTE-WORK-ENVIRONMENTS",
+      "name": "Hybrid/remote work environments",
+      "objective": "5.6"
+    },
+    {
+      "conceptId": "CON-5.6-INITIAL",
+      "name": "Initial",
+      "objective": "5.6"
+    },
+    {
+      "conceptId": "CON-5.6-RECURRING",
+      "name": "Recurring",
+      "objective": "5.6"
+    }
+  ]
+}

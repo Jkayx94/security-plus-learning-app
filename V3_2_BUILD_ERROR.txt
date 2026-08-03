@@ -1,0 +1,232 @@
+
+> security-plus-learning-app@3.2.0 build
+> npm run validate && npm run test && npm run typecheck && node scripts/build.mjs
+
+
+> security-plus-learning-app@3.2.0 validate
+> node scripts/validate-data.mjs && node scripts/validate-content-v3.2.mjs
+
+VALIDATION PASSED: 578 objective concepts, 336 acronyms, 101 units, 30 prototype questions.
+CONTENT VALIDATION PASSED: 15 reviewed questions; 563 objective concepts have no reviewed question.
+
+> security-plus-learning-app@3.2.0 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: authoritative record counts
+ok 1 - authoritative record counts
+  ---
+  duration_ms: 1.610913
+  type: 'test'
+  ...
+# Subtest: all unit concept references resolve
+ok 2 - all unit concept references resolve
+  ---
+  duration_ms: 1.221814
+  type: 'test'
+  ...
+# Subtest: all objective concepts have a learning unit
+ok 3 - all objective concepts have a learning unit
+  ---
+  duration_ms: 0.748556
+  type: 'test'
+  ...
+# Subtest: storage key remains compatible
+ok 4 - storage key remains compatible
+  ---
+  duration_ms: 2.244807
+  type: 'test'
+  ...
+# Subtest: persistent More navigation and routes exist
+ok 5 - persistent More navigation and routes exist
+  ---
+  duration_ms: 0.722093
+  type: 'test'
+  ...
+# Subtest: backup and separate exports are reachable
+ok 6 - backup and separate exports are reachable
+  ---
+  duration_ms: 0.587962
+  type: 'test'
+  ...
+# Subtest: developer activation remains five-tap and code gated
+ok 7 - developer activation remains five-tap and code gated
+  ---
+  duration_ms: 0.579203
+  type: 'test'
+  ...
+# Subtest: test state is excluded from genuine export
+ok 8 - test state is excluded from genuine export
+  ---
+  duration_ms: 0.562099
+  type: 'test'
+  ...
+# Subtest: normal question UI hides internal quality metadata
+ok 9 - normal question UI hides internal quality metadata
+  ---
+  duration_ms: 0.619956
+  type: 'test'
+  ...
+# Subtest: retired universal prompt is absent
+ok 10 - retired universal prompt is absent
+  ---
+  duration_ms: 0.767013
+  type: 'test'
+  ...
+# Subtest: question and lesson content are outside app.ts
+ok 11 - question and lesson content are outside app.ts
+  ---
+  duration_ms: 0.683835
+  type: 'test'
+  ...
+# Subtest: mode eligibility is derived from review evidence
+ok 12 - mode eligibility is derived from review evidence
+  ---
+  duration_ms: 0.630989
+  type: 'test'
+  ...
+# Subtest: boss and exam modes cannot use raw generated fallback
+ok 13 - boss and exam modes cannot use raw generated fallback
+  ---
+  duration_ms: 2.607181
+  type: 'test'
+  ...
+# Subtest: malformed content produces a readable error
+ok 14 - malformed content produces a readable error
+  ---
+  duration_ms: 0.28659
+  type: 'test'
+  ...
+# Subtest: reviewed questions use explicit confusion groups
+ok 15 - reviewed questions use explicit confusion groups
+  ---
+  duration_ms: 0.265598
+  type: 'test'
+  ...
+# Subtest: reviewed questions contain valid options and specific rationales
+ok 16 - reviewed questions contain valid options and specific rationales
+  ---
+  duration_ms: 0.252381
+  type: 'test'
+  ...
+# Subtest: boss rules match v3.1 specification
+ok 17 - boss rules match v3.1 specification
+  ---
+  duration_ms: 3.173498
+  type: 'test'
+  ...
+# Subtest: one question cannot defeat a boss
+ok 18 - one question cannot defeat a boss
+  ---
+  duration_ms: 0.361362
+  type: 'test'
+  ...
+# Subtest: full battle completion and threshold are required
+ok 19 - full battle completion and threshold are required
+  ---
+  duration_ms: 0.162199
+  type: 'test'
+  ...
+# Subtest: boss rewards issue once
+ok 20 - boss rewards issue once
+  ---
+  duration_ms: 0.17304
+  type: 'test'
+  ...
+# Subtest: normal reward baseline is restrained and idempotent
+ok 21 - normal reward baseline is restrained and idempotent
+  ---
+  duration_ms: 1.132764
+  type: 'test'
+  ...
+# Subtest: shield thresholds require substantial real evidence
+ok 22 - shield thresholds require substantial real evidence
+  ---
+  duration_ms: 0.241279
+  type: 'test'
+  ...
+# Subtest: test mode leaves real state unchanged and resets separately
+ok 23 - test mode leaves real state unchanged and resets separately
+  ---
+  duration_ms: 0.259726
+  type: 'test'
+  ...
+# Subtest: test mode is excluded from export
+ok 24 - test mode is excluded from export
+  ---
+  duration_ms: 0.178502
+  type: 'test'
+  ...
+# Subtest: cosmetic purchase cannot affect learning progress
+ok 25 - cosmetic purchase cannot affect learning progress
+  ---
+  duration_ms: 0.408157
+  type: 'test'
+  ...
+# Subtest: developer activation requires five taps and exact code
+ok 26 - developer activation requires five taps and exact code
+  ---
+  duration_ms: 0.408227
+  type: 'test'
+  ...
+# Subtest: reduced-motion disables nonessential animation
+ok 27 - reduced-motion disables nonessential animation
+  ---
+  duration_ms: 0.679315
+  type: 'test'
+  ...
+# Subtest: feedback branches are distinct
+ok 28 - feedback branches are distinct
+  ---
+  duration_ms: 0.94791
+  type: 'test'
+  ...
+# Subtest: question status is hidden outside developer mode
+ok 29 - question status is hidden outside developer mode
+  ---
+  duration_ms: 0.473519
+  type: 'test'
+  ...
+# Subtest: boss UI and developer lab are present
+ok 30 - boss UI and developer lab are present
+  ---
+  duration_ms: 0.499502
+  type: 'test'
+  ...
+1..30
+# tests 30
+# suites 0
+# pass 30
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 117.581945
+
+> security-plus-learning-app@3.2.0 typecheck
+> node tools/typescript/bin/tsc -p tsconfig.json --noEmit
+
+src/content/security-plus-v3.2.ts(36,673): error TS1005: ',' expected.
+src/content/security-plus-v3.2.ts(36,679): error TS1005: ',' expected.
+src/content/security-plus-v3.2.ts(36,739): error TS1005: ':' expected.
+src/content/security-plus-v3.2.ts(36,749): error TS1005: ',' expected.
+src/content/security-plus-v3.2.ts(36,755): error TS1005: ',' expected.
+src/content/security-plus-v3.2.ts(36,887): error TS1005: ',' expected.
+src/content/security-plus-v3.2.ts(36,1185): error TS1128: Declaration or statement expected.
+src/content/security-plus-v3.2.ts(36,1186): error TS1128: Declaration or statement expected.
+src/content/security-plus-v3.2.ts(36,1187): error TS1128: Declaration or statement expected.
+src/content/security-plus-v3.2.ts(37,591): error TS1005: ',' expected.
+src/content/security-plus-v3.2.ts(37,597): error TS1005: ',' expected.
+src/content/security-plus-v3.2.ts(37,652): error TS1005: ':' expected.
+src/content/security-plus-v3.2.ts(37,657): error TS1005: ',' expected.
+src/content/security-plus-v3.2.ts(37,663): error TS1005: ',' expected.
+src/content/security-plus-v3.2.ts(37,737): error TS1005: ',' expected.
+src/content/security-plus-v3.2.ts(37,738): error TS1135: Argument expression expected.
+src/content/security-plus-v3.2.ts(37,755): error TS1005: ',' expected.
+src/content/security-plus-v3.2.ts(37,816): error TS1005: ',' expected.
+src/content/security-plus-v3.2.ts(37,865): error TS1005: ',' expected.
+src/content/security-plus-v3.2.ts(37,959): error TS1005: ',' expected.
+src/content/security-plus-v3.2.ts(37,983): error TS1005: ',' expected.
+src/content/security-plus-v3.2.ts(37,1007): error TS1005: ',' expected.
+src/content/security-plus-v3.2.ts(38,1): error TS1128: Declaration or statement expected.
+src/content/security-plus-v3.2.ts(38,2): error TS1128: Declaration or statement expected.
