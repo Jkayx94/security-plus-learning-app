@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const root = process.argv[2] || 'dist';
+const expectedVersion = process.env.APP_VERSION || '2.2.1';
 const read = p => fs.readFileSync(path.join(root,p),'utf8');
 const exists = p => fs.existsSync(path.join(root,p));
 const failures=[];
@@ -24,7 +25,7 @@ check((units.learningUnits||[]).length===101,'Expected 101 learning units');
 check(app.includes('What should we call you'),'Onboarding missing');
 check(app.includes('PROFILE_KEY'),'Profile persistence missing');
 check(app.includes('Download JSON backup'),'Export control missing');
-check(app.includes("id=\"import\""),'Import control missing');
+check(app.includes('id="import"'),'Import control missing');
 check(app.includes('Reset all local progress'),'Reset control missing');
 check(app.includes('Acronym trainer'),'Acronym mode missing');
 check(app.includes('Exam mode'),'Exam mode missing');
@@ -36,12 +37,12 @@ check(app.includes('Why this answer is correct'),'Progressive explanation missin
 check(app.includes('Flag this question'),'Question flag control missing');
 check(!app.includes('How confident are you?</b>'),'Pre-answer confidence still visible');
 check(!app.includes('A scenario points to'), 'Invalid fabricated scenario generator remains');
-check(!app.includes('compare-two-concepts\',prompt'), 'Invalid generated compare activity remains');
+check(!app.includes("compare-two-concepts',prompt"), 'Invalid generated compare activity remains');
 check(css.includes('.postAnswerConfidence'),'Post-answer confidence styling missing');
 check(css.includes('.explanationPanel'),'Explanation dropdown styling missing');
 check(css.includes('body:has(.questionScreen) nav'),'Question navigation suppression missing');
-check(sw.includes('security-plus-v2.2.0'),'Service-worker cache not bumped');
-check(app.includes('2.2.0'),'Visible app version not bumped');
+check(sw.includes(`security-plus-v${expectedVersion}`),'Service-worker cache not bumped');
+check(app.includes(expectedVersion),'Visible app version not bumped');
 check(manifest.name?.includes('Security+'),'Manifest name invalid');
 check(manifest.start_url,'Manifest start_url missing');
 check(manifest.display==='standalone','Manifest is not standalone');
@@ -51,4 +52,4 @@ for(const h of handlers) check(app.includes(h),`Expected interaction missing: ${
 
 if(failures.length){console.error('Feature audit failed:\n- '+failures.join('\n- '));process.exit(1)}
 console.log('Feature audit passed');
-console.log(JSON.stringify({concepts:578,acronyms:336,units:101,version:'2.2.0',checkedFeatures:handlers.length},null,2));
+console.log(JSON.stringify({concepts:578,acronyms:336,units:101,version:expectedVersion,checkedFeatures:handlers.length},null,2));
