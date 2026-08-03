@@ -9,7 +9,9 @@ const styles = fs.readFileSync('src/styles.css', 'utf8');
 test('CI builds canonical source without repair scripts or generated commits', () => {
   assert.doesNotMatch(workflow, /apply-v3\.2\.1|source fixes|python3 scripts\/apply-/i);
   assert.doesNotMatch(workflow, /git commit -m "Apply Test Mode boss, cosmetic and theme corrections"/);
-  assert.match(workflow, /git diff --exit-code -- src\/app\.ts src\/styles\.css/);
+  assert.match(workflow, /git diff --exit-code -- .*src/);
+  assert.match(workflow, /git diff --exit-code -- .*tests/);
+  assert.match(workflow, /git diff --exit-code -- .*scripts/);
 });
 
 test('course storage and content loaders remain stable', () => {
