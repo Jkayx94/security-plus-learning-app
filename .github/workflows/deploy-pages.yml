@@ -68,7 +68,7 @@ jobs:
           grep -q "Developer Lab" dist/assets/app.js
           grep -q "JAKE-SECPLUS-TEST" dist/assets/app.js
           grep -q "sanitiseTestState" dist/assets/app.js
-          grep -q "Test cosmetic preview applied" dist/assets/app.js
+          grep -q "Test cosmetic equipped" dist/assets/app.js
           grep -q "FINISH MODE ARMED" dist/assets/app.js
           grep -q "FINAL STRIKE CONFIRMED" dist/assets/app.js
           grep -q "SKIP_WAITING" dist/sw.js
