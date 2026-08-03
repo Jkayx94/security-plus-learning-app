@@ -117,7 +117,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           rm -f V3_MIGRATION_ERROR.txt V3_BUILD_ERROR.txt
-          git add -A src/app.ts src/styles.css public/manifest.webmanifest public/sw.js V3_MIGRATION_ERROR.txt V3_BUILD_ERROR.txt
+          git add src/app.ts src/styles.css public/manifest.webmanifest public/sw.js
+          git add -u -- V3_MIGRATION_ERROR.txt V3_BUILD_ERROR.txt 2>/dev/null || true
           if ! git diff --cached --quiet; then
             git commit -m "Apply Security+ v3.0 learning experience [skip ci]"
             git push origin HEAD:main
