@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0.0",
   "curriculumVersion": "1.2",
-  "learnerId": "JAKE-001",
+  "learnerId": "LOCAL-LEARNER-TEMPLATE",
   "records": [
     {
       "conceptId": "CON-1.1-TECHNICAL",
